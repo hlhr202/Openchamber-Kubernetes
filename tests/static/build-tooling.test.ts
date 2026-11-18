@@ -7,10 +7,12 @@ import { inspectWatchContract } from '../../scripts/toolchain-contract.ts';
 
 test('release/development share exact dual targets while separating minification and source maps', () => {
   for (const profile of ['release', 'development'] as const) {
-    const options = bundleConfigurations('/controlled/stage', profile, '/controlled/source');
+    const options = bundleConfigurations('/controlled/stage', profile, '1.2.3', '/controlled/source');
     assert.equal(options.length, 2);
     assert.equal(options[0]?.platform, 'browser');
     assert.equal(options[1]?.platform, 'node');
+    assert.equal(options[1]?.transform?.define?.__K8S_EXTENSION_VERSION__, '"1.2.3"');
+    assert.equal(options[0]?.transform?.define?.__K8S_EXTENSION_VERSION__, undefined);
     for (const option of options) {
       assert.equal(option.cwd, '/controlled/source');
       const output = option.output;

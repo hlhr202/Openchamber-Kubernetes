@@ -1,6 +1,6 @@
 {
   "name": "openchamber-kubernetes",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Kubernetes integration for the official OpenChamber 2.5.1 host.",
   "license": "MIT",

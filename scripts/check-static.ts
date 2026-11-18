@@ -13,6 +13,12 @@ function record(value: unknown): Record<string, unknown> | null {
   return typeof value === 'object' && value !== null && !Array.isArray(value) ? value as Record<string, unknown> : null;
 }
 
+function stringValue(node: Record<string, unknown> | null | undefined): unknown {
+  if (node?.type !== 'TemplateLiteral') return node?.value;
+  if (!Array.isArray(node.expressions) || node.expressions.length !== 0 || !Array.isArray(node.quasis)) return undefined;
+  return record(record(node.quasis[0])?.value)?.cooked;
+}
+
 function visit(value: unknown, inspect: (node: Record<string, unknown>) => void): void {
   if (Array.isArray(value)) { for (const item of value) visit(item, inspect); return; }
   const node = record(value);
@@ -108,6 +114,7 @@ async function verifyPackageProfile(directory: string, profile: 'release' | 'dev
   const manifest = await readFile(resolve(directory, 'package.json'), 'utf8');
   const parsed = parseManifestJson(manifest);
   if (!parsed.ok) throw new Error(`SDK rejected package manifest: ${parsed.code}`);
+  const { version } = z.object({ version: z.string() }).parse(JSON.parse(manifest) as unknown);
   const html = await readFile(resolve(directory, 'panel/index.html'), 'utf8');
   assert.match(html, /<script src="\.\/main\.js"><\/script>/);
   assert.ok(!/<script[^>]+type=["']module|https?:\/\//i.test(html));
@@ -115,7 +122,19 @@ async function verifyPackageProfile(directory: string, profile: 'release' | 'dev
   for (const [path, panel] of [['panel/main.js', true], ['service/main.js', false]] as const) {
     const code = await readFile(resolve(directory, path), 'utf8');
     const ast = parseAst(code, null, path);
+    let healthVersionMatches = false;
     visit(ast, node => {
+      if (!panel && node.type === 'Identifier' && node.name === '__K8S_EXTENSION_VERSION__') throw new Error('Missing service release version');
+      if (!panel && node.type === 'ObjectExpression' && Array.isArray(node.properties)) {
+        const fields = new Map(node.properties.flatMap(property => {
+          const field = record(property), key = record(field?.key);
+          return field?.type === 'Property' && key?.type === 'Identifier' ? [[key.name, record(field.value)] as const] : [];
+        }));
+        if (stringValue(fields.get('status')) === 'ready' && fields.has('serviceGeneration') && fields.has('compatibility') && fields.has('protocol')) {
+          assert.equal(stringValue(fields.get('version')), version, 'Service health version differs from package manifest');
+          healthVersionMatches = true;
+        }
+      }
       if (node.type === 'ImportExpression') throw new Error('Unreviewed runtime module loading in bundle');
       if (node.type === 'ImportDeclaration') {
         const source = record(node.source)?.value;
@@ -123,6 +142,7 @@ async function verifyPackageProfile(directory: string, profile: 'release' | 'dev
       }
       if (panel && ['ExportNamedDeclaration', 'ExportDefaultDeclaration', 'ExportAllDeclaration'].includes(String(node.type))) throw new Error('Panel is not classic IIFE');
     });
+    if (!panel) assert.ok(healthVersionMatches, 'Missing versioned service health response');
     if (panel) verifyBrowserEnvironment(code);
     verifyBundlePaths(code, profile);
     if (profile === 'development') {

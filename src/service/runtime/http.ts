@@ -78,6 +78,9 @@ function respond(response: ServerResponse, status: number, body: unknown): void 
 // Process-level hard budgets for the whole service: in-flight admitted requests, total body
 // bytes being consumed across all requests, and a v8 heap watermark. Admission above any of
 // them refuses NEW work with QUERY_LIMIT (429) / BUDGET_EXCEEDED (413) without touching old work.
+// Substituted from package.json by the service build.
+declare const __K8S_EXTENSION_VERSION__: string;
+
 const inFlight = { requests: 0, bodyBytes: 0 };
 const inFlightRequestLimit = 64;
 const inFlightBodyBudgetBytes = 8 * 1024 * 1024;
@@ -170,7 +173,7 @@ export function createServiceHandler(options: { token: string; serviceGeneration
         return;
       }
       if (request.method === 'GET' && url.pathname === '/health' && !url.search) {
-        respond(response, 200, healthSchema.parse({ protocol: protocolVersion, status: 'ready', serviceGeneration: options.serviceGeneration, version: '0.1.0', compatibility: '2.5.1' }));
+        respond(response, 200, healthSchema.parse({ protocol: protocolVersion, status: 'ready', serviceGeneration: options.serviceGeneration, version: __K8S_EXTENSION_VERSION__, compatibility: '2.5.1' }));
         return;
       }
       if (request.method === 'POST' && ['/v2/workspace-files/open', '/v2/workspace-files/read', '/v2/workspace-files/release', '/v2/workspace-files/rebind', '/v2/workspace-files/list'].includes(url.pathname) && !url.search) {
