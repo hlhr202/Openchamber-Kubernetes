@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "evidence": "M1-E016",
+  "checkedAt": "2026-10-23",
+  "runtime": "not-executed",
+  "records": [
+    {
+      "id": "node-24.22.1-child-process",
+      "url": "https://nodejs.org/docs/v24.22.1/api/child_process.json",
+      "bytes": 165529,
+      "sha256": "2d9c9b3b6e369bc400b259e78588bd8416352acffcca8687aaa760082e8fdbf2"
+    },
+    {
+      "id": "posix-2024-open",
+      "url": "https://pubs.opengroup.org/onlinepubs/9799919799/functions/open.html",
+      "bytes": 40401,
+      "sha256": "57b770918aa3e0c25186972675df8c96da119cf4b973335ed4487405e260dc3a"
+    },
+    {
+      "id": "posix-2024-mkfifo",
+      "url": "https://pubs.opengroup.org/onlinepubs/9799919799/utilities/mkfifo.html",
+      "bytes": 11067,
+      "sha256": "508f579e25f7ac32d94c2f57aef1a12448e4984fc60d467120cb2bb66157c3ed"
+    }
+  ]
+}

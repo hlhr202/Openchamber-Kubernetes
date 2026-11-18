@@ -1,0 +1,41 @@
+{
+  "repo": "openchamber/openchamber",
+  "commit": "3e9ef4db17bd184f1f2713eb6356261304d6aee7",
+  "records": [
+    {
+      "path": "packages/ui/src/lib/guests/files.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/ui/src/lib/guests/files.ts",
+      "gitBlob": "5fe990bf799788bd7c1996b2ab3d86431b6642cd",
+      "sha256": "01c421a60ce48c6ba53914f68a4f9e42d3628666c4abde809e7cc434841f85bf",
+      "bytes": 3344
+    },
+    {
+      "path": "packages/ui/src/components/layout/GuestHosts.tsx",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/ui/src/components/layout/GuestHosts.tsx",
+      "gitBlob": "efba06e674f3854ed9d3b914c382c0292b628488",
+      "sha256": "3694e665d03b1ee847ef637b65cc45cd1830dd72d27132ecb7c1ba211de9e0e3",
+      "bytes": 2262
+    },
+    {
+      "path": "packages/ui/src/components/layout/PluginPane.tsx",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/ui/src/components/layout/PluginPane.tsx",
+      "gitBlob": "48abf8a4b92ba0d1509bf7e68272b933f732f4ef",
+      "sha256": "22b7189964b6d159ecf95b6b02266f0d1f78ec4bbbec75bb123b7a109a209814",
+      "bytes": 54322
+    },
+    {
+      "path": "packages/web/server/lib/opencode/project-directory-runtime.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/opencode/project-directory-runtime.js",
+      "gitBlob": "0fe18881500eb440b42507eb8a15aadf3bc700a9",
+      "sha256": "ae7204bef27ec3014ae750e7dc068235b2fe1a495a37ed8d2d3b03dea789bc72",
+      "bytes": 6997
+    },
+    {
+      "path": "packages/web/server/index.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/index.js",
+      "gitBlob": "3f5cdc416c706bbffaf88793d4766bd79a4081aa",
+      "sha256": "07e0e721e4632df9ff4b9a404cb83bf89e0670695248d54651cf902e9299dd00",
+      "bytes": 131587
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+// Text/metadata only. The protocol ships under static review; server-side execution is deferred.
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { readFile } from 'node:fs/promises';
+const file = (path: string) => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
+const source = (path: string) => readFile(new URL(`../../tests/fixtures/baseline/kubernetes/src/${path}.txt`, import.meta.url), 'utf8');
+test('pinned upstream text proves the flow: environment pick, legacy build/push, debug workload, readiness, forward, attach, optional expose', async () => {
+  const extension = await source('extension.ts'), host = await source('hostutils.ts'), session = await source('debug/debugSession.ts'), registry = await source('debug/providerRegistry.ts');
+  assert.ok(extension.includes("registerCommand('extension.vsKubernetesDebug', debugKubernetes)"));
+  const pick = extension.slice(extension.indexOf('const debugKubernetes = async () =>'), extension.indexOf('async function selectPodKubernetes'));
+  assert.ok(pick.includes('const legacySupportedDebuggers = ["node"];'));
+  assert.ok(pick.includes('providerSupportedDebuggers.concat(legacySupportedDebuggers)'));
+  assert.ok(pick.includes("placeHolder: \"Select the environment\""));
+  assert.ok(pick.includes('getDebugProviderOfType(debuggerType)'));
+  assert.ok(pick.includes('new DebugSession(kubectl).launch(workspaceFolder, debugProvider)'));
+  assert.ok(pick.includes('buildPushThenExec(debugInternal)'));
+  const build = extension.slice(extension.indexOf('function buildPushThenExec'), extension.indexOf('async function createClusterKubernetes'));
+  for (const needle of ['message: "Building an image..."', "image + ' built.'", 'message: "Pushing the image..."', "image + ' pushed.'", 'Image push failed; unable to call ${buildTool}.', '${diagnostic} See Output window for ${buildTool} push error message.', 'Image build failed; unable to call ${buildTool}.', "'Image build failed. See Output window for details.'", 'Failed building/pushing an image: ${errorMessage}']) assert.ok(build.includes(needle), needle);
+  const internal = extension.slice(extension.indexOf('const debugInternal ='), extension.indexOf('const doDebug ='));
+  assert.ok(internal.includes("prompt: 'Debug command for your container:'"));
+  assert.ok(internal.includes("placeHolder: 'Example: node debug server.js'"));
+  assert.ok(internal.includes('Error getting input: ${err}'));
+  const doDebug = extension.slice(extension.indexOf('const doDebug ='), extension.indexOf('const waitForRunningPod ='));
+  assert.ok(doDebug.includes('const deploymentName = `${name}-debug`;'));
+  assert.ok(doDebug.includes('run ${deploymentName} --image=${image} -i --attach=false -- ${cmd}'));
+  assert.ok(doDebug.includes("whatFailed: 'Failed to start debug container'"));
+  assert.ok(doDebug.includes("'Failed to find debug pod.'"));
+  assert.ok(doDebug.includes("'Debug pod running as: ' + podName"));
+  assert.ok(doDebug.includes('` port-forward ${podName} 5858:5858 8000:8000`'));
+  assert.ok(doDebug.includes("type: 'node'"));
+  assert.ok(doDebug.includes("request: 'attach'"));
+  assert.ok(doDebug.includes("name: 'Attach to Process'"));
+  assert.ok(doDebug.includes('port: 5858'));
+  assert.ok(doDebug.includes("remoteRoot: '/'"));
+  assert.ok(doDebug.includes("'Debug session established', 'Expose Service'"));
+  assert.ok(doDebug.includes("prompt: 'Expose on which port?', placeHolder: '80'"));
+  assert.ok(doDebug.includes('expose deployment ${deploymentName} --type=LoadBalancer --port=${port}'));
+  assert.ok(doDebug.includes("'Failed to expose deployment: '"));
+  assert.ok(doDebug.includes('Deployment exposed. Run Kubernetes Get > service ${deploymentName} for IP address'));
+  assert.ok(doDebug.includes('Error getting port info: ${err}'));
+  assert.ok(doDebug.includes('Error getting expose info: ${err.message}'));
+  const wait = extension.slice(extension.indexOf('const waitForRunningPod ='), extension.indexOf('function exists(kind'));
+  assert.ok(wait.includes(' get pods ${name} -o jsonpath --template="{.status.phase}"'));
+  assert.ok(wait.includes("succ.stdout === 'Running'"));
+  assert.ok(wait.includes('setTimeout(() => waitForRunningPod(name, callback), 1000)'));
+  assert.ok(host.includes("'This command requires an open folder.'"));
+  const launch = session.slice(session.indexOf('public async launch('), session.indexOf('private async promptForCleanup('));
+  assert.ok(launch.includes("No Docker image prefix set for image push. Please set 'vsdocker.imageUser' in your Kubernetes extension settings."));
+  assert.ok(launch.includes('message: "Building Docker image..."'));
+  assert.ok(launch.includes('message: "Running Docker image on Kubernetes..."'));
+  assert.ok(registry.includes('placeHolder: "Select the environment"'));
+});
+test('the shared protocol keeps the upstream projections verbatim with the deferral disclosed', async () => {
+  const protocol = await file('src/shared/debug-protocol.ts');
+  for (const part of ["return 'Select the environment';", "return ['node'];", "return 'This command requires an open folder.';", "return 'Building an image...';", "return image + ' built.';", "return 'Pushing the image...';", "return image + ' pushed.';", 'return `Image push failed; unable to call ${buildTool}.`;', 'return `${diagnostic} See Output window for ${buildTool} push error message.`;', 'return `Image build failed; unable to call ${buildTool}.`;', "return 'Image build failed. See Output window for details.';", 'return `Failed building/pushing an image: ${errorMessage}`;', "return 'Debug command for your container:';", "return 'Example: node debug server.js';", 'return `Error getting input: ${err}`;', 'return `${name}-debug`;', 'return `run ${name}-debug --image=${image} -i --attach=false -- ${cmd}`;', "return 'Failed to start debug container';", "return 'Failed to find debug pod.';", "return 'Debug pod running as: ' + podName;", 'return ` get pods ${name} -o jsonpath --template="{.status.phase}"`;', "return stdout === 'Running';", 'POD_READY_RETRY_MS = 1000', 'return ` port-forward ${podName} 5858:5858 8000:8000`;', "name: 'Attach to Process', port: 5858", "remoteRoot: '/'", "return 'Debug session established';", "EXPOSE_SERVICE_BUTTON = 'Expose Service'", "return 'Expose on which port?';", "return '80';", 'return `expose deployment ${deploymentName} --type=LoadBalancer --port=${port}`;', "return 'Failed to expose deployment: ' + detail;", 'return `Deployment exposed. Run Kubernetes Get > service ${deploymentName} for IP address`;', 'return `Error getting port info: ${err}`;', 'return `Error getting expose info: ${message}`;', 'SERVER-SIDE EXECUTION IS DELIBERATELY DEFERRED', 'generating a launch configuration alone is never the', 'later OPTIONAL Expose are separate write steps, and a failed or unknown dependency never', 'never impersonates a rollback', 'deleted only on the user\'s explicit choice or setting', 'auto-clears, and a Compose stop never triggers the deletion', 'No automated execution exists', 'anywhere.']) assert.ok(protocol.includes(part), part);
+  assert.ok(!/child_process|spawn|writeFile|node:path/.test(protocol));
+});
+test('no server execution surface exists yet: no adapter, route, client or view for debugging', async () => {
+  const routes = await file('src/service/runtime/http.ts'), bridge = await file('src/host/bridge.ts');
+  assert.ok(!routes.includes('/v2/debug'));
+  assert.ok(!bridge.includes('DebugClient'));
+});
+test('the deferral is registered in coverage as a reviewed partial bound to the human package', async () => {
+  const coverage = JSON.parse(await readFile(new URL('../../docs/baseline/command-coverage.json', import.meta.url), 'utf8')) as { entries: { commandId: string; implementation: string; implementationEvidence: { evidence: string } }[] };
+  const entry = coverage.entries.find(e => e.commandId === 'extension.vsKubernetesDebug');
+  assert.ok(entry); assert.equal(entry.implementation, 'partial');
+  assert.equal(entry.implementationEvidence.evidence, 'M7-E074');
+});
+test('the readonly suite covers pure values only and is registered in the allowlists', async () => {
+  const readonly = await file('tests/readonly/debug-values.test.ts');
+  assert.ok(!/from ['"].*(?:adapters\/|operations\/|runtime\/|client|bridge|sdk)|\.spawn\(|child_process/.test(readonly));
+  assert.ok((await file('scripts/readonly-tests.ts')).includes("'tests/readonly/debug-values.test.ts'"));
+  assert.ok((await file('scripts/static-tests.ts')).includes("'tests/static/debug-wiring.test.ts'"));
+});

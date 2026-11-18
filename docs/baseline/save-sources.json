@@ -1,0 +1,18 @@
+{
+  "node": "24.22.1",
+  "posix": "9799919799",
+  "records": [
+    {
+      "name": "node-fs.json",
+      "url": "https://nodejs.org/docs/v24.22.1/api/fs.json",
+      "bytes": 723509,
+      "sha256": "6314af6d5377165e455e791db1826e4d9b4b983b3c3f59788101770b56891bed"
+    },
+    {
+      "name": "posix-link.html",
+      "url": "https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html",
+      "bytes": 18557,
+      "sha256": "17ae6a495199069f4b68db5ce03bebbc47e48d95a25e75c4198656519aa87ec8"
+    }
+  ]
+}

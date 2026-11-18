@@ -1,0 +1,19 @@
+# Project Documentation
+
+- [Product scope](./product.md) · [Roadmap](./roadmap.md) · [Architecture](./architecture.md) · [Design](./design.md)
+- Feature specs: [Compatibility](./features/1-compatibility-baseline-and-host-boundaries/spec.md) · [Plugin and resource tree](./features/2-plugin-foundation-and-resource-tree/spec.md) · [Reads and observation](./features/3-resource-inspection-and-observation/spec.md) · [Resource and configuration operations](./features/4-resource-and-kubeconfig-management/spec.md) · [Terminal and forwarding](./features/5-terminal-exec-and-port-forwarding/spec.md) · [Helm](./features/6-helm-repositories-and-releases/spec.md) · [Debug and providers](./features/7-debugging-tunnels-and-cluster-providers/spec.md) · [Packaging and acceptance](./features/8-integration-packaging-and-human-acceptance/spec.md) · [Explorer](./features/9-resource-explorer-ux-and-request-control/spec.md).
+- [Development and verification commands](./development.md) · [Hard limits](#hard-limits) · [Delivered candidate](./status.md)
+
+## Documentation Policy
+
+Write project documentation in English. Each feature uses one short `spec.md` to define behavior, boundaries, and non-goals. Shared rules belong in the architecture or design docs. Do not maintain a separate backlog or per-operation manual acceptance files in the repository docs. The archive is a short evidence index, not a specification or test input. `baseline/` contains only machine-readable JSON fixtures. Tests verify sources, protocols, and behavior, not historical wording.
+
+## Hard Limits
+
+1. Do not modify, install, configure, or restart the development host, official OpenChamber, the SDK, the Docker daemon or context, or existing services. Do not publish to or register the plugin on a real host.
+2. Do not read, print, copy, or mount real kubeconfigs, keys, tokens, credential caches, secret environment variables, or Docker or registry login configuration. Do not scan the host home directory or access real clusters. Prepare tools and dependencies only in isolated Docker containers; a person prepares Docker itself.
+3. Run engineering verification in Docker, including Chromium, pure-model tests, and ZIP readback. The host may only check copy integrity when exporting an already verified Git install candidate. Automated engineering work is limited to type checks, lint, builds, static source checks, pure presentation tests, and synthetic read-only tests. Do not run real or mocked authentication, writes, cache refreshes, Terminal, Exec, Forward, Debug, Telepresence, or provider lifecycle operations, even indirectly through dry runs, failing inputs, or automated cleanup.
+4. The dedicated bootstrap may prepare only a synthetic environment and must not import or invoke plugin operations. Do not use privileged containers, host networking, or mounts for the host socket, home directory, or secrets. Do not automatically delete volumes, reset state, or prune. Environment readiness does not prove that a feature works.
+5. Before stopping or rebuilding an existing service, use a trusted, side-effect-free check for the current service generation to confirm that there are no active manual operations, writes in flight, results awaiting reconciliation, or pending operation cleanup, and that no new session can start. If the state is unknown or a race cannot be ruled out, a person ends the work, verifies the state, and stops the service if necessary. Do not use shutdown as a shortcut for cleanup. Standalone read-only tasks can still be canceled safely.
+
+People verify the real host, platforms, identities, and operations in a non-production environment. Record only redacted results and do not run those checks on their behalf. Missing implementation or failed tests are not merely pending manual acceptance.

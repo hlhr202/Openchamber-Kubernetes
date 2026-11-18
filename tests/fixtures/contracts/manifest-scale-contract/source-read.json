@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v1.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/scale/scale.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/scale/scale.go",
+      "local": "tests/fixtures/contracts/manifest-scale-contract/pkg__cmd__scale__scale.go.txt",
+      "bytes": 10506,
+      "sha256": "88d208c986c8cf41ba5d589ce553a1dd2ad20d4b14d2641d59a88af2eee0f9c2"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v1.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/scale/scale.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/scale/scale.go",
+      "local": "tests/fixtures/contracts/manifest-scale-contract/pkg__scale__scale.go.txt",
+      "bytes": 8861,
+      "sha256": "8187683caf5050f4ca157d6a1476727acbf5e6312ac0fd67460809ed2043e937"
+    }
+  ]
+}

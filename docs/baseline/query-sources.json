@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "evidence": "M1-E049",
+  "records": [
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "tools/clientcmd/loader.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/tools/clientcmd/loader.go",
+      "bytes": 22050,
+      "sha256": "2dd30cca66df09aa9133a24242fa59c435bd21139279217e9c67a4ff6f506f9a"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "tools/clientcmd/api/types.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/tools/clientcmd/api/types.go",
+      "bytes": 19994,
+      "sha256": "0e23ace1bd559f1d8640eddd2585b98baf90d186d874ea6a0f0cbcda748d1387"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "tools/clientcmd/merged_client_builder.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/tools/clientcmd/merged_client_builder.go",
+      "bytes": 6204,
+      "sha256": "7d1c344452452bc87b44c6e741350412e97a510d9d1dffacecbfe7c5cbac3d56"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "kubernetes/typed/core/v1/pod_expansion.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/kubernetes/typed/core/v1/pod_expansion.go",
+      "bytes": 3904,
+      "sha256": "838aeb75b8fa9d56c931d607928d1c43c1b4e938241223aa3101c68bffa166f9"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "tools/clientcmd/config.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/tools/clientcmd/config.go",
+      "bytes": 15506,
+      "sha256": "9b2657d71b869d8c067b618af5f56c84185595b8074f8ccb273d16ee970e2639"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "discovery/cached/disk/cached_discovery.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/discovery/cached/disk/cached_discovery.go",
+      "bytes": 16790,
+      "sha256": "48265381045a0dab5a45f805179d30d47383302d9d2db4736871ec3e180e5c68"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "discovery/cached/disk/round_tripper.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/discovery/cached/disk/round_tripper.go",
+      "bytes": 4006,
+      "sha256": "9a020c2da60f44044d04bfd039da1b171614d7e04683f281ed30daaede1555a6"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "third_party/forked/httpcache/httpcache.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/third_party/forked/httpcache/httpcache.go",
+      "bytes": 16458,
+      "sha256": "1fec67db5fd68b7d4a1dbf32df92edb26f20a30ef9846dbe58ef8b223241d591"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "go.mod",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/go.mod",
+      "bytes": 2827,
+      "sha256": "d4e41d2bb92c5d3efff17c6df29f15964a044629775f0bcbc9374fd85c3f575c"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "openapi/client.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/openapi/client.go",
+      "bytes": 3979,
+      "sha256": "849703b5c9a2b9f44cd69be0f6317360f5a046a157d0f737be2f778c4a74aab4"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "openapi/groupversion.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/openapi/groupversion.go",
+      "bytes": 3768,
+      "sha256": "cfe2152afb47aac1e3ec875f9686e1ffa955dfe0311d255408592480a744f898"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/get/get.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/get/get.go",
+      "bytes": 26595,
+      "sha256": "ab57dec3fc15d169fac75f9055cbd8c3615e94fa251c1392132c3b1e094cff64"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/rawhttp/raw.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/rawhttp/raw.go",
+      "bytes": 2618,
+      "sha256": "628c17b0faff1cc8b620aaa2231f48fc2db491aac4bb26ebd7a65c129615d56a"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/cmd.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/cmd.go",
+      "bytes": 16187,
+      "sha256": "bbb673dd42abdf9461025e616ce5f835a03d2a7b75108d82b4c6589b3b91de90"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/profiling.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/profiling.go",
+      "bytes": 3073,
+      "sha256": "8717bed84c603695738215ac839c124a01018e27ea8e87925faa5b072a33b868"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/kuberc/kuberc.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/kuberc/kuberc.go",
+      "bytes": 17458,
+      "sha256": "854ce6cd0af4e173a081f4ba556a15dd3971a264e0b54286bc106ef9e283f164"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/polymorphichelpers/logsforobject.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/polymorphichelpers/logsforobject.go",
+      "bytes": 6564,
+      "sha256": "a015ac79054600cc9a30eb123025a7e309b1b49995fef6dccc3e0a18231826fc"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/polymorphichelpers/helpers.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/polymorphichelpers/helpers.go",
+      "bytes": 6620,
+      "sha256": "a5f3e8ac4807c3039083cd5abc1c102f491b8df32659c783048b8f423321bbc3"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/util/podutils/podutils.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/util/podutils/podutils.go",
+      "bytes": 10480,
+      "sha256": "8f88e51f94999624db18012ee4e39b72c5af11d5d97de8806ebe96368754a054"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/delete/delete.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/delete/delete.go",
+      "bytes": 17421,
+      "sha256": "9814151c8a040fe1fac1eff8523f214a1c4c38e3abbf2e4fdd3a137f76c27894"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/config/use_context.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/config/use_context.go",
+      "bytes": 2846,
+      "sha256": "3ead95daae6e2ffaeb6519f204d1e2c6f6b93c26a2f4a421205c290a0ec2e865"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/config/delete_context.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/config/delete_context.go",
+      "bytes": 2619,
+      "sha256": "0cb0cc971c5c889846c0d22e017926ee92eafe079c7e88ca5b4de1300605866d"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/config/delete_cluster.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/config/delete_cluster.go",
+      "bytes": 2409,
+      "sha256": "36bd2dc6044dfebcb9272385fb63b2990871d0a430b165d68c14c328f307e7f3"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/config/unset.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/config/unset.go",
+      "bytes": 2895,
+      "sha256": "897769fdf8e81577e5211a0fcecaf6c053ea1a31b05f784dcdc4aba26fa7dcc9"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/config/set_context.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/config/set_context.go",
+      "bytes": 5125,
+      "sha256": "96ed8fb06cee0bbf311a9c50b1d1b16fa5f7bb5f88683b478b094f861a81d4aa"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/describe/describe.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/describe/describe.go",
+      "bytes": 9350,
+      "sha256": "8238f67315b748805e427e181af5e984a2689bbaec5120d576cc3952834f1698"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/clusterinfo/clusterinfo.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/clusterinfo/clusterinfo.go",
+      "bytes": 4884,
+      "sha256": "bcf3d7b232e8cb490feb26a93a49373a53ead468028ac449ab3dc7d7cc78ed7f"
+    },
+    {
+      "repo": "kubernetes/cli-runtime",
+      "tag": "v0.37.0",
+      "commit": "c58f9415ee24b32da8ffdffd7bc94edb2a9b40de",
+      "path": "pkg/genericclioptions/config_flags.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/cli-runtime/c58f9415ee24b32da8ffdffd7bc94edb2a9b40de/pkg/genericclioptions/config_flags.go",
+      "bytes": 18444,
+      "sha256": "5a5ffea2f292f8c50bf24cf3f1e48ba44405161a82a1932a2ea5f6e612c27cfd"
+    },
+    {
+      "repo": "kubernetes/cli-runtime",
+      "tag": "v0.37.0",
+      "commit": "c58f9415ee24b32da8ffdffd7bc94edb2a9b40de",
+      "path": "pkg/genericclioptions/json_yaml_flags.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/cli-runtime/c58f9415ee24b32da8ffdffd7bc94edb2a9b40de/pkg/genericclioptions/json_yaml_flags.go",
+      "bytes": 2750,
+      "sha256": "20e3dfddcb76598887b8354bb66feb48ac9a31f026b3c88780af37eba5fbb930"
+    },
+    {
+      "repo": "kubernetes/cli-runtime",
+      "tag": "v0.37.0",
+      "commit": "c58f9415ee24b32da8ffdffd7bc94edb2a9b40de",
+      "path": "pkg/printers/managedfields.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/cli-runtime/c58f9415ee24b32da8ffdffd7bc94edb2a9b40de/pkg/printers/managedfields.go",
+      "bytes": 1687,
+      "sha256": "a95ec3a346592da7bdb056ab6b1be9adc16e5b5fa336f00e8153ddebaeeb132c"
+    },
+    {
+      "repo": "kubernetes/apiextensions-apiserver",
+      "tag": "v0.37.0",
+      "commit": "78b55771e5935f10d7d8d187de1b2f3c934cdcb9",
+      "path": "pkg/apis/apiextensions/v1/types.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/apiextensions-apiserver/78b55771e5935f10d7d8d187de1b2f3c934cdcb9/pkg/apis/apiextensions/v1/types.go",
+      "bytes": 30227,
+      "sha256": "7af3a8853a7f50e8d0d02fa34958db6bd08acb0c7a2b2a33199685471a619d4b"
+    },
+    {
+      "repo": "kubernetes/apiextensions-apiserver",
+      "tag": "v0.37.0",
+      "commit": "78b55771e5935f10d7d8d187de1b2f3c934cdcb9",
+      "path": "pkg/apis/apiextensions/validation/validation.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/apiextensions-apiserver/78b55771e5935f10d7d8d187de1b2f3c934cdcb9/pkg/apis/apiextensions/validation/validation.go",
+      "bytes": 87754,
+      "sha256": "b57b915b6ffcb0b08279be19732267cbaa1fb2a7e41132d17712022217a02ca5"
+    },
+    {
+      "repo": "kubernetes/api",
+      "tag": "v0.37.0",
+      "commit": "34b5cc4a2603a1cdcad4aced5c83808fb7df7bb8",
+      "path": "core/v1/types.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/api/34b5cc4a2603a1cdcad4aced5c83808fb7df7bb8/core/v1/types.go",
+      "bytes": 471597,
+      "sha256": "64b70c914fe25eba63bfb325401a551bbd0871e37eb7fd9b9878283a53e6e062"
+    },
+    {
+      "repo": "kubernetes/api",
+      "tag": "v0.37.0",
+      "commit": "34b5cc4a2603a1cdcad4aced5c83808fb7df7bb8",
+      "path": "events/v1/types.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/api/34b5cc4a2603a1cdcad4aced5c83808fb7df7bb8/events/v1/types.go",
+      "bytes": 6389,
+      "sha256": "aa1e07c2dbea999c6975fc0e5c16366134e4b3dacba14ffdef8a94812bd49b58"
+    },
+    {
+      "repo": "kubernetes/apimachinery",
+      "tag": "v0.37.0",
+      "commit": "7164e39885ced1e843757da6423a337f6eae75f7",
+      "path": "pkg/apis/meta/v1/types.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/apimachinery/7164e39885ced1e843757da6423a337f6eae75f7/pkg/apis/meta/v1/types.go",
+      "bytes": 87135,
+      "sha256": "a544ea7354cf745449e42db03a512f505aea91dc4adcdc79d6e656406066ebc6"
+    },
+    {
+      "repo": "kubernetes/apimachinery",
+      "tag": "v0.37.0",
+      "commit": "7164e39885ced1e843757da6423a337f6eae75f7",
+      "path": "pkg/runtime/schema/group_version.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/apimachinery/7164e39885ced1e843757da6423a337f6eae75f7/pkg/runtime/schema/group_version.go",
+      "bytes": 10492,
+      "sha256": "9a6b8edc2ad3f742923f3f51b083a70804b764c5d5eba63a2266722f30b45835"
+    },
+    {
+      "repo": "peterbourgon/diskv",
+      "tag": "v2.0.1",
+      "commit": "5f041e8faa004a95c88a202771f4cc3e991971e6",
+      "path": "diskv.go",
+      "url": "https://raw.githubusercontent.com/peterbourgon/diskv/5f041e8faa004a95c88a202771f4cc3e991971e6/diskv.go",
+      "bytes": 16714,
+      "sha256": "f0a7a4f272d1ae8e149a13a47fb82ddb4472c0b30b96f5f1ca3d697987d0048e"
+    }
+  ]
+}

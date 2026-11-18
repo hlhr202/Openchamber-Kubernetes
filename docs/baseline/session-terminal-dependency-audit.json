@@ -1,0 +1,15 @@
+{
+  "name": "@xterm/addon-serialize",
+  "version": "0.14.0",
+  "license": "MIT",
+  "integrity": "sha512-uteyTU1EkrQa2Ux6P/uFl2fzmXI46jy5uoQMKEOM0fKTyiW7cSn0WrFenHm5vO5uEXX/GpwW/FgILvv3r0WbkA==",
+  "archiveBytes": 54965,
+  "runtimeDependencies": [],
+  "installHooks": [],
+  "nativeAssets": [],
+  "sourceCommit": "f447274f430fd22513f6adbf9862d19524471c04",
+  "licenseSource": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+  "licenseAsset": "assets/third-party/xterm-addon-serialize-LICENSE.txt",
+  "reason": "Restore the bounded terminal screen, cursor, modes and alternate buffer after viewer destruction; memory only, never serializeAsHTML or persistence.",
+  "review": "Metadata/archive integrity statically reviewed inside the dependency container; pnpm installation used --ignore-scripts. The npm tarball has no LICENSE; notices use the exact repository-root license above. Runtime and platform acceptance not executed."
+}

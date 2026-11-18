@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "evidence": "M1-E051",
+  "scope": "repository-format-and-paths-not-cli-support-or-runtime-evidence",
+  "records": [
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/repo/repo.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/repo/repo.go",
+      "bytes": 2980,
+      "sha256": "a2ffea338591bbec9ec85589a2afbb8559faa33f65a922aee7018d4d2460dee5"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/repo/index.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/repo/index.go",
+      "bytes": 12641,
+      "sha256": "7704964f4b4a9762f5f94d1bf24ee8526f830bf4c4e7d434a75fb70974cb0593"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/repo/chartrepo.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/repo/chartrepo.go",
+      "bytes": 10292,
+      "sha256": "2e7f7d18b1fc1e8391b4de7d3f8fd86434e81dac7ceb944b787d471c1a70aa55"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "cmd/helm/search_repo.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/cmd/helm/search_repo.go",
+      "bytes": 12562,
+      "sha256": "ca14249c97c25b5b30e50a4ef81c4d156fc15a06e9ba8226e1b2dac2a5bc6af5"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "cmd/helm/search/search.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/cmd/helm/search/search.go",
+      "bytes": 6208,
+      "sha256": "f17e6784900ee598ad0e82dcb721dcb899f7b4e3b0a969887b02e6d62cdb6469"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/cli/environment.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/cli/environment.go",
+      "bytes": 10301,
+      "sha256": "91b81d7696204ff90aba577fd38727ba034591fbb0b5a1e1afe9a9e7c2ca1211"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/helmpath/home.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/helmpath/home.go",
+      "bytes": 1592,
+      "sha256": "f7d72998130a19997b6e8bda559796302484b84e4d73b26d9f170ceb709a2c7f"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/helmpath/lazypath.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/helmpath/lazypath.go",
+      "bytes": 2587,
+      "sha256": "4971843231cdbdc97aafae18c1646a702d5e9de1770f7646bbad7b775805ec3e"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/helmpath/lazypath_darwin.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/helmpath/lazypath_darwin.go",
+      "bytes": 946,
+      "sha256": "e11e237e2dfc6dd99baf39dcedd38562b3e36ed2c63f3b1b7aa6d3792d838ad2"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/helmpath/lazypath_unix.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/helmpath/lazypath_unix.go",
+      "bytes": 1562,
+      "sha256": "800c8eaf908ed3d3f2f1afc846b7220d041db88a1b13a330d08f10a28b8655a8"
+    },
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "pkg/helmpath/xdg/xdg.go",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/pkg/helmpath/xdg/xdg.go",
+      "bytes": 1368,
+      "sha256": "55a784c2c45e6b1baf07e476b502c6b4935b6e661bea30e5079cba92876e12ce"
+    }
+  ]
+}

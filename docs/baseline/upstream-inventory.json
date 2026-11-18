@@ -1,0 +1,3731 @@
+{
+  "schemaVersion": 1,
+  "commit": "f54aef89a48c64e3df66af4a75cc5dd3d80f4a75",
+  "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/package.json",
+  "views": {
+    "kubernetesView": [
+      {
+        "id": "extension.vsKubernetesExplorer",
+        "name": "Clusters"
+      },
+      {
+        "id": "extension.vsKubernetesHelmRepoExplorer",
+        "name": "Helm Repos"
+      },
+      {
+        "id": "kubernetes.cloudExplorer",
+        "name": "Clouds"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "command": "extension.helmConvertToTemplate",
+      "declaration": {
+        "command": "extension.helmConvertToTemplate",
+        "title": "Convert to Template",
+        "description": "Convert this manifest to a Helm template",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmConvertToTemplate",
+          "line": 258,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L258"
+        }
+      ],
+      "menus": [
+        {
+          "location": "explorer/context",
+          "index": 4,
+          "when": "resourceLangId == yaml",
+          "command": "extension.helmConvertToTemplate",
+          "group": "2_helm@98"
+        },
+        {
+          "location": "view/item/context",
+          "index": 20,
+          "command": "extension.helmConvertToTemplate",
+          "group": "2",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource(?!\\.namespace).*/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 258,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L258",
+          "text": "registerCommand('extension.helmConvertToTemplate', helmConvertToTemplate),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmConvertToTemplate",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E049",
+          "scope": "用户显式Convert to Template窄入口（资源YAML随请求体≤45KiB单文档；chart为显式规范workspace位置=root+相对path全schema校验+bounded模板名token——无chart自动发现/quick-pick/自动创建（上游取消可留半成品目录，显式表单从根上避免该部分副作用，披露更窄范围））：parsing层templatise严格移植（剥集群metadata/status与last-applied注解、设fullname名表达式与chart标签表达式、修正引号，双侧bounded）后，adapter以独占wx标志在chart templates/下单次写入<名称>.yaml新文件——绝不覆盖既有文件（上游TODO承认缺存在检查；DOCUMENT_DIRTY拒绝，披露增强）；不自动打开文档（主机UI动作）；不触发Save/Apply/集群。非YAML/多文档→CONTENT_INVALID/INVALID_INPUT固定码；30s期限/单并发；诊断面板bounded表单+textarea非最终picker/renderer。链为真实工作区写链（单新文件），静态审查交付，运行归人工包；自动测试仅纯协议/投影/变换值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmCreate",
+      "declaration": {
+        "command": "extension.helmCreate",
+        "title": "Create Chart",
+        "description": "Create a new Helm Chart",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmCreate",
+          "line": 250,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L250"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 250,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L250",
+          "text": "registerCommand('extension.helmCreate', helmexec.helmCreate),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmCreate",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E046",
+          "scope": "用户显式Create Chart窄入口（规范workspace父目录=root+相对path全schema校验+bounded名称与仓库资源管理器同一token集——上游将原始输入内插进shell字符串，此处为严格移植；workspace folder picker/输入框浏览入口后续）：单次 helm create <父目录>/<名称> 脚手架新chart（隔离PATH+空HOME）；无隐式安装；不自动打开Chart.yaml/文件夹（仅报告路径——上游打开为主机UI动作的披露偏离）；非零退出=创建失败固定码（stderr绝不保留——披露偏离）；输出仅bounded stdout≤16KiB；30s固定期限/单并发无队列/不自动重试；诊断面板bounded表单非最终workspace folder picker/renderer。链为真实工作区写链（脚手架写入规范父目录内），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmDepUp",
+      "declaration": {
+        "command": "extension.helmDepUp",
+        "title": "Dependency Update",
+        "description": "Update the dependencies listed in requirements.yaml.",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmDepUp",
+          "line": 248,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L248"
+        }
+      ],
+      "menus": [
+        {
+          "location": "explorer/context",
+          "index": 0,
+          "title": "Update Dependencies",
+          "when": "resourceFilename == requirements.yaml",
+          "command": "extension.helmDepUp",
+          "group": "2_helm@99"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 248,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L248",
+          "text": "registerCommand('extension.helmDepUp', helmexec.helmDepUp),"
+        },
+        {
+          "path": "src/helm.requirementsCodeLens.ts",
+          "line": 19,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.requirementsCodeLens.ts#L19",
+          "text": "command: \"extension.helmDepUp\","
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmDepUp",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E045",
+          "scope": "用户显式Dependency Update窄入口（规范workspace chart目录=root+相对path全schema校验，绝无任意文件系统路径/shell字符串；上游pickChart/文件URI目录推导入口后续）：单次 helm dep up <chart目录>（隔离PATH+空HOME；用户repositories.yaml只读，依赖下载只写插件隔离缓存）；工作区写仅限该chart目录内（Chart.lock与charts/子树）；非零退出=更新失败固定码（stderr绝不保留——披露偏离）；输出仅bounded stdout≤16KiB；60s固定期限（下载可能较慢）/单并发无队列/部分更新如实报告不自动重试；诊断面板bounded表单非最终chart picker/renderer。链为真实工作区写链（写chart目录内），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmDependencies",
+      "declaration": {
+        "command": "extension.helmDependencies",
+        "title": "Show Dependencies",
+        "description": "List the dependencies of a Helm chart",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmDependencies",
+          "line": 257,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L257"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 39,
+          "command": "extension.helmDependencies",
+          "group": "0@3",
+          "when": "view == extension.vsKubernetesHelmRepoExplorer && viewItem =~ /vsKubernetes\\.((chart)|(chartversion))/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 257,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L257",
+          "text": "registerCommand('extension.helmDependencies', helmexec.helmDependencies),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmDependencies",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E040",
+          "scope": "用户显式Show Dependencies窄入口（仅repo/chart[+version]，树节点/InputBox分支后续）：单次 helm fetch <chart> [--version v] -d <插件自有临时目录（服务home下helm-tmp/vsk-fetchfordeps-*，非系统tmp）> 后对该压缩包单次 helm dep list，按上游制表符分隔解析（首行表头）；随后按上游finally删除压缩包与临时目录。用户repositories.yaml只读，下载只写插件隔离缓存+插件自有临时目录；输出仅bounded表（≤64行×≤4列×≤256字符，schema强制），stderr绝不保留；仅表头=无依赖（上游以错误串表达，此处为确定性空表并披露），不用默认索引依赖字段冒充完整命令；30s固定期限/单并发无队列/固定失败码不自动重试。链为写式（仅写插件自有目录），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmDryRun",
+      "declaration": {
+        "command": "extension.helmDryRun",
+        "title": "Dry Run",
+        "description": "Run 'helm install --dry-run --debug' on this chart.",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmDryRun",
+          "line": 247,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L247"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 247,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L247",
+          "text": "registerCommand('extension.helmDryRun', helmexec.helmDryRun),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmDryRun",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E043",
+          "scope": "用户显式Dry Run窄入口（按显式操作处理非只读豁免；规范workspace chart目录=root+相对path均schema校验；chart picker浏览入口后续）：每次先经版本读取器重新探测语法（响应回显），再单次 helm install --dry-run[--dry-run=client(v4)] [--generate-name(v3/v4)] --debug <目录>（上游参数分支逐字；隔离PATH+空HOME；用户repositories.yaml只读，缺依赖下载只写插件隔离缓存；绝不触碰集群写面/kubeconfig）；非零退出=失败固定码（stderr绝不保留——披露偏离）；输出仅bounded文本≤16KiB超限拒绝；30s固定期限/单并发无队列/不自动重试；诊断面板bounded表单非最终chart picker/renderer。链为写式（至多写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmFetch",
+      "declaration": {
+        "command": "extension.helmFetch",
+        "title": "Fetch",
+        "description": "Fetch a Helm chart into the current project",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmFetch",
+          "line": 253,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L253"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 37,
+          "command": "extension.helmFetch",
+          "group": "1",
+          "when": "view == extension.vsKubernetesHelmRepoExplorer && viewItem =~ /vsKubernetes\\.((chart)|(chartversion))/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 253,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L253",
+          "text": "registerCommand('extension.helmFetch', helmexec.helmFetch),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmFetch",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E047",
+          "scope": "用户显式Fetch窄入口（chart引用+可选版本=共享严格token schema（上游isSafe严格移植）+规范workspace目标=root+相对path全schema校验；输入框/树节点/folder picker浏览入口后续）：单次 helm fetch <chart> --untar [--version v] -d <目标>（隔离PATH+空HOME；用户repositories.yaml只读，仓库下载只写插件隔离缓存）；解包chart树只写入指定目标目录（目标自动创建）；非零退出=获取失败固定码（含HELM_INDEX_MISSING缺chart；stderr绝不保留——披露偏离）；输出仅bounded stdout≤16KiB；60s固定期限（下载较慢）/单并发无队列/部分结果如实报告不自动重试；诊断面板bounded表单非最终输入框/folder picker renderer。链为真实工作区写链（解包写目标目录），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmFetchValues",
+      "declaration": {
+        "command": "extension.helmFetchValues",
+        "title": "Fetch values",
+        "description": "Fetches values.yaml from the chart",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmFetchValues",
+          "line": 245,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L245"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 41,
+          "command": "extension.helmFetchValues",
+          "group": "0@3",
+          "when": "view == extension.vsKubernetesHelmRepoExplorer && viewItem =~ /vsKubernetes\\.((chart)|(chartversion))/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 245,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L245",
+          "text": "registerCommand('extension.helmFetchValues', helmexec.helmFetchValues),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmFetchValues",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E039",
+          "scope": "用户显式Fetch values窄入口（仅repo/chart[+version]，文件/目录分支后续）：单次 helm inspect values <chart> [--version v]（上游FETCH_VALUES_SCHEME+generateFile分支，无all作用域、无需语法探测），用户repositories.yaml只读，chart下载只写插件隔离缓存（服务home下镜像原cache目录名）；输出仅bounded预览文本≤16KiB（schema强制，含savedTo字段不存在契约），stderr绝不保留；30s固定期限/单并发无队列/固定失败码，失败不自动重试；与上游虚拟文档一致本链不向任何工作区落盘，是否保存由用户在平台侧决定；诊断面板bounded表单非最终虚拟文档renderer。链为写式（仅写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmGet",
+      "declaration": {
+        "command": "extension.helmGet",
+        "title": "Get Release",
+        "description": "Get a Helm release from the cluster",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmGet",
+          "line": 251,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L251"
+        }
+      ],
+      "menus": [
+        {
+          "location": "commandPalette",
+          "index": 14,
+          "command": "extension.helmGet",
+          "when": "view == extension.vsKubernetesExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/components/clusterexplorer/node.helmrelease.ts",
+          "line": 26,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.helmrelease.ts#L26",
+          "text": "command: \"extension.helmGet\","
+        },
+        {
+          "path": "src/components/clusterexplorer/node.helmrelease.ts",
+          "line": 60,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.helmrelease.ts#L60",
+          "text": "command: \"extension.helmGet\","
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 251,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L251",
+          "text": "registerCommand('extension.helmGet', helmexec.helmGet),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmGet",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E075",
+          "scope": "helmGet只读纯Node解析已接（M6-E075）：release.v1 Secret内存解码（manifest/config/hooks）"
+        }
+      }
+    },
+    {
+      "command": "extension.helmInsertReq",
+      "declaration": {
+        "command": "extension.helmInsertReq",
+        "title": "Insert Dependency",
+        "description": "Insert a dependency YAML fragment",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmInsertReq",
+          "line": 249,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L249"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 249,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L249",
+          "text": "registerCommand('extension.helmInsertReq', helmexec.insertRequirement),"
+        },
+        {
+          "path": "src/helm.requirementsCodeLens.ts",
+          "line": 24,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.requirementsCodeLens.ts#L24",
+          "text": "command: \"extension.helmInsertReq\","
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmInsertReq",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E048",
+          "scope": "用户显式Insert Dependency窄入口（纯读链：无CLI/spawn/写）：按仓库名+chart名经既有repository-file只读边界与纯投影查最新版本（上游searchForChart/releases[0]语义），生成上游Requirement文本形状但repository字段用@别名引用——仓库URL（可能内嵌凭证）绝不离开读取边界（披露偏离）；不自动插入任何文档/剪贴板（上游insertSnippet为主机编辑器动作；此处仅显示bounded文本≤512由人放置）；缺仓库/chart/索引→NOT_FOUND/HELM_INDEX_MISSING固定码；5s调度期限与仓库读取链一致；诊断面板bounded表单非最终输入框/renderer。读链静态审查交付，运行归人工包；自动测试仅纯协议/投影值+合成注入读"
+        }
+      }
+    },
+    {
+      "command": "extension.helmInspectChart",
+      "declaration": {
+        "command": "extension.helmInspectChart",
+        "title": "Inspect Chart",
+        "description": "Inspect a Helm Chart",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmInspectChart",
+          "line": 246,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L246"
+        }
+      ],
+      "menus": [
+        {
+          "location": "explorer/context",
+          "index": 5,
+          "when": "resourceExtname == .tgz",
+          "command": "extension.helmInspectChart",
+          "group": "2_helm@1"
+        },
+        {
+          "location": "view/item/context",
+          "index": 40,
+          "command": "extension.helmInspectChart",
+          "group": "0@1",
+          "when": "view == extension.vsKubernetesHelmRepoExplorer && viewItem =~ /vsKubernetes\\.((chart)|(chartversion))/i"
+        },
+        {
+          "location": "commandPalette",
+          "index": 15,
+          "command": "extension.helmInspectChart",
+          "when": "view === extension.vsKubernetesHelmRepoExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 246,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L246",
+          "text": "registerCommand('extension.helmInspectChart', helmexec.helmInspectChart),"
+        },
+        {
+          "path": "src/helm.repoExplorer.ts",
+          "line": 193,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.repoExplorer.ts#L193",
+          "text": "command: \"extension.helmInspectChart\","
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmInspectChart",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E038",
+          "scope": "用户显式Inspect Chart窄入口（仅repo/chart[+version]，不含文件Chart分支）：每次先经版本读取器重新探测语法（仅v2省略all），单次 helm inspect [all] <chart> [--version v]，用户repositories.yaml只读，chart下载只写插件隔离缓存（服务home下镜像原cache目录名）；输出仅bounded预览文本≤16KiB（schema强制），stderr绝不保留；30s固定期限/单并发无队列/固定失败码（HELM_INDEX_MISSING等），失败不自动重试；诊断面板表单非最终虚拟文档renderer，不落盘values文件。链为写式（写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmInstall",
+      "declaration": {
+        "command": "extension.helmInstall",
+        "title": "Install",
+        "description": "Install a Helm chart into the cluster",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmInstall",
+          "line": 254,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L254"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 38,
+          "command": "extension.helmInstall",
+          "group": "2",
+          "when": "view == extension.vsKubernetesHelmRepoExplorer && viewItem =~ /vsKubernetes\\.((chart)|(chartversion))/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 254,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L254",
+          "text": "registerCommand('extension.helmInstall', (o) => helmexec.helmInstall(kubectl, o)),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmInstall",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E076",
+          "scope": "helmInstall服务器执行已接（M6-E076）：G4链+HELM_KUBETOKEN零物化CLI"
+        }
+      }
+    },
+    {
+      "command": "extension.helmLint",
+      "declaration": {
+        "command": "extension.helmLint",
+        "title": "Lint",
+        "description": "Run the Helm linter on this chart.",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmLint",
+          "line": 244,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L244"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 244,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L244",
+          "text": "registerCommand('extension.helmLint', helmexec.helmLint),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmLint",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E041",
+          "scope": "用户显式Lint窄入口（规范workspace chart目录=root+相对path，均schema校验，绝无任意文件系统路径/shell字符串；chart picker浏览入口后续）：单次 helm lint <目录>（隔离PATH+空HOME，用户repositories.yaml只读，缺依赖下载只写插件隔离缓存）；非零退出=lint发现（确定性failed=true结果而非失败码，stderr绝不保留——上游同时记录stderr的披露偏离）；输出仅bounded stdout≤16KiB；30s固定期限/单并发无队列/固定失败码不自动重试；诊断面板bounded表单非最终chart picker/renderer。链为写式（至多写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmPackage",
+      "declaration": {
+        "command": "extension.helmPackage",
+        "title": "Package",
+        "description": "Package a chart directory into a versioned chart archive file.",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmPackage",
+          "line": 252,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L252"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 252,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L252",
+          "text": "registerCommand('extension.helmPackage', helmexec.helmPackage),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmPackage",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E044",
+          "scope": "用户显式Package窄入口（chart目录与打包目标均为规范workspace位置=root+相对path全schema校验，绝无任意文件系统路径/shell字符串；上游pickChart+Save单文件夹对话框语义，chart picker/对话框浏览入口后续）：单次 helm package <chart> -d <目标目录>（隔离PATH+空HOME；用户repositories.yaml只读，缺依赖下载只写插件隔离缓存）；唯一文件系统效果=目标workspace目录内的.tgz归档（目标目录自动创建）；非零退出=失败固定码（stderr绝不保留——披露偏离）；输出仅bounded stdout≤16KiB（含saved-to身份）；30s固定期限/单并发无队列/部分产物如实报告不自动重试；诊断面板bounded四字段表单非最终chart picker/保存对话框renderer。链为真实工作区写链（写用户指定目标），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmParameterise",
+      "declaration": {
+        "command": "extension.helmParameterise",
+        "title": "Convert to Template Parameter",
+        "description": "Convert this value to a Helm template parameter",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmParameterise",
+          "line": 259,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L259"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 259,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L259",
+          "text": "registerCommand('extension.helmParameterise', helmParameterise),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmParameterise",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E050",
+          "scope": "用户显式Parameterise窄入口（纯变换计算链：无CLI/无文件/无缓冲写）：在所供模板YAML文本（≤45KiB、≤4000行）中定位唯一`字段: 值`标量赋值行（任意缩进、值至行尾、无尾注释），替换为`{{ .Values.<模板名>.<字段> }}`并生成values条目文本（<模板名>:\\n  <字段>: 原值）——上游对两缓冲applyEdit为主机编辑器动作，此处仅显示两个bounded文本由人放置（披露偏离）；不自动保存/写文件/剪贴板。找不到赋值→NOT_FOUND（上游Selection is not a YAML field类比）；多于一个精确匹配→显式STATE_UNAVAILABLE绝不猜测/递归消歧；模板/字段名token集（上游sanitize在此为恒等）；字面值单行≤1024；文档级控制字符守卫容忍换行/制表。48KB路由/单飞行；诊断面板bounded表单+textarea非最终symbol picker/renderer。纯读形计算静态审查交付，运行归人工包；自动测试仅纯协议/投影/变换值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmRollback",
+      "declaration": {
+        "command": "extension.helmRollback",
+        "title": "Rollback",
+        "description": "Rollback Helm Release",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmRollback",
+          "line": 256,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L256"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 42,
+          "command": "extension.helmRollback",
+          "group": "3@1",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.helmhistory/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 256,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L256",
+          "text": "registerCommand(\"extension.helmRollback\", helmexec.helmRollback),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmRollback",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E076",
+          "scope": "helmRollback服务器执行已接（M6-E076）：G4链+世代证明+零物化CLI"
+        }
+      }
+    },
+    {
+      "command": "extension.helmTemplate",
+      "declaration": {
+        "command": "extension.helmTemplate",
+        "title": "Template",
+        "description": "Run 'helm template' on this chart.",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmTemplate",
+          "line": 242,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L242"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 242,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L242",
+          "text": "registerCommand('extension.helmTemplate', helmexec.helmTemplate),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmTemplate",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E042",
+          "scope": "用户显式Template窄入口（规范workspace chart目录=root+相对path均schema校验，绝无任意文件系统路径/shell字符串；chart picker浏览入口与TemplatePreview文档流后续）：单次 helm template <目录>（隔离PATH+空HOME，用户repositories.yaml只读，缺依赖下载只写插件隔离缓存）；非零退出=渲染失败（固定失败码；上游显示错误流——本实现stderr绝不保留的披露偏离）；输出仅bounded渲染清单≤16KiB（超限BUDGET_EXCEEDED拒绝而非静默截断）；30s固定期限/单并发无队列/不自动重试；诊断面板bounded表单非最终chart picker/renderer。链为写式（至多写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.helmTemplatePreview",
+      "declaration": {
+        "command": "extension.helmTemplatePreview",
+        "title": "Preview Template",
+        "description": "Run 'helm template' on this chart and show only this file.",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmTemplatePreview",
+          "line": 243,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L243"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 243,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L243",
+          "text": "registerCommand('extension.helmTemplatePreview', helmexec.helmTemplatePreview),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmTemplatePreview",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E077",
+          "scope": "TemplatePreview服务器执行已接（M6-E077）：单模板--show-only渲染（工作区文件新鲜proof+图表结构归因+YAML校验+上游固定错误分支）"
+        }
+      }
+    },
+    {
+      "command": "extension.helmUninstall",
+      "declaration": {
+        "command": "extension.helmUninstall",
+        "title": "Uninstall",
+        "description": "Uninstall a Helm release",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmUninstall",
+          "line": 255,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L255"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 43,
+          "command": "extension.helmUninstall",
+          "group": "3@2",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.helmrelease/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 255,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L255",
+          "text": "registerCommand(\"extension.helmUninstall\", helmexec.helmUninstall),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmUninstall",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E076",
+          "scope": "helmUninstall服务器执行已接（M6-E076）：G4链+世代证明+零物化CLI"
+        }
+      }
+    },
+    {
+      "command": "extension.helmVersion",
+      "declaration": {
+        "command": "extension.helmVersion",
+        "title": "Version",
+        "description": "Get the version of the local Helm client.",
+        "category": "Helm"
+      },
+      "registration": [
+        {
+          "id": "extension.helmVersion",
+          "line": 241,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L241"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 241,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L241",
+          "text": "registerCommand('extension.helmVersion', helmexec.helmVersion),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.helmVersion",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E055",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E034",
+          "scope": "只读Helm版本检查：按固定上游探测顺序每次重新判定语法（v2先答version --short -c，否则version --short辨v3/v4，未知不猜），再按语法输出version（v2带-c）；无全局语法缓存（上游STALE风险的保守偏离）、PATH+空HOME隔离环境不读真实配置/插件/凭证/集群、不安装；缺CLI/版本未知/非零为固定失败码，stderr不保留；输出≤4KiB/读取≤16KiB、单并发、7秒总期。语法探测成功不等于正式支持矩阵通过；其余Helm写操作/缓存/正式平台仍缺，真实或mock CLI运行未执行"
+        }
+      }
+    },
+    {
+      "command": "extension.showInfoMessage",
+      "declaration": null,
+      "registration": [
+        {
+          "id": "extension.showInfoMessage",
+          "line": 270,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L270"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 270,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L270",
+          "text": "registerCommand('extension.showInfoMessage', showInfoMessage),"
+        },
+        {
+          "path": "src/helm.repoExplorer.ts",
+          "line": 112,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.repoExplorer.ts#L112",
+          "text": "command: 'extension.showInfoMessage',"
+        }
+      ],
+      "milestone": "M2",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.showInfoMessage",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E057",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M2-E036",
+          "scope": "树内message节点激活仅显示schema-bounded标签文本（无控制字符/固定上限），非message节点与未就绪树不显示；选择其他行或dispose清除；无Helm/刷新/安装/写菜单/通知/chat/剪贴板/HTML，消息节点永不携带query（expandable=false契约）。诊断状态区非最终renderer/几何/辅助技术；完整树UI/正式平台仍缺，真实运行未验"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesAddFile",
+      "declaration": {
+        "command": "extension.vsKubernetesAddFile",
+        "title": "Add File(s)",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesAddFile",
+          "line": 235,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L235"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 33,
+          "command": "extension.vsKubernetesAddFile",
+          "group": "3",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.configmap/i"
+        },
+        {
+          "location": "view/item/context",
+          "index": 34,
+          "command": "extension.vsKubernetesAddFile",
+          "group": "3",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.secret/i"
+        },
+        {
+          "location": "commandPalette",
+          "index": 12,
+          "command": "extension.vsKubernetesAddFile",
+          "when": "view == extension.vsKubernetesExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 235,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L235",
+          "text": "registerCommand('extension.vsKubernetesAddFile', (explorerNode: ClusterExplorerResourceNode) => { addKubernetesConfigFile(kubectl, explorerNode, treeProvider); }),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesAddFile",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E032",
+          "scope": "仅core/v1 ConfigMap/Secret行+每次恰一个Server工作区文件（原读取proof独立capture，拒Save receipt，不读dirty编辑器）：文件核验+原对象UID/RV证明+固定60秒确认（即上游逐键覆盖决定，UI明示可能覆盖恰该键）；确认后GET钉住原对象，按上游编码语义（ConfigMap文本/Secret标准base64）设置该键后的完整对象单次PUT replace（RV门禁），其他键/binaryData保留；文件漂移/父对象重建/409冲突固定失败不重试，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。上游多文件dialog/逐键分别提示/F6父项/完整G4/正式平台仍缺，真实或mock写链均未运行"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesAddWatch",
+      "declaration": {
+        "command": "extension.vsKubernetesAddWatch",
+        "title": "Watch",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesAddWatch",
+          "line": 219,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L219"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 13,
+          "command": "extension.vsKubernetesAddWatch",
+          "group": "3@1",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /k8s-watchable/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 219,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L219",
+          "text": "registerCommand('extension.vsKubernetesAddWatch', (explorerNode: ClusterExplorerNode) => { addWatch(treeProvider, explorerNode); }),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesAddWatch",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E015",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E026",
+          "scope": "原内置raw Watch/ACK/单410relist/公共任务/同target树合并保持；E026独立strict custom type-definition-listKind接纳CRD目录/原UID对象显式Watch，原finite槽CRD/discovery list+watch proof、初始exact UID/RV/精确served GVR与private custom-resource-watch-relist/worker再核。proof累计256GET8MB，加原10watch+20List共30响应8MB，总286响应16MB，公共流2/finite2/原期限不增。同target/definition列表stale拒续页/迟到，不改Load/dirty/写引用；28新只读8静态及第二轮1107/362/类型/lint/release过，无真实运行。最终renderer/自动观察配置/inactive恢复/一般网络恢复/正式认证平台与内部硬预算仍缺，runtimeEvidence空"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesApply",
+      "declaration": {
+        "command": "extension.vsKubernetesApply",
+        "title": "Apply",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesApply",
+          "line": 189,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L189"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 189,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L189",
+          "text": "registerCommand('extension.vsKubernetesApply', applyKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesApply",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E015",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E027",
+          "scope": "仅单个完整非stale已Load CRD实例内存buffer：独立source/grant/上传/限时确认、Server原CRD/discovery get+patch/instance UID-RV快照、真实last-applied三方JSON merge/固定UID-RV patch SHA、共享锁/final proof/低层单次HTTPS PATCH/原结果与metadata stale已接。E027新增缺失→明确Create分支：fresh 404+get+create五GET证明、剥离Load残留旧uid/RV的单次collection POST（kubectl-create语义，新UID≠旧UID），独立create-missing-crd-object确认。初始仅HTTPS根地址/内联bearer/可选内联CA且拒调试注入环境，无重试/force/SSA/replace/隐式apply，不清dirty/改Load origin；内置strategic/OpenAPI回退/文件dirty-save/多文档/CRD定义生命周期/完整认证与公共G4/最终树视觉/内部硬预算/正式平台仍缺，所有真实或mock写链均未运行"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesApplyFile",
+      "declaration": {
+        "command": "extension.vsKubernetesApplyFile",
+        "title": "Apply Kubernetes resource",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesApplyFile",
+          "line": 184,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L184"
+        }
+      ],
+      "menus": [
+        {
+          "location": "explorer/context",
+          "index": 2,
+          "title": "Apply Kubernetes resource",
+          "when": "resourceLangId == yaml && config.vs-kubernetes.resource-commands-on-files",
+          "command": "extension.vsKubernetesApplyFile",
+          "group": "2_k8s_2"
+        },
+        {
+          "location": "commandPalette",
+          "index": 1,
+          "command": "extension.vsKubernetesApplyFile",
+          "when": "filesExplorerFocus"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 184,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L184",
+          "text": "registerCommand('extension.vsKubernetesApplyFile',"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesApplyFile",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E015",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E028",
+          "scope": "ApplyFile(apply动词)服务器执行已接（M4-E028）：≤16文档流式解析+逐文档探测+单次逐文档直连PATCH/POST；create/delete文件动词窄协议+人工包"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesClusterInfo",
+      "declaration": {
+        "command": "extension.vsKubernetesClusterInfo",
+        "title": "Show Cluster Info",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesClusterInfo",
+          "line": 215,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L215"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 3,
+          "command": "extension.vsKubernetesClusterInfo",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster($|\\s)/i",
+          "group": "0@1"
+        },
+        {
+          "location": "commandPalette",
+          "index": 8,
+          "command": "extension.vsKubernetesClusterInfo",
+          "when": "view == extension.vsKubernetesExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 215,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L215",
+          "text": "registerCommand('extension.vsKubernetesClusterInfo', clusterInfoKubernetes),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesClusterInfo",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E012",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E007",
+          "scope": "当前available context真实CLI cluster-info、固定kube-system/缓存哨兵/配置前后核对、同inspection有界内存续块及SDK诊断已接；地址/proxy/dump hint仅文本不执行。M2-E016全局current metadata使active行off-page仍可读取，最终树/完整入口、内部HTTP内存硬预算/正式认证规模与平台仍未完成"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesConfigureFromCluster",
+      "declaration": {
+        "command": "extension.vsKubernetesConfigureFromCluster",
+        "title": "Add Existing Cluster",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesConfigureFromCluster",
+          "line": 208,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L208"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/title",
+          "index": 2,
+          "command": "extension.vsKubernetesConfigureFromCluster",
+          "when": "view == extension.vsKubernetesExplorer",
+          "group": "0"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 208,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L208",
+          "text": "registerCommand('extension.vsKubernetesConfigureFromCluster', configureFromClusterKubernetes),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesConfigureFromCluster",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E075",
+          "scope": "ConfigureFromCluster已接（M7-E075）：minikube kubectl config view有界读取→显式M4-E030合并确认视图（绝不自动合并）"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesCopy",
+      "declaration": {
+        "command": "extension.vsKubernetesCopy",
+        "title": "Copy Name",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesCopy",
+          "line": 231,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L231"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 2,
+          "command": "extension.vsKubernetesCopy",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster.*/i",
+          "group": "1"
+        },
+        {
+          "location": "view/item/context",
+          "index": 11,
+          "command": "extension.vsKubernetesCopy",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\./i",
+          "group": "1"
+        },
+        {
+          "location": "view/item/context",
+          "index": 36,
+          "command": "extension.vsKubernetesCopy",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.helmrelease/i",
+          "group": "1"
+        },
+        {
+          "location": "commandPalette",
+          "index": 11,
+          "command": "extension.vsKubernetesCopy",
+          "when": "view == extension.vsKubernetesExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 231,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L231",
+          "text": "registerCommand('extension.vsKubernetesCopy', copyKubernetes),"
+        }
+      ],
+      "milestone": "M2",
+      "scope": "included",
+      "verification": "human-clipboard-pure-render-auto",
+      "caseId": "UPSTREAM-extension.vsKubernetesCopy",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E057",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M2-E018",
+          "scope": "context/内置资源与CRD/子资源诊断页Copy Name显式点击→当前页strict selection/身份/ready非stale纯名称投影→官方SDK clipboard，每bridge1真实pending/finally释放与固定未确认不重试反馈。18新纯投影/11文本静态和第二轮1079/354/类型/lint/release过，无真实或mock clipboard/SDK执行。无正文/任意复制字符串/自动写；config-key仅helper未增默认键菜单，Helm release/最终树/视觉/真实SDK与平台仍缺"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesCreate",
+      "declaration": {
+        "command": "extension.vsKubernetesCreate",
+        "title": "Create",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesCreate",
+          "line": 177,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L177"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 177,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L177",
+          "text": "registerCommand('extension.vsKubernetesCreate',"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesCreate",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E018",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E024",
+          "scope": "沿E023具名内存/选区/多文档/v1 List grant/确认/实际POST/原结果，新增普通完整文件dirty先明确Save与精确成功ack后用户重提Create、Server原proof或同位置原Save成功账本/当前metadata核验、实际磁盘同portable parser核source及payload SHA/字节，finish/每项/final gate文件再核；不上传body冒充文件、不延public scope或清dirty/换origin。generateName/Typed List/多文件/完整编辑器与SaveAs URI关联/CRD定义生命周期/Apply/完整公共G4/最终树视觉/内部硬预算/正式平台仍缺，所有写链仅静态与待人工"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesCreateCluster",
+      "declaration": {
+        "command": "extension.vsKubernetesCreateCluster",
+        "title": "Create Cluster",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesCreateCluster",
+          "line": 209,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L209"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/title",
+          "index": 1,
+          "command": "extension.vsKubernetesCreateCluster",
+          "when": "view == extension.vsKubernetesExplorer",
+          "group": "0"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 209,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L209",
+          "text": "registerCommand('extension.vsKubernetesCreateCluster', createClusterKubernetes),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesCreateCluster",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E075",
+          "scope": "CreateCluster已接（M7-E075）：范围内provider清单（内置minikube；云provider经排除的云扩展委托）+创建经既有minikube start G4链"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesCreateFile",
+      "declaration": {
+        "command": "extension.vsKubernetesCreateFile",
+        "title": "Create Kubernetes resource",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesCreateFile",
+          "line": 180,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L180"
+        }
+      ],
+      "menus": [
+        {
+          "location": "explorer/context",
+          "index": 1,
+          "title": "Create Kubernetes resource",
+          "when": "resourceLangId == yaml && config.vs-kubernetes.resource-commands-on-files",
+          "command": "extension.vsKubernetesCreateFile",
+          "group": "2_k8s_1"
+        },
+        {
+          "location": "commandPalette",
+          "index": 2,
+          "command": "extension.vsKubernetesCreateFile",
+          "when": "filesExplorerFocus"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 180,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L180",
+          "text": "registerCommand('extension.vsKubernetesCreateFile',"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesCreateFile",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E018",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E024",
+          "scope": "明确所选Server根/相对文件的独立磁盘capture，不改活动dirty编辑器/原文/baseline/revision，capture前冻结cluster target；Server原proof精确核root/path/metadata/body并新私有短读scope，实际磁盘同portable parser核source及payload SHA/bytes，独立Create确认/逐项final文件与目标再核/真实raw POST stdin及原结果已接。scope/proof非写grant、完整文件无body上传、未知不重试；仅单个明确具名文件，多文件/生成名/Typed List/原生文件关联/CRD定义生命周期/完整公共G4/最终树/视觉/内部硬预算/正式平台仍缺，写链仅静态与待人工"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesCronJobRunNow",
+      "declaration": {
+        "command": "extension.vsKubernetesCronJobRunNow",
+        "title": "Run CronJob Now",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesCronJobRunNow",
+          "line": 238,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L238"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 32,
+          "command": "extension.vsKubernetesCronJobRunNow",
+          "group": "3",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.cronjob/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 238,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L238",
+          "text": "registerCommand('extension.vsKubernetesCronJobRunNow', cronJobRunNow),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesCronJobRunNow",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E018",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E029",
+          "scope": "仅batch/v1 CronJob行：原UID/RV证明+固定60秒确认+可编辑本地时钟默认job名；确认后GET钉住UID/RV的原CronJob，按固定kubectl createJobFromCronJob语义（instantiate=manual注解、jobTemplate labels/spec、Controller ownerReference无BlockOwnerDeletion）对jobs collection单次POST；同名Job/模板漂移/无权限固定失败不重试/不静默换名，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。Expose/F4其余/最终树菜单/完整G4/正式平台仍缺，真实或mock写链均未运行"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDashboard",
+      "declaration": {
+        "command": "extension.vsKubernetesDashboard",
+        "title": "Open Dashboard",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDashboard",
+          "line": 218,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L218"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 4,
+          "command": "extension.vsKubernetesDashboard",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster($|\\s)/i",
+          "group": "0@3"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 218,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L218",
+          "text": "registerCommand('extension.vsKubernetesDashboard', () => { dashboardKubernetes(kubectl); }),"
+        }
+      ],
+      "milestone": "M5",
+      "scope": "included",
+      "verification": "human-session-control-snapshot-only-auto",
+      "caseId": "UPSTREAM-extension.vsKubernetesDashboard",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M5-E006",
+          "scope": "2026-11-17纠正：仅既有转发的有界单次代理预览；Dashboard发现、proxy启动与打开链仍缺实现。不能标Dashboard已接或归为仅待人工。见action-chain-audit.md"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDebounceActivation",
+      "declaration": {
+        "command": "extension.vsKubernetesDebounceActivation",
+        "title": "Debounce Activation",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDebounceActivation",
+          "line": 267,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L267"
+        }
+      ],
+      "menus": [
+        {
+          "location": "commandPalette",
+          "index": 0,
+          "command": "extension.vsKubernetesDebounceActivation",
+          "when": "context == thiscontextdoesnotexist7603253285"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 267,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L267",
+          "text": "vscode.commands.registerCommand('extension.vsKubernetesDebounceActivation', () => {}),"
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 2016,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L2016",
+          "text": "await vscode.commands.executeCommand('extension.vsKubernetesDebounceActivation');"
+        }
+      ],
+      "milestone": null,
+      "scope": "excluded-internal-activation",
+      "verification": "static-only",
+      "caseId": "UPSTREAM-extension.vsKubernetesDebounceActivation",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E057",
+        "implementation": "not-started",
+        "candidateId": null,
+        "runtimeEvidence": []
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDebug",
+      "declaration": {
+        "command": "extension.vsKubernetesDebug",
+        "title": "Debug (Launch)",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDebug",
+          "line": 202,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L202"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 202,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L202",
+          "text": "registerCommand('extension.vsKubernetesDebug', debugKubernetes),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesDebug",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E074",
+          "scope": "2026-11-17纠正：Debug安全阻断DEBUG_ADAPTER_REQUIRED；缺少真实语言adapter与Launch构建/部署/控制归账，不是已完成。见action-chain-audit.md"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDebugAttach",
+      "declaration": {
+        "command": "extension.vsKubernetesDebugAttach",
+        "title": "Debug (Attach)",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDebugAttach",
+          "line": 204,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L204"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 24,
+          "command": "extension.vsKubernetesDebugAttach",
+          "group": "2@5",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.pod/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 204,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L204",
+          "text": "registerCommand('extension.vsKubernetesDebugAttach', debugAttachKubernetes),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesDebugAttach",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E074",
+          "scope": "2026-11-17纠正：Node Inspector 9229是CDP，不是DAP；真实语言adapter/握手/附着仍缺，实现安全阻断而非伪连接成功。原owner/配置控制已加固，真实调试未运行。见action-chain-audit.md"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDebugLocalTunnel",
+      "declaration": {
+        "command": "extension.vsKubernetesDebugLocalTunnel",
+        "title": "Debug (Local Tunnel)",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDebugLocalTunnel",
+          "line": 205,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L205"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 25,
+          "command": "extension.vsKubernetesDebugLocalTunnel",
+          "group": "2@5",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.(pod|job|service|deployment)/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 205,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L205",
+          "text": "registerCommand('extension.vsKubernetesDebugLocalTunnel', (target?: any) => { localTunnelDebugger.startLocalTunnelDebugSession(target); }),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesDebugLocalTunnel",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E075",
+          "scope": "2026-11-17纠正：当前只接provider发现提示及结果展示，不是完整LocalTunnel。真正Telepresence原配置/daemon目标、intercept/调试/恢复界面仍缺；见action-chain-audit.md"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDelete",
+      "declaration": {
+        "command": "extension.vsKubernetesDelete",
+        "title": "Delete",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDelete",
+          "line": 186,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L186"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 17,
+          "command": "extension.vsKubernetesDelete",
+          "group": "2@2",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource.*/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 186,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L186",
+          "text": "registerCommand('extension.vsKubernetesDelete', (explorerNode: ClusterExplorerResourceNode) => { deleteKubernetes(KubernetesDeleteMode.Graceful, explorerNode); }),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesDelete",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E010",
+          "scope": "单个稳定内置Delete与Namespace风险/有界内容/原UID-RV已接；Namespace删除支持default/file/有序merge，全来源预览，当前namespace按origin切default、stage hook、实际writer版本/预期内容/其他来源复核再重绑目标与原Namespace后才DELETE；非当前不写配置、已default无stage，部分成功原结果不回滚。仍无完整wait/刷新/bulk/CRD/文件/完整菜单或两平台运行证据"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDeleteContext",
+      "declaration": {
+        "command": "extension.vsKubernetesDeleteContext",
+        "title": "Delete from kubeconfig",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDeleteContext",
+          "line": 216,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L216"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 1,
+          "command": "extension.vsKubernetesDeleteContext",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster.*/i",
+          "group": "0@2"
+        },
+        {
+          "location": "commandPalette",
+          "index": 9,
+          "command": "extension.vsKubernetesDeleteContext",
+          "when": "view == extension.vsKubernetesExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 216,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L216",
+          "text": "registerCommand('extension.vsKubernetesDeleteContext', deleteContextKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesDeleteContext",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E025",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E011",
+          "scope": "诊断Context行支持default/file/有序merge，cluster-user-context各一次winning-origin逐步删除/不追shadow，全部物理context共享引用保护/缺失跳过、全来源及每步origin-next与contextAfter风险披露；保current-context，同锁/唯一writer/逐文件实际metadata版本与四个完整内容HMAC checkpoint、stage后source hook/失败unknown阻断/原结果已接。复杂YAML/创建/完整picker/树菜单与真实平台未完成"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDeleteFile",
+      "declaration": {
+        "command": "extension.vsKubernetesDeleteFile",
+        "title": "Delete File",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDeleteFile",
+          "line": 234,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L234"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 35,
+          "command": "extension.vsKubernetesDeleteFile",
+          "group": "3",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.file/i"
+        },
+        {
+          "location": "commandPalette",
+          "index": 13,
+          "command": "extension.vsKubernetesDeleteFile",
+          "when": "view == extension.vsKubernetesExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 234,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L234",
+          "text": "registerCommand('extension.vsKubernetesDeleteFile', (explorerNode: ClusterExplorerConfigurationValueNode) => { deleteKubernetesConfigFile(kubectl, explorerNode, treeProvider); }),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesDeleteFile",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E031",
+          "scope": "仅core/v1 ConfigMap/Secret行：原UID/RV证明+固定60秒确认+恰一个可打印basename键；确认后GET钉住原对象，按上游removeKey语义仅删目标data键（其他键/binaryData原样保留），单次完整PUT replace携带钉住RV作乐观并发门禁；键缺失/不可变/409冲突/无权限固定失败不重试，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。Add File(s)/多键/工作区文件删除/最终树菜单/完整G4/正式平台仍缺，真实或mock写链均未运行"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDeleteNow",
+      "declaration": {
+        "command": "extension.vsKubernetesDeleteNow",
+        "title": "Delete Now",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDeleteNow",
+          "line": 187,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L187"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 21,
+          "command": "extension.vsKubernetesDeleteNow",
+          "group": "2@3",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.pod/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 187,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L187",
+          "text": "registerCommand('extension.vsKubernetesDeleteNow', (explorerNode: ClusterExplorerResourceNode) => { deleteKubernetes(KubernetesDeleteMode.Now, explorerNode); }),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesDeleteNow",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E002",
+          "scope": "Pod单对象now映射gracePeriodSeconds=1、不force；与普通单步删除同view/确认/UID-RV/专用worker/原结果，accepted非已消失；完整wait/失效刷新/树菜单与真实平台未验"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDeleteUri",
+      "declaration": {
+        "command": "extension.vsKubernetesDeleteUri",
+        "title": "Delete Kubernetes resource",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDeleteUri",
+          "line": 182,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L182"
+        }
+      ],
+      "menus": [
+        {
+          "location": "explorer/context",
+          "index": 3,
+          "title": "Delete Kubernetes resource",
+          "when": "resourceLangId == yaml && config.vs-kubernetes.resource-commands-on-files",
+          "command": "extension.vsKubernetesDeleteUri",
+          "group": "2_k8s_3"
+        },
+        {
+          "location": "commandPalette",
+          "index": 3,
+          "command": "extension.vsKubernetesDeleteUri",
+          "when": "filesExplorerFocus"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 182,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L182",
+          "text": "registerCommand('extension.vsKubernetesDeleteUri',"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesDeleteUri",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E018",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E033",
+          "scope": "仅一个Server工作区文件且恰一份descriptor面内文档（原读取proof独立capture，拒Save receipt，缺省namespace=目标namespace）：文件核验→解析→活对象UID/RV钉住+固定60秒确认（即上游Delete警告）→再次核文件与活对象后单次DELETE携带DeleteOptions preconditions（uid/resourceVersion）+Background传播，非裸名删除、无--now/--force/树picker；文件漂移/对象重建/404/409固定失败不重试，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。上游多文档/非file URI/ApplyFile与完整G4/正式平台仍缺，真实或mock写链均未运行"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDeleteWatch",
+      "declaration": {
+        "command": "extension.vsKubernetesDeleteWatch",
+        "title": "Stop Watching",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDeleteWatch",
+          "line": 220,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L220"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 14,
+          "command": "extension.vsKubernetesDeleteWatch",
+          "group": "3@2",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /k8s-watchable/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 220,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L220",
+          "text": "registerCommand('extension.vsKubernetesDeleteWatch', (explorerNode: ClusterExplorerNode) => { deleteWatch(treeProvider, explorerNode); }),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesDeleteWatch",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E015",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E026",
+          "scope": "E026复用原consumer/lease/实际未settle槽与headless Stop队列边界，CRD proof/410退避/finite排队/List/迟到结果期间Stop或target/分支切换阻新事件与RESYNC/续watch；peer不误停/原期限预算不延长，不调用业务清理或变更写引用。28新合成只读8文本静态及第二轮1107/362等过，无真实SDK/worker/CLI运行。最终renderer/自动观察配置/inactive恢复/正式worker-FIFO-平台与内部硬预算仍缺，runtimeEvidence空"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDescribe",
+      "declaration": {
+        "command": "extension.vsKubernetesDescribe",
+        "title": "Describe",
+        "category": "Kubernetes",
+        "icon": "$(eye)"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDescribe",
+          "line": 196,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L196"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 18,
+          "command": "extension.vsKubernetesDescribe",
+          "group": "inline",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource(?!\\.namespace).*/i"
+        },
+        {
+          "location": "view/item/context",
+          "index": 19,
+          "command": "extension.vsKubernetesDescribe",
+          "group": "3",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource(?!\\.namespace).*/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 196,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L196",
+          "text": "registerCommand('extension.vsKubernetesDescribe', describeKubernetes),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesDescribe",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E024",
+          "scope": "内置Describe保持，新增具名CRD实例真实Describe含Events与单TYPE/NAME禁前缀回落；原CRD/served GVR/discovery与实例前后proof、custom-describe严格引用/path/namespace/worker再核、原cache哨兵/finite2/≤7响应12MB，续块≤5GET8MB只读原snapshot不重跑。独立纯文本无编辑/PTY/写；分类/all/picker/最终树、相关内部HTTP/heap/正式平台仍缺，CRD Delete/Explain/写/Watch不扩"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDescribe.Refresh",
+      "declaration": {
+        "command": "extension.vsKubernetesDescribe.Refresh",
+        "title": "Refresh",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDescribe.Refresh",
+          "line": 188,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L188"
+        }
+      ],
+      "menus": [
+        {
+          "location": "editor/title",
+          "index": 0,
+          "command": "extension.vsKubernetesDescribe.Refresh",
+          "when": "vscodeKubernetesDescribeContext"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 188,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L188",
+          "text": "registerCommand('extension.vsKubernetesDescribe.Refresh', () => refreshDescribeKubernetes(resourceDocProvider)),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesDescribe.Refresh",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E024",
+          "scope": "原内置Refresh保持，CRD Describe显式Refresh仅捕获原同UID实例新RV、definition UID/RV/精确served GVR保持；原配置/实例/CRD/discovery前后proof与实际printer，flag-free新source/cursor绑定捕获RV且续块不重跑，client definition比较/失败保旧stale/禁续块。不同UID/定义/版本/历史目标不采用，不改Load/dirty或写确认；完整树导航/内部HTTP-heap/正式认证两平台仍未验"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesDiff",
+      "declaration": {
+        "command": "extension.vsKubernetesDiff",
+        "title": "Diff",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesDiff",
+          "line": 200,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L200"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 200,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L200",
+          "text": "registerCommand('extension.vsKubernetesDiff', diffKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesDiff",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E015",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E025",
+          "scope": "沿E022独立只读Diff的逐文档精确GET/UID-RV捕获/分块/本地字面对齐与各错误分支；新增用户显式的本地last-applied三方JSON值模型、所有权/注解防递归/捕获身份再核与有限预算，一次仅保一份模型，不新增网络/上传/文件/策略选择/写授权。JSON数组整体替换非内置strategic列表或服务器预测，模型排版非Go encoder字节一致；真正Apply/ApplyFile/执行前UID-RV proof/冻结确认/单次PATCH与原结果、完整编辑器/CRD生命周期/最终树视觉/内部硬预算及正式平台仍缺，模型不使Apply变partial，所有真实运行未验"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesExec",
+      "declaration": {
+        "command": "extension.vsKubernetesExec",
+        "title": "Exec",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesExec",
+          "line": 198,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L198"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 198,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L198",
+          "text": "registerCommand('extension.vsKubernetesExec', execKubernetes),"
+        }
+      ],
+      "milestone": "M5",
+      "scope": "included",
+      "verification": "human-session-control-snapshot-only-auto",
+      "caseId": "UPSTREAM-extension.vsKubernetesExec",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M5-E006",
+          "scope": "2026-11-17修正：独立argv编码、容量预留先于Exec、快速结束与尾输出原结果交付、未知阻重试；源码已接，真实Exec未执行。见action-chain-audit.md"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesExplain",
+      "declaration": {
+        "command": "extension.vsKubernetesExplain",
+        "title": "Explain",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesExplain",
+          "line": 190,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L190"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 190,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L190",
+          "text": "registerCommand('extension.vsKubernetesExplain', explainActiveWindow),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesExplain",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E012",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E025",
+          "scope": "原完整Load实际字段/显式文档选择/OpenAPI v3保持；新增CRD Load字段Explain独立strict definition admission、source/page/editor origin与target核对，只发原type/definition/path/documentIdentity/revision无正文/实例身份。同原finite2槽内CRD/discovery→OpenAPI index/schema/index→CRD/discovery，精确served GVR/唯一GVK/local refs投影，≤7GET16MB/schema8MB，无实例读取/缓存/版本fallback/新worker用途；回包核definition。未分析多文档/其他GVK仍拒；hover/任意文件/复杂schema/最终树/内部硬预算与正式两平台仍缺，Delete/generic verifyReference/CRD写/Watch不扩"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesExpose",
+      "declaration": {
+        "command": "extension.vsKubernetesExpose",
+        "title": "Expose",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesExpose",
+          "line": 195,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L195"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 195,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L195",
+          "text": "registerCommand('extension.vsKubernetesExpose', exposeKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesExpose",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E018",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E030",
+          "scope": "仅引用面可达三类（Deployment/Pod/Service）：原UID/RV证明+固定60秒确认+显式1-65535端口（可空=唯一推导端口）与可选targetPort/type/protocol（默认TCP/ClusterIP）；确认后GET钉住原对象，按固定kubectl mapbasedselector/portsfor推导与内联createService映射构造Service，对services collection单次POST；matchExpressions/无labels/无selector/同名Service固定失败不重试，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。上游五类中ReplicaSet/RC待引用面扩展；最终树菜单/完整G4/正式平台仍缺，真实或mock写链均未运行"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesFindLocalTunnelDebugProviders",
+      "declaration": {
+        "command": "extension.vsKubernetesFindLocalTunnelDebugProviders",
+        "title": "Find Local Tunnel Debug Providers on Marketplace",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesFindLocalTunnelDebugProviders",
+          "line": 206,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L206"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/components/localtunneldebugger/localtunneldebugger.ts",
+          "line": 42,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/localtunneldebugger/localtunneldebugger.ts#L42",
+          "text": "vscode.commands.executeCommand('extension.vsKubernetesFindLocalTunnelDebugProviders');"
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 206,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L206",
+          "text": "registerCommand('extension.vsKubernetesFindLocalTunnelDebugProviders', kubernetesFindLocalTunnelDebugProviders),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesFindLocalTunnelDebugProviders",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E075",
+          "scope": "FindLocalTunnelProviders已接（M7-E075）：固定Marketplace搜索URL经host.openUrl外部导航（无安装/无注册远程代码）"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesFollowEvents",
+      "declaration": {
+        "command": "extension.vsKubernetesFollowEvents",
+        "title": "Follow Events",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesFollowEvents",
+          "line": 237,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L237"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 10,
+          "command": "extension.vsKubernetesFollowEvents",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.namespace/",
+          "group": "1"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 237,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L237",
+          "text": "registerCommand('extension.vsKubernetesFollowEvents', (explorerNode: ClusterExplorerResourceNode) => { getEvents(kubectl, EventDisplayMode.Follow, explorerNode); }),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesFollowEvents",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E012",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E022",
+          "scope": "原Namespace UID/事件API/有限初始list/真实watch与公共读预算保持；新增必需single-410-relist、初始RESYNC及首watch410等旧transport settle后250ms退避/原Namespace同API完整20页重同步/新List RV续watch。RELISTING清旧UID-name行/未完成快照/持久历史缺口、计数替换，第二410或List/核对/其他错误不重试，不重置原期限/8MB/256有限GET/4096含marker/10watch预算。一般网络恢复/其他历史API/最终树/事件Terminal/内部heap/正式认证两平台仍缺，真实运行全空"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesGet",
+      "declaration": {
+        "command": "extension.vsKubernetesGet",
+        "title": "Get",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesGet",
+          "line": 192,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L192"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 12,
+          "command": "extension.vsKubernetesGet",
+          "group": "1@1",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.kind/i"
+        },
+        {
+          "location": "view/item/context",
+          "index": 16,
+          "command": "extension.vsKubernetesGet",
+          "group": "2@1",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource(?!\\.namespace).*/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 192,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L192",
+          "text": "registerCommand('extension.vsKubernetesGet', getKubernetes),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesGet",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E024",
+          "scope": "内置真实Get wide保持，新增具名CRD实例显式Get：原CRD/精确served GVR/discovery/实例→独立custom-wide真printer→实例/CRD/discovery前后核对，单TYPE/NAME/cache哨兵/原finite2池/≤7响应12MB。续块≤5GET8MB proof后读原16份4MiB60秒snapshot不重跑AGE，显式Refresh只采同UID新RV且definition不变；client原身份/有界文本/目标失效已接。分类/all/picker/最终树、内部HTTP/heap与正式平台仍缺，Delete/Explain/写/Watch不扩"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesLoad",
+      "declaration": {
+        "command": "extension.vsKubernetesLoad",
+        "title": "Load",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesLoad",
+          "line": 191,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L191"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 15,
+          "command": "extension.vsKubernetesLoad",
+          "group": "0",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource(?!\\.namespace).*/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/components/clusterexplorer/node.resource.ts",
+          "line": 44,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.resource.ts#L44",
+          "text": "command: \"extension.vsKubernetesLoad\","
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 191,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L191",
+          "text": "registerCommand('extension.vsKubernetesLoad', loadKubernetes),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesLoad",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E023",
+          "scope": "原内置Load/文档流纯分析/分块/词法/dirty保持；CRD实例显式YAML/JSON Load每块原CRD UID/RV/精确served GVR与discovery前后proof、≤5GET/8MB、原finite2池，custom-document用途严格绑定引用/路径且worker再核。原lossless/60秒HMAC游标与client definition身份/冻结缓冲；Get/Describe另经E024明确inspection审查接通，Delete/Explain/generic verifyReference仍内置白名单。分类all/picker/完整树/其他文件与Save/Apply/Diff/G4/真实平台仍缺，无真实SDK/CLI/集群或写链运行"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesLoadConfigMapData",
+      "declaration": null,
+      "registration": [
+        {
+          "id": "extension.vsKubernetesLoadConfigMapData",
+          "line": 233,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L233"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/components/clusterexplorer/node.configurationvalue.ts",
+          "line": 17,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.configurationvalue.ts#L17",
+          "text": "command: \"extension.vsKubernetesLoadConfigMapData\","
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 233,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L233",
+          "text": "registerCommand('extension.vsKubernetesLoadConfigMapData', configmaps.loadConfigMapData),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesLoadConfigMapData",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E001",
+          "scope": "专用键GET/解码/分块/SDK与诊断键按钮已接；完整DOM树单击入口、编辑交接和真实平台运行未完成，不代表完整菜单或命令已验收"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesLogs",
+      "declaration": {
+        "command": "extension.vsKubernetesLogs",
+        "title": "Logs",
+        "category": "Kubernetes",
+        "icon": "$(list-flat)"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesLogs",
+          "line": 194,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L194"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 30,
+          "command": "extension.vsKubernetesLogs",
+          "group": "inline",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.(pod|job)/i"
+        },
+        {
+          "location": "view/item/context",
+          "index": 31,
+          "command": "extension.vsKubernetesLogs",
+          "group": "3",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.(pod|job)/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 194,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L194",
+          "text": "registerCommand('extension.vsKubernetesLogs', (explorerNode: ClusterExplorerResourceNode) => { logsKubernetes(kubectl, explorerNode); }),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesLogs",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E012",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E017",
+          "scope": "原有限Pod/Job实际来源、默认等待/Follow/viewer/标量偏好/一次autorun决策与M3→M5只读Terminal DTO/背压已接；新增s/m/h时长picker/乘后有界整数秒与精确恢复、Webview白名单SGR安全typed styles/可见文字过滤Find分页保色、明确关闭颜色看原转义文本，不输入HTML或终端控制/保存样式。Save/真实xterm/DOM/SDK/autorun执行器未运行，旧包同候选回归；完整regex/schemaColors/非白名单ANSI/连续滚动/最终树/正式矩阵/内部heap仍缺"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesPortForward",
+      "declaration": {
+        "command": "extension.vsKubernetesPortForward",
+        "title": "Port Forward",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesPortForward",
+          "line": 232,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L232"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 26,
+          "command": "extension.vsKubernetesPortForward",
+          "group": "2@6",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.pod/i"
+        },
+        {
+          "location": "view/item/context",
+          "index": 27,
+          "command": "extension.vsKubernetesPortForward",
+          "group": "2@6",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.service/i"
+        },
+        {
+          "location": "view/item/context",
+          "index": 28,
+          "command": "extension.vsKubernetesPortForward",
+          "group": "2@6",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.deployment/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 232,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L232",
+          "text": "registerCommand('extension.vsKubernetesPortForward', (explorerNode: ClusterExplorerResourceNode) => { portForwardKubernetes(kubectl, explorerNode); }),"
+        }
+      ],
+      "milestone": "M5",
+      "scope": "included",
+      "verification": "human-session-control-snapshot-only-auto",
+      "caseId": "UPSTREAM-extension.vsKubernetesPortForward",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M5-E006",
+          "scope": "2026-11-17修正：原Service/Deployment与backend端口、监听就绪/占用、每个明确TCP连接独立v4流、两字节端口首帧与owned清理；源码/纯值已核，真实转发未验。见action-chain-audit.md"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesRefreshCloudExplorer",
+      "declaration": {
+        "command": "extension.vsKubernetesRefreshCloudExplorer",
+        "title": "Refresh",
+        "category": "Kubernetes",
+        "icon": {
+          "light": "images/light/refresh.svg",
+          "dark": "images/dark/refresh.svg"
+        }
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesRefreshCloudExplorer",
+          "line": 212,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L212"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/title",
+          "index": 5,
+          "command": "extension.vsKubernetesRefreshCloudExplorer",
+          "when": "view == kubernetes.cloudExplorer",
+          "group": "navigation"
+        },
+        {
+          "location": "commandPalette",
+          "index": 6,
+          "command": "extension.vsKubernetesRefreshCloudExplorer",
+          "when": "view == kubernetes.cloudExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/components/cloudexplorer/cloudexplorer.ts",
+          "line": 53,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/cloudexplorer/cloudexplorer.ts#L53",
+          "text": "sleep(50).then(() => vscode.commands.executeCommand('extension.vsKubernetesRefreshCloudExplorer'));"
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 212,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L212",
+          "text": "registerCommand('extension.vsKubernetesRefreshCloudExplorer', () => cloudExplorer.refresh()),"
+        }
+      ],
+      "milestone": null,
+      "scope": "excluded-clouds-view",
+      "verification": "static-only",
+      "caseId": "UPSTREAM-extension.vsKubernetesRefreshCloudExplorer",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E057",
+        "implementation": "not-started",
+        "candidateId": null,
+        "runtimeEvidence": []
+      }
+    },
+    {
+      "command": "extension.vsKubernetesRefreshExplorer",
+      "declaration": {
+        "command": "extension.vsKubernetesRefreshExplorer",
+        "title": "Refresh",
+        "category": "Kubernetes",
+        "icon": {
+          "light": "images/light/refresh.svg",
+          "dark": "images/dark/refresh.svg"
+        }
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesRefreshExplorer",
+          "line": 210,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L210"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/title",
+          "index": 0,
+          "command": "extension.vsKubernetesRefreshExplorer",
+          "when": "view == extension.vsKubernetesExplorer",
+          "group": "navigation"
+        },
+        {
+          "location": "commandPalette",
+          "index": 4,
+          "command": "extension.vsKubernetesRefreshExplorer",
+          "when": "view == extension.vsKubernetesExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/components/clusterprovider/common/explorer.ts",
+          "line": 4,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/common/explorer.ts#L4",
+          "text": "await vscode.commands.executeCommand('extension.vsKubernetesRefreshExplorer');"
+        },
+        {
+          "path": "src/debug/debugSession.ts",
+          "line": 393,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/debugSession.ts#L393",
+          "text": "vscode.commands.executeCommand(\"extension.vsKubernetesRefreshExplorer\");"
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 210,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L210",
+          "text": "registerCommand('extension.vsKubernetesRefreshExplorer', () => treeProvider.refresh()),"
+        }
+      ],
+      "milestone": "M2",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesRefreshExplorer",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E057",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M2-E035",
+          "scope": "仅树失效刷新：refreshAll一次性将全部查询行标记stale并中止pending，随后仅对可见展开分支经原自动刷新队列重读（原2槽/64次/失败需显式重试）；折叠分支只失效不重读，失败保stale固定错误不伪装健康空树，suspend/clear下惰性；不触发Describe Refresh/Helm更新/配置切换/写/认证刷新/Watch生命周期/跨context扫描。诊断Read按钮非完整树刷新；最终树renderer/菜单/几何/辅助技术与正式平台仍缺，真实运行未验"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesRefreshHelmRepoExplorer",
+      "declaration": {
+        "command": "extension.vsKubernetesRefreshHelmRepoExplorer",
+        "title": "Refresh",
+        "category": "Helm",
+        "icon": {
+          "light": "images/light/refresh.svg",
+          "dark": "images/dark/refresh.svg"
+        }
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesRefreshHelmRepoExplorer",
+          "line": 211,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L211"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/title",
+          "index": 4,
+          "command": "extension.vsKubernetesRefreshHelmRepoExplorer",
+          "when": "view == extension.vsKubernetesHelmRepoExplorer",
+          "group": "navigation"
+        },
+        {
+          "location": "commandPalette",
+          "index": 5,
+          "command": "extension.vsKubernetesRefreshHelmRepoExplorer",
+          "when": "view == extension.vsKubernetesHelmRepoExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 211,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L211",
+          "text": "registerCommand('extension.vsKubernetesRefreshHelmRepoExplorer', () => helmRepoTreeProvider.refresh()),"
+        }
+      ],
+      "milestone": "M6",
+      "scope": "included",
+      "verification": "per-command-semantics-review-required",
+      "caseId": "UPSTREAM-extension.vsKubernetesRefreshHelmRepoExplorer",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E050",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M6-E037",
+          "scope": "用户显式刷新：单次 helm repo update，用户 repositories.yaml 仅经 --repository-config 只读，下载只写入插件隔离缓存（服务home下 .openchamber-kubernetes/helm-cache/<原名镜像>）；非零退出保已写缓存不回滚/重放，固定失败码（HELM_INDEX_MISSING等），单并发无队列；成功仅使仓库视图失效由下次读取拾取，绝不改用户配置/真实缓存；展开/配置变化/偏好恢复绝不自动触发。链为写式（写插件自有缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesRemoveDebug",
+      "declaration": {
+        "command": "extension.vsKubernetesRemoveDebug",
+        "title": "Remove Debug",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesRemoveDebug",
+          "line": 203,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L203"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 203,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L203",
+          "text": "registerCommand('extension.vsKubernetesRemoveDebug', removeDebugKubernetes),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesRemoveDebug",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E074",
+          "scope": "2026-11-17纠正：原owner控制检查已接，关闭旧桥/转发不等于真实RemoveDebug业务清理；实际adapter/Launch/资源归属清理仍缺。见action-chain-audit.md"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesRun",
+      "declaration": {
+        "command": "extension.vsKubernetesRun",
+        "title": "Run",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesRun",
+          "line": 193,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L193"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 193,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L193",
+          "text": "registerCommand('extension.vsKubernetesRun', runKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesRun",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E029",
+          "scope": "Run服务器执行已接（M4-E029）：build→push→kubectl-run形状Pod单次直连POST"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesScale",
+      "declaration": {
+        "command": "extension.vsKubernetesScale",
+        "title": "Scale",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesScale",
+          "line": 201,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L201"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 29,
+          "command": "extension.vsKubernetesScale",
+          "group": "2@6",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.(deployment|job|rc|rs|statefulset)/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 201,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L201",
+          "text": "registerCommand('extension.vsKubernetesScale', scaleKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesScale",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E018",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E028",
+          "scope": "上游五类规则+非负int32 replicas输入、原对象UID/RV fresh证明+固定60秒确认、kubectl前置条件分支（GET scale子资源固定RV→单次完整PUT替换replicas）、共享配置锁/单次直连HTTPS（内联bearer/CA根地址）、409/404固定失败不重试/不重建、原账本与accepted仅metadata stale已接。当前精确引用面可达Deployment/StatefulSet/Job；ReplicaSet/RC待树描述符扩展后自然可达，协议不放宽引用面。Job无scale子资源404明确失败；上游不传RV，插件按G4固定RV为已记录保守偏离。Expose/CronJob Run Now/最终树菜单/完整G4/正式平台仍缺，真实或mock写链均未运行"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesSelectPod",
+      "declaration": null,
+      "registration": [
+        {
+          "id": "extension.vsKubernetesSelectPod",
+          "line": 207,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L207"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 207,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L207",
+          "text": "registerCommand('extension.vsKubernetesSelectPod', selectPodKubernetes),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesSelectPod",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E074",
+          "scope": "SelectPod已接（M7-E074）：既有pods读取name/nodeName纯投影"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesShowEvents",
+      "declaration": {
+        "command": "extension.vsKubernetesShowEvents",
+        "title": "Show Events",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesShowEvents",
+          "line": 236,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L236"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 9,
+          "command": "extension.vsKubernetesShowEvents",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.namespace/",
+          "group": "1"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 236,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L236",
+          "text": "registerCommand('extension.vsKubernetesShowEvents', (explorerNode: ClusterExplorerResourceNode) => { getEvents(kubectl, EventDisplayMode.Show, explorerNode); }),"
+        }
+      ],
+      "milestone": "M3",
+      "scope": "included",
+      "verification": "readonly-after-auth-cache-review",
+      "caseId": "UPSTREAM-extension.vsKubernetesShowEvents",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E012",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M3-E018",
+          "scope": "原Namespace诊断/current有限事件页、UID-RV/series与legacy时间计数已接；新增core-v1首collection404才单次events.k8s.io/v1选择、严格版本专属字段投影、sealed cursor/client续页API与实际UI来源绑定。非404/Namespace404/JSON错误/继续页不回退，明确Refresh才重选。更多历史API/通用discovery/最终树菜单/事件Terminal/正式认证平台与内部heap仍缺，所有真实运行未验"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesSync",
+      "declaration": {
+        "command": "extension.vsKubernetesSync",
+        "title": "Sync Working Copy to Cluster",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesSync",
+          "line": 197,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L197"
+        }
+      ],
+      "menus": [],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 197,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L197",
+          "text": "registerCommand('extension.vsKubernetesSync', syncKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesSync",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E009",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E029",
+          "scope": "Sync服务器执行已接（M4-E029）：只读git log探测→单次git checkout"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesTerminal",
+      "declaration": {
+        "command": "extension.vsKubernetesTerminal",
+        "title": "Terminal",
+        "category": "Kubernetes",
+        "icon": "$(terminal)"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesTerminal",
+          "line": 199,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L199"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 22,
+          "command": "extension.vsKubernetesTerminal",
+          "group": "inline",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.pod/i"
+        },
+        {
+          "location": "view/item/context",
+          "index": 23,
+          "command": "extension.vsKubernetesTerminal",
+          "group": "2@4",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.pod/i"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 199,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L199",
+          "text": "registerCommand('extension.vsKubernetesTerminal', terminalKubernetes),"
+        }
+      ],
+      "milestone": "M5",
+      "scope": "included",
+      "verification": "human-session-control-snapshot-only-auto",
+      "caseId": "UPSTREAM-extension.vsKubernetesTerminal",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M5-E006",
+          "scope": "2026-11-17修正：明确Pod/真实container、交互xterm/有界串行输入/显式resize、内存画面恢复和原会话结果已接代码；容器纯模型/源码检查通过，真实PTY/交互/平台未验。见action-chain-audit.md与当前候选"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesUseContext",
+      "declaration": {
+        "command": "extension.vsKubernetesUseContext",
+        "title": "Set as Current Cluster",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesUseContext",
+          "line": 213,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L213"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 0,
+          "command": "extension.vsKubernetesUseContext",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster\\.inactive/i",
+          "group": "0@1"
+        },
+        {
+          "location": "commandPalette",
+          "index": 7,
+          "command": "extension.vsKubernetesUseContext",
+          "when": "view == extension.vsKubernetesExplorer"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 170,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L170",
+          "text": "activeContextStatusBarItem.command = 'extension.vsKubernetesUseContext';"
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 213,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L213",
+          "text": "registerCommand('extension.vsKubernetesUseContext', useContextKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesUseContext",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E025",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E014",
+          "scope": "E013完整snapshot inactive搜索/100分页/SDK选择只返回元数据，bridge核原scope才开E008确认；新默认多来源与reader用同冻结列表，first-existing而非context origin，原全来源/版本/global已active无stage/同锁/唯一writer/source hook/原结果不变。原picker30/单16/多18例同候选回归；官方未转发环境/缺失条目创建/复杂YAML/最终树/真实平台仍待"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesUseKubeconfig",
+      "declaration": {
+        "command": "extension.vsKubernetesUseKubeconfig",
+        "title": "Set Kubeconfig",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesUseKubeconfig",
+          "line": 214,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L214"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/title",
+          "index": 3,
+          "command": "extension.vsKubernetesUseKubeconfig",
+          "when": "view == extension.vsKubernetesExplorer",
+          "group": "1"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 214,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L214",
+          "text": "registerCommand('extension.vsKubernetesUseKubeconfig', useKubeconfigKubernetes),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesUseKubeconfig",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E025",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E014",
+          "scope": "E013显式Server文件名称metadata浏览/hidden/blocked项/100分页/HMAC代次与草稿已接，原30例同候选回归；E006 known-active修订与18例同候选回归，同HOME共享非SDK instance且卸载保留。默认来源按service实际收到的KUBECONFIG/HOME冻结有界列表，官方不转发Server变量时保显式single/merge适配，不自动解析/保存新草稿。完整Server环境/最终树/复杂配置/真实目录与平台仍待"
+        }
+      }
+    },
+    {
+      "command": "extension.vsKubernetesUseNamespace",
+      "declaration": {
+        "command": "extension.vsKubernetesUseNamespace",
+        "title": "Use Namespace",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsKubernetesUseNamespace",
+          "line": 217,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L217"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 8,
+          "command": "extension.vsKubernetesUseNamespace",
+          "group": "0",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.resource\\.namespace\\.inactive/i"
+        },
+        {
+          "location": "commandPalette",
+          "index": 10,
+          "command": "extension.vsKubernetesUseNamespace",
+          "when": "true"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 167,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L167",
+          "text": "activeNamespaceStatusBarItem.command = 'extension.vsKubernetesUseNamespace';"
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 217,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L217",
+          "text": "registerCommand('extension.vsKubernetesUseNamespace', (explorerNode: ClusterExplorerNode) => { useNamespaceKubernetes(kubectl, explorerNode); } ),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-extension.vsKubernetesUseNamespace",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E023",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E016",
+          "scope": "已有context的空/flow mapping缺namespace可安全源区间补值，普通JSON/尾注释/已有逗号保留，后验原引用与context数不变，旧NS-09拒绝预期更新。E015原非空current缺stanza显式CREATE first-existing namespace-only、必需action/缺失性/同锁/全来源/唯一writer/source hook不变；已有origin仍winning、不建文件/补引用/改current或放宽删除认证。原单15/多20/配置身份18/创建24例同候选回归；null/复杂不安全位置/完整G4/最终树/真实平台仍待"
+        }
+      }
+    },
+    {
+      "command": "extension.vsMinikubeStart",
+      "declaration": {
+        "command": "extension.vsMinikubeStart",
+        "title": "Start minikube",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsMinikubeStart",
+          "line": 222,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L222"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 6,
+          "command": "extension.vsMinikubeStart",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.minikubeCluster/i",
+          "group": "2@0"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 222,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L222",
+          "text": "registerCommand('extension.vsMinikubeStart', () => minikube.start({} as MinikubeOptions)),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsMinikubeStart",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E074",
+          "scope": "minikube start服务器执行已接（M7-E074）：G4链单次--driver调用"
+        }
+      }
+    },
+    {
+      "command": "extension.vsMinikubeStatus",
+      "declaration": {
+        "command": "extension.vsMinikubeStatus",
+        "title": "Minikube status",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsMinikubeStatus",
+          "line": 223,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L223"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 7,
+          "command": "extension.vsMinikubeStatus",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.minikubeCluster/i",
+          "group": "2@3"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 223,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L223",
+          "text": "registerCommand('extension.vsMinikubeStatus', async () => {"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsMinikubeStatus",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E074",
+          "scope": "minikube status只读CLI探测已接（M7-E074）：--output=json，无自动安装"
+        }
+      }
+    },
+    {
+      "command": "extension.vsMinikubeStop",
+      "declaration": {
+        "command": "extension.vsMinikubeStop",
+        "title": "Stop minikube",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "extension.vsMinikubeStop",
+          "line": 221,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L221"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 5,
+          "command": "extension.vsMinikubeStop",
+          "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.minikubeCluster/i",
+          "group": "2@1"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 221,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L221",
+          "text": "registerCommand('extension.vsMinikubeStop', () => minikube.stop()),"
+        }
+      ],
+      "milestone": "M7",
+      "scope": "included",
+      "verification": "human-operation-or-prerequisite-review",
+      "caseId": "UPSTREAM-extension.vsMinikubeStop",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M7-E074",
+          "scope": "minikube stop服务器执行已接（M7-E074）：G4链单次调用"
+        }
+      }
+    },
+    {
+      "command": "kubernetes.cloudExplorer.findProviders",
+      "declaration": {
+        "command": "kubernetes.cloudExplorer.findProviders",
+        "title": "Find Cloud Providers on Marketplace",
+        "description": "Find extensions that add clouds to the Cloud Explorer"
+      },
+      "registration": [
+        {
+          "id": "kubernetes.cloudExplorer.findProviders",
+          "line": 264,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L264"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/title",
+          "index": 6,
+          "command": "kubernetes.cloudExplorer.findProviders",
+          "when": "view == kubernetes.cloudExplorer",
+          "group": "1"
+        },
+        {
+          "location": "view/item/context",
+          "index": 46,
+          "command": "kubernetes.cloudExplorer.findProviders",
+          "when": "view == kubernetes.cloudExplorer && viewItem == kubernetes.noProviders",
+          "group": "1"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/components/cloudexplorer/cloudexplorer.ts",
+          "line": 22,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/cloudexplorer/cloudexplorer.ts#L22",
+          "text": "treeItem.command = { title: 'Find Cloud Providers on Marketplace', command: 'kubernetes.cloudExplorer.findProviders' };"
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 264,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L264",
+          "text": "registerCommand('kubernetes.cloudExplorer.findProviders', kubernetesFindCloudProviders),"
+        }
+      ],
+      "milestone": null,
+      "scope": "excluded-clouds-view",
+      "verification": "static-only",
+      "caseId": "UPSTREAM-kubernetes.cloudExplorer.findProviders",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E057",
+        "implementation": "not-started",
+        "candidateId": null,
+        "runtimeEvidence": []
+      }
+    },
+    {
+      "command": "kubernetes.cloudExplorer.mergeIntoKubeconfig",
+      "declaration": {
+        "command": "kubernetes.cloudExplorer.mergeIntoKubeconfig",
+        "title": "Merge into Kubeconfig",
+        "description": "Merge the cluster's kubeconfig into your existing kubeconfig"
+      },
+      "registration": [
+        {
+          "id": "kubernetes.cloudExplorer.mergeIntoKubeconfig",
+          "line": 262,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L262"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 44,
+          "command": "kubernetes.cloudExplorer.mergeIntoKubeconfig",
+          "group": "7",
+          "when": "view == kubernetes.cloudExplorer && viewItem =~ /kubernetes\\.providesKubeconfig/i"
+        },
+        {
+          "location": "commandPalette",
+          "index": 16,
+          "command": "kubernetes.cloudExplorer.mergeIntoKubeconfig",
+          "when": "true"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 262,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L262",
+          "text": "registerCommand('kubernetes.cloudExplorer.mergeIntoKubeconfig', kubernetesMergeIntoKubeconfig),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-kubernetes.cloudExplorer.mergeIntoKubeconfig",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E030",
+          "scope": "MergeIntoKubeconfig服务器执行已接（M4-E030）：FIRST EXISTING路径G4合并+单次staged替换"
+        }
+      }
+    },
+    {
+      "command": "kubernetes.cloudExplorer.saveKubeconfig",
+      "declaration": {
+        "command": "kubernetes.cloudExplorer.saveKubeconfig",
+        "title": "Save Kubeconfig",
+        "description": "Save the cluster's kubeconfig as a kubeconfig file"
+      },
+      "registration": [
+        {
+          "id": "kubernetes.cloudExplorer.saveKubeconfig",
+          "line": 263,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L263"
+        }
+      ],
+      "menus": [
+        {
+          "location": "view/item/context",
+          "index": 45,
+          "command": "kubernetes.cloudExplorer.saveKubeconfig",
+          "group": "7",
+          "when": "view == kubernetes.cloudExplorer && viewItem =~ /kubernetes\\.providesKubeconfig/i"
+        },
+        {
+          "location": "commandPalette",
+          "index": 17,
+          "command": "kubernetes.cloudExplorer.saveKubeconfig",
+          "when": "true"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/extension.ts",
+          "line": 263,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L263",
+          "text": "registerCommand('kubernetes.cloudExplorer.saveKubeconfig', kubernetesSaveKubeconfig),"
+        }
+      ],
+      "milestone": "M4",
+      "scope": "included",
+      "verification": "static-only-human-operation",
+      "caseId": "UPSTREAM-kubernetes.cloudExplorer.saveKubeconfig",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E056",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M4-E030",
+          "scope": "SaveKubeconfig链已接（M4-E030）：上游provider前置（无Clouds视图）恒cluster-required"
+        }
+      }
+    },
+    {
+      "command": "kubernetes.portForwarding.showSessions",
+      "declaration": {
+        "command": "kubernetes.portForwarding.showSessions",
+        "title": "Show Port Forwarding Sessions",
+        "category": "Kubernetes"
+      },
+      "registration": [
+        {
+          "id": "kubernetes.portForwarding.showSessions",
+          "line": 239,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L239"
+        }
+      ],
+      "menus": [
+        {
+          "location": "commandPalette",
+          "index": 18,
+          "command": "kubernetes.portForwarding.showSessions",
+          "when": "true"
+        }
+      ],
+      "references": [
+        {
+          "path": "src/components/kubectl/port-forward-ui.ts",
+          "line": 69,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/port-forward-ui.ts#L69",
+          "text": "this.statusBarItem.command = 'kubernetes.portForwarding.showSessions';"
+        },
+        {
+          "path": "src/extension.ts",
+          "line": 239,
+          "source": "https://github.com/vscode-kubernetes-tools/vscode-kubernetes-tools/blob/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts#L239",
+          "text": "registerCommand('kubernetes.portForwarding.showSessions', () => portForwardStatusBarManager.showSessions()),"
+        }
+      ],
+      "milestone": "M5",
+      "scope": "included",
+      "verification": "human-session-control-snapshot-only-auto",
+      "caseId": "UPSTREAM-kubernetes.portForwarding.showSessions",
+      "review": {
+        "registration": "statically-found",
+        "semantics": "source-reviewed",
+        "semanticsEvidence": "M1-E054",
+        "implementation": "partial",
+        "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+        "runtimeEvidence": [],
+        "implementationEvidence": {
+          "evidence": "M5-E006",
+          "scope": "会话列表已接（M5-E006）：注册表list+事件历史"
+        }
+      }
+    }
+  ]
+}

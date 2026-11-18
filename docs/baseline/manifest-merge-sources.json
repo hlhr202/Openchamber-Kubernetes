@@ -1,0 +1,11 @@
+{
+  "scope": "Pinned public TEXT for the three-way JSON-merge model and outstanding strategic Apply contract; never executed",
+  "repo": "kubernetes/apimachinery",
+  "commit": "7164e39885ced1e843757da6423a337f6eae75f7",
+  "records": [
+    { "path": "pkg/util/jsonmergepatch/patch.go", "local": "tests/fixtures/contracts/manifest-apply-contract/pkg__util__jsonmergepatch__patch.go.txt", "bytes": 4866, "sha256": "5f6e2bea2749e783e068e4f03fcda25a1d8bd4067c9affd383bcf376a303fd43" },
+    { "path": "pkg/util/strategicpatch/patch.go", "local": "tests/fixtures/contracts/manifest-apply-contract/pkg__util__strategicpatch__patch.go.txt", "bytes": 77591, "sha256": "77242a5afa950bf7ba0da6b7d501f05054578e61853b386e1575c2aa692eca9a" },
+    { "path": "pkg/util/strategicpatch/meta.go", "local": "tests/fixtures/contracts/manifest-apply-contract/pkg__util__strategicpatch__meta.go.txt", "bytes": 7934, "sha256": "6c09f639b5ecda43ff202842aace8ae459cd18e0505087c0f9b4c7734d206587" },
+    { "path": "pkg/util/mergepatch/util.go", "local": "tests/fixtures/contracts/manifest-apply-contract/pkg__util__mergepatch__util.go.txt", "bytes": 3622, "sha256": "9cb02642c5bfa116b0cc7d213dbce234262ad9dffd465a906b8236add598a59a" }
+  ]
+}

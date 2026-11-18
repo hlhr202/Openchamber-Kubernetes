@@ -1,0 +1,267 @@
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+#app { box-sizing: border-box; width: 100%; height: 100dvh; min-width: 0; color: var(--oc-fg); background: var(--oc-bg); font-family: var(--oc-font); padding: 0.5rem; font-size: 0.875rem; }
+p { overflow-wrap: anywhere; margin-block: 0.35rem; }
+[hidden] { display: none !important; }
+
+/* Workbench layout: narrow panel switches explorer <-> subview; wide page splits side by side */
+.oc-k8s-workbench { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.oc-k8s-namespace-switch-status { grid-column: 1 / -1; }
+.oc-k8s-workbench-split { display: none; }
+@media (min-width: 900px) {
+  .oc-k8s-workbench:not([data-route="explorer"]) {
+    display: grid;
+    grid-template-columns: clamp(min(18rem, 40%), var(--oc-k8s-explorer-width, 30%), min(65%, max(40%, calc(100% - 19.25rem)))) 0.75rem minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 0;
+  }
+  .oc-k8s-workbench:not([data-route="explorer"]) > .oc-k8s-namespace-switch-status { grid-row: 1; }
+  .oc-k8s-workbench:not([data-route="explorer"]) > .oc-k8s-explorer-shell {
+    display: flex !important;
+    grid-area: 2 / 1;
+  }
+  .oc-k8s-workbench:not([data-route="explorer"]) > .oc-k8s-subview-shell { grid-area: 2 / 3; }
+  .oc-k8s-workbench:not([data-route="explorer"]) > .oc-k8s-workbench-split {
+    display: grid;
+    grid-area: 2 / 2;
+    justify-items: center;
+    cursor: col-resize;
+    touch-action: none;
+    user-select: none;
+  }
+  .oc-k8s-workbench-split::before { content: ""; width: 2px; background: var(--oc-border); }
+  .oc-k8s-workbench-split:is(:hover, :focus-visible, [data-dragging])::before { background: var(--oc-focus); }
+  .oc-k8s-workbench-split:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: -2px; }
+}
+
+.oc-k8s-explorer-shell { display: flex; flex: 1; flex-direction: column; gap: 0.5rem; position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.oc-k8s-clusters-section { display: flex; flex: 1; flex-direction: column; min-height: 0; min-width: 0; }
+.oc-k8s-clusters-tree-mount, .oc-k8s-clusters-tree, .oc-k8s-tree-split, .oc-k8s-tree-pane { display: flex; flex: 1; flex-direction: column; min-height: 0; min-width: 0; }
+.oc-k8s-helm-repos-mount { flex: 0 1 auto; max-height: 35%; overflow: auto; }
+.oc-k8s-explorer-section { border: 1px solid var(--oc-border, rgba(128, 128, 128, 0.25)); border-radius: 6px; padding: 0.35rem 0.5rem; position: relative; }
+.oc-k8s-view-header { display: flex; align-items: center; gap: 0.4rem; min-height: 1.75rem; border-bottom: 1px solid var(--oc-border, rgba(128, 128, 128, 0.2)); padding-bottom: 0.25rem; margin-bottom: 0.25rem; }
+.oc-k8s-view-title { font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin: 0; flex: 0 0 auto; }
+.oc-k8s-context-pill { font-size: 0.75rem; opacity: 0.8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 1 auto; min-width: 0; }
+.oc-k8s-title-actions { display: flex; align-items: center; gap: 0.2rem; margin-inline-start: auto; flex: 0 0 auto; }
+.oc-k8s-section-toggle { background: none; border: none; color: inherit; cursor: pointer; padding: 0 0.2rem; font-size: 0.875rem; }
+.oc-k8s-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border: none; border-radius: 4px; background: transparent; color: inherit; cursor: pointer; padding: 0; }
+.oc-k8s-icon-button:hover:not(:disabled) { background: var(--oc-hover); }
+.oc-k8s-icon-button:disabled { opacity: 0.4; cursor: default; }
+
+.oc-k8s-empty-banner { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.5rem; border-radius: 4px; background: var(--oc-muted-surface); margin-bottom: 0.35rem; }
+.oc-k8s-empty-text { margin: 0; font-size: 0.8125rem; }
+.oc-k8s-empty-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.oc-k8s-view-header, .oc-k8s-tree-note { flex-shrink: 0; }
+.oc-k8s-primary-button, .oc-k8s-secondary-button, .oc-k8s-back-button, .oc-k8s-link-button {
+  border: 1px solid var(--oc-border, rgba(128, 128, 128, 0.35));
+  background: transparent;
+  color: inherit;
+  border-radius: 4px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  line-height: 1.4;
+  min-height: 1.75rem;
+}
+.oc-k8s-primary-button { font-weight: 600; background: var(--oc-primary); color: var(--oc-primary-fg); }
+.oc-k8s-back-button:hover { background: var(--oc-hover); }
+.oc-k8s-workbench button:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: -2px; }
+
+.oc-k8s-subview-shell { display: flex; flex: 1; min-width: 0; min-height: 0; overflow: auto; flex-direction: column; gap: 0.5rem; border: 1px solid var(--oc-border, rgba(128, 128, 128, 0.25)); border-radius: 6px; padding: 0.5rem; }
+.oc-k8s-subview-bar { display: flex; flex: 0 0 auto; align-items: center; min-width: 0; gap: 0.5rem; border-bottom: 1px solid var(--oc-border, rgba(128, 128, 128, 0.2)); padding-bottom: 0.35rem; }
+.oc-k8s-subview-title { flex: 1 1 0; min-width: 0; margin: 0; font-size: 0.9375rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.configuration-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-block: 0.5rem; }
+.configuration-results { max-width: 100%; overflow-x: auto; }
+.configuration-results table { width: 100%; border-collapse: collapse; }
+.configuration-results caption { text-align: start; padding-block: 0.5rem; }
+.configuration-results th, .configuration-results td { text-align: start; vertical-align: top; padding: 0.25rem; overflow-wrap: anywhere; }
+.log-viewer-fields { display: flex; flex-wrap: wrap; align-items: end; gap: 0.5rem; }
+.log-viewer-output { max-width: 100%; min-height: 16rem; overflow: auto; }
+.log-viewer-output pre { margin: 0; font-family: monospace; }
+.log-viewer-output mark { color: var(--oc-selection-fg); background: var(--oc-selection); text-decoration: underline; }
+.log-terminal-shell { max-width: 100%; overflow: auto; }
+.log-terminal-surface { min-width: 40rem; }
+
+/* Approved batch-5 tree renderer geometry: placeholder values pending the frozen R-05
+   measurements; only these variables change, never the component code. */
+.oc-k8s-tree { display: block; flex: 1; min-height: 0; overflow: auto; border: none; outline: none; }
+.oc-k8s-tree-item {
+  display: flex;
+  align-items: center;
+  gap: var(--oc-k8s-tree-icon-gap, 6px);
+  min-height: var(--oc-k8s-tree-row-height, 22px);
+  height: var(--oc-k8s-tree-row-height, 22px);
+  padding-inline-start: calc(var(--oc-k8s-tree-level, 0) * var(--oc-k8s-tree-indent, 12px));
+  padding-inline-end: 0.25rem;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+}
+
+/* All right-hand tasks share one quiet layout. Existing task DOM stays mounted. */
+.oc-k8s-route, .oc-k8s-subroute, .oc-k8s-task-deck, .oc-k8s-task-content { display: flex; flex-direction: column; flex: 1; min-width: 0; gap: 0.6rem; }
+.oc-k8s-route > section, .oc-k8s-subroute > section, .oc-k8s-task-content > section { min-width: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.oc-k8s-task-picker { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; color: var(--oc-muted); font-size: 0.8125rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--oc-border); }
+.oc-k8s-task-select { flex: 1; min-width: 8rem; max-width: 100%; color: var(--oc-fg); background: var(--oc-bg); border: 1px solid var(--oc-border); border-radius: var(--oc-radius, 4px); padding: 0.4rem 0.6rem; font: inherit; }
+.oc-k8s-subview-shell :is(input, select, textarea) { max-width: 100%; box-sizing: border-box; }
+.oc-k8s-subview-shell :is(button, select, input):focus-visible { outline: 2px solid var(--oc-focus); outline-offset: 2px; }
+.oc-k8s-subview-shell .configuration-actions { gap: 0.4rem; align-items: end; margin-block: 0.25rem; }
+.oc-k8s-subview-shell .oc-sdk-btn { max-width: 100%; white-space: normal; min-height: 2rem; height: auto; padding-block: 0.4rem; line-height: 1.3; overflow-wrap: anywhere; }
+.oc-k8s-panel-fields, .oc-k8s-task-content > section > div:has(> .oc-sdk-field):not(.configuration-actions), .oc-k8s-log-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 0.6rem; }
+.oc-k8s-panel-fields > div, .oc-k8s-log-controls > div { flex: 1 1 8rem; min-width: 0; }
+.oc-k8s-subview-shell .oc-sdk-field { min-width: 0; max-width: 100%; }
+.oc-k8s-subview-shell p { margin-block: 0.2rem; line-height: 1.5; }
+.oc-k8s-panel-target { color: var(--oc-fg); font-weight: 600; overflow-wrap: anywhere; }
+.oc-k8s-panel-note, .oc-k8s-subview-shell [role="status"] { color: var(--oc-muted); font-size: 0.8125rem; }
+.oc-k8s-subview-shell [data-tone="error"] { color: var(--oc-error-text); }
+.oc-k8s-subview-shell [data-tone="warning"] { color: var(--oc-warning-text); }
+.oc-k8s-subview-shell [data-tone="success"] { color: var(--oc-success-text); }
+.oc-k8s-subview-shell [data-tone="info"] { color: var(--oc-info-text); }
+.oc-k8s-disclosure { min-width: 0; font-size: 0.8125rem; }
+.oc-k8s-disclosure > summary { color: var(--oc-muted); cursor: pointer; padding-block: 0.3rem; }
+.oc-k8s-disclosure > summary:focus-visible { outline: 2px solid var(--oc-focus); }
+.oc-k8s-disclosure-body { padding: 0.5rem 0.6rem; border-radius: var(--oc-radius, 4px); background: var(--oc-muted-surface); display: flex; flex-direction: column; gap: 0.5rem; }
+.oc-k8s-operation-identifiers { font-family: var(--oc-mono); white-space: pre-wrap; color: var(--oc-muted); font-size: 0.75rem; }
+[data-operation-phase="confirm"] [data-operation-action="prepare"], [data-operation-phase="submitting"] [data-operation-action="prepare"] { display: none; }
+.oc-k8s-task-content label:has(> input), .oc-k8s-task-content label:has(> textarea) { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; color: var(--oc-muted); font-size: 0.8125rem; }
+.oc-k8s-task-content label > :is(input:not([type="checkbox"]), textarea), .oc-k8s-task-content > section > div > input { background: var(--oc-bg); color: var(--oc-fg); border: 1px solid var(--oc-border); border-radius: var(--oc-radius, 4px); padding: 0.45rem 0.6rem; font: inherit; min-width: 0; }
+.oc-k8s-task-content label:has(> input[type="checkbox"]) { flex-direction: row; align-items: center; color: var(--oc-fg); }
+.oc-k8s-subview-shell pre { margin: 0; padding: 0.7rem; font: 0.8125rem/1.6 var(--oc-mono); background: var(--oc-muted-surface); color: var(--oc-fg); border-radius: var(--oc-radius, 4px); max-width: 100%; box-sizing: border-box; overflow: auto; tab-size: 2; }
+.oc-k8s-subview-shell :is(.oc-k8s-document-panel, .oc-k8s-log-panel, .oc-k8s-log-viewer, .oc-k8s-log-follow) { display: flex; flex-direction: column; flex: 1; min-width: 0; gap: 0.4rem; }
+.oc-k8s-log-panel > .configuration-results { display: flex; flex: 1; flex-direction: column; }
+.oc-k8s-log-viewer > .log-viewer-output { flex: 1 1 auto; min-height: 20rem; height: max(20rem, calc(100dvh - 20rem)); max-height: max(20rem, calc(100dvh - 20rem)); border: 1px solid var(--oc-border); border-radius: var(--oc-radius, 4px); }
+.oc-k8s-log-viewer > .log-viewer-output:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: -2px; }
+.oc-k8s-log-viewer .log-viewer-fields > div { flex: 1 1 12rem; }
+.oc-k8s-document-panel .oc-sdk-field:has(textarea) { display: flex; flex-direction: column; }
+.oc-k8s-document-panel textarea, .oc-k8s-task-content textarea { min-height: 18rem; resize: vertical; font-family: var(--oc-mono); line-height: 1.6; }
+/* Surrounding controls follow the interface language; data and code do not. */
+#app :is(pre, code, textarea, .xterm) { direction: ltr; text-align: start; }
+.oc-k8s-subview-shell .configuration-results table { font-size: 0.8125rem; }
+.oc-k8s-subview-shell .configuration-results th { color: var(--oc-muted); font-weight: 500; border-bottom: 1px solid var(--oc-border); }
+.oc-k8s-subview-shell .configuration-results td { padding: 0.45rem 0.35rem; }
+.oc-k8s-tree-item:hover { background: var(--oc-hover); }
+.oc-k8s-tree-item:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: -2px; }
+.oc-k8s-tree-item-selected, .oc-k8s-tree-item-selected:hover { font-weight: 600; background: var(--oc-selection); color: var(--oc-selection-fg); }
+.oc-k8s-tree-item-stale:not(.oc-k8s-tree-item-selected) .oc-k8s-tree-label { color: var(--oc-muted); }
+.oc-k8s-tree-toggle { min-width: 1.1em; width: 1.1em; background: none; border: none; color: inherit; cursor: pointer; padding: 0; text-align: center; flex: 0 0 auto; }
+.oc-k8s-tree-toggle:disabled { cursor: default; }
+.oc-k8s-tree-item { -webkit-user-select: none; user-select: none; }
+.oc-k8s-tree-spinner { display: inline-block; width: .75em; height: .75em; box-sizing: border-box; border: 1px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: oc-k8s-tree-spin .75s linear infinite; }
+@keyframes oc-k8s-tree-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .oc-k8s-tree-spinner { animation: none; } }
+.oc-k8s-icon, .oc-k8s-action-icon { width: 14px; height: 14px; flex: 0 0 auto; }
+.oc-k8s-icon:is(.oc-k8s-icon-kubernetes, .oc-k8s-icon-aks, .oc-k8s-icon-node, .oc-k8s-icon-namespace) { --oc-k8s-icon-hue: #397be4; }
+.oc-k8s-icon:is(.oc-k8s-icon-minikube, .oc-k8s-icon-network) { --oc-k8s-icon-hue: #12938e; }
+.oc-k8s-icon:is(.oc-k8s-icon-workload, .oc-k8s-icon-pod, .oc-k8s-icon-job, .oc-k8s-icon-cronjob) { --oc-k8s-icon-hue: #7567dc; }
+.oc-k8s-icon:is(.oc-k8s-icon-storage, .oc-k8s-icon-configuration) { --oc-k8s-icon-hue: #a66519; }
+.oc-k8s-icon:is(.oc-k8s-icon-secret, .oc-k8s-icon-config-key) { --oc-k8s-icon-hue: #ab4f85; }
+.oc-k8s-icon:is(.oc-k8s-icon-custom, .oc-k8s-icon-helm, .oc-k8s-icon-helm-repo) { --oc-k8s-icon-hue: #8060c7; }
+.oc-k8s-icon { color: color-mix(in srgb, var(--oc-k8s-icon-hue, currentColor) 67%, var(--oc-fg, currentColor)); }
+.oc-k8s-tree-label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oc-k8s-tree-description { font-size: 0.75rem; opacity: 0.75; flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 9rem; }
+.oc-k8s-tree-badge { font-size: 0.6875rem; padding: 0 0.3rem; border-radius: 3px; background: var(--oc-muted-surface); color: var(--oc-fg); flex: 0 1 auto; max-width: 30%; overflow: hidden; text-overflow: ellipsis; }
+.oc-k8s-tree-inline-actions { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: auto; flex: 0 0 auto; opacity: 0.85; }
+.oc-k8s-tree-inline-button, .oc-k8s-tree-menu-button, .oc-k8s-tree-more {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; border-radius: 3px; background: transparent; color: inherit;
+  cursor: pointer; padding: 2px 4px; font-size: 0.75rem;
+}
+.oc-k8s-tree-inline-button:hover:not(:disabled), .oc-k8s-tree-menu-button:hover, .oc-k8s-tree-more:hover {
+  background: var(--oc-hover);
+}
+.oc-k8s-tree-inline-button:disabled { opacity: 0.35; cursor: default; }
+.oc-k8s-tree-message { white-space: pre-wrap; padding: 0.25rem 0.5rem; font-size: 0.8125rem; }
+.oc-k8s-tree-note, .oc-k8s-inline-status { font-size: 0.8125rem; opacity: 0.85; margin-block: 0.25rem; }
+
+/* Batch-7 tree additions: resizable split, action menu, history navigation. Geometry stays
+   CSS-variable parameterised (R-05 backfills values without code changes). */
+.oc-k8s-tree-split { gap: 0.25rem; }
+@media (min-width: 900px) {
+  .oc-k8s-tree-split[data-detail="true"] { flex-direction: row; gap: 0; }
+  .oc-k8s-tree-split[data-detail="true"] > .oc-k8s-tree-pane { flex: 0 0 var(--oc-k8s-tree-split, 52%); min-width: 30%; overflow: hidden; }
+  .oc-k8s-tree-split-handle { flex: 0 0 4px; cursor: col-resize; background: var(--oc-border, rgba(128, 128, 128, 0.2)); background-clip: content-box; }
+  .oc-k8s-tree-split > .oc-k8s-tree-detail { flex: 1 1 auto; min-width: 20%; overflow: auto; padding: 0.35rem 0.5rem; border-inline-start: 1px solid var(--oc-border, rgba(128, 128, 128, 0.15)); }
+}
+.oc-k8s-tree-split > .oc-k8s-tree-detail { overflow: auto; padding: 0.25rem 0; }
+.oc-k8s-detail-title { margin: 0 0 0.15rem; font-size: 0.875rem; overflow-wrap: anywhere; }
+.oc-k8s-detail-subtitle { margin: 0 0 0.4rem; font-size: 0.75rem; opacity: 0.75; }
+.oc-k8s-detail-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.oc-k8s-detail-action { border: 1px solid var(--oc-border, rgba(128, 128, 128, 0.35)); background: transparent; color: inherit; border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.75rem; cursor: pointer; }
+.oc-k8s-detail-action[data-destructive="true"] { border-color: var(--oc-error-text); }
+
+.oc-k8s-menu-overlay-host { position: relative; }
+.oc-k8s-tree-menu, .oc-k8s-action-menu {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  min-width: 12.5rem;
+  max-width: 20rem;
+  overflow-y: auto;
+  padding: 0.25rem 0;
+  border-radius: 6px;
+  border: 1px solid var(--oc-border, rgba(128, 128, 128, 0.35));
+  background: var(--oc-elevated, var(--oc-bg));
+  color: var(--oc-elevated-fg, var(--oc-fg));
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+}
+.oc-k8s-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: start;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+.oc-k8s-menu-item:hover:not(.oc-k8s-menu-item-disabled), .oc-k8s-menu-item:focus-visible {
+  background: var(--oc-hover);
+  outline: 1px solid var(--oc-focus);
+  outline-offset: -1px;
+}
+.oc-k8s-menu-item-disabled { opacity: 0.45; cursor: default; }
+.oc-k8s-menu-item[data-destructive="true"] { color: var(--oc-error-text); }
+.oc-k8s-menu-item-reason { font-size: 0.6875rem; opacity: 0.8; }
+.oc-k8s-menu-separator { height: 1px; margin: 0.25rem 0; background: var(--oc-border, rgba(128, 128, 128, 0.25)); }
+.oc-k8s-helm-breadcrumb { display: flex; align-items: center; gap: 0.4rem; margin-block: 0.25rem; font-size: 0.8125rem; }
+.oc-k8s-helm-footer { margin-top: 0.25rem; }
+.oc-k8s-diagnostics-summary { font-family: monospace; font-size: 0.75rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* SDK 2.5.1 semantic text colours, not a separate Kubernetes colour scheme. */
+.oc-k8s-icon-pod-running, .oc-k8s-icon-workload-ready, .oc-k8s-icon-helm-deployed { color: var(--oc-success-text, var(--oc-fg)); }
+.oc-k8s-icon-pod-error, .oc-k8s-icon-workload-error, .oc-k8s-icon-helm-failed { color: var(--oc-error-text, var(--oc-fg)); }
+.oc-k8s-icon-pod-not-ready, .oc-k8s-icon-workload-progressing { color: var(--oc-warning-text, var(--oc-fg)); }
+.oc-k8s-icon-pod-completed { color: var(--oc-info-text, var(--oc-fg)); }
+.oc-k8s-icon-workload-paused { color: var(--oc-muted); }
+.oc-k8s-inspection { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+.oc-k8s-inspection-target { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.oc-k8s-inspection-note, .oc-k8s-inspection-status, .oc-k8s-inspection-details { margin: 0; color: var(--oc-muted); font-size: 0.8125rem; }
+.oc-k8s-inspection-status[data-tone="error"] { color: var(--oc-error-text); }
+.oc-k8s-inspection-status[data-tone="warning"] { color: var(--oc-warning-text); }
+.oc-k8s-inspection-status[data-tone="info"] { color: var(--oc-info-text); }
+.oc-k8s-inspection-details summary { cursor: pointer; width: fit-content; }
+.oc-k8s-inspection-details p { font-family: var(--oc-mono, monospace); overflow-wrap: anywhere; }
+.oc-k8s-inspection .configuration-actions { margin-block: 0.2rem; }
+.oc-k8s-inspection-output { border: 1px solid var(--oc-border); background: var(--oc-muted-surface, var(--oc-bg)); border-radius: var(--oc-radius, 4px); padding: 0.75rem; min-width: 0; max-width: 100%; overflow: auto; }
+.oc-k8s-inspection-output pre { margin: 0; font-family: var(--oc-mono, monospace); font-size: 0.8125rem; line-height: 1.6; white-space: pre; tab-size: 2; color: var(--oc-fg); }
+.oc-k8s-inspection-output:focus-visible { outline: 2px solid var(--oc-focus); outline-offset: -2px; }
+.oc-k8s-syntax-key { color: var(--oc-k8s-code-key, var(--oc-primary-text, var(--oc-fg))); }
+.oc-k8s-syntax-heading { color: var(--oc-k8s-code-heading, var(--oc-primary-text, var(--oc-fg))); font-weight: 600; }
+.oc-k8s-syntax-number { color: var(--oc-k8s-code-number, var(--oc-info-text, var(--oc-fg))); }
+.oc-k8s-syntax-muted { color: var(--oc-muted); }
+.oc-k8s-syntax-success { color: var(--oc-success-text, var(--oc-fg)); }
+.oc-k8s-syntax-warning { color: var(--oc-warning-text, var(--oc-fg)); }
+.oc-k8s-syntax-error { color: var(--oc-error-text, var(--oc-fg)); font-weight: 600; }
+@media (forced-colors: active) {
+  .oc-k8s-tree-item-selected { background: Highlight; color: HighlightText; }
+  .oc-k8s-tree-item:focus-visible, .oc-k8s-workbench button:focus-visible { outline-color: Highlight; }
+}

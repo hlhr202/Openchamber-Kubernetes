@@ -1,0 +1,31 @@
+{
+  "records": [
+    {
+      "repo": "kubernetes/apimachinery",
+      "commit": "7164e39885ced1e843757da6423a337f6eae75f7",
+      "path": "pkg/api/validation/objectmeta.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/apimachinery/7164e39885ced1e843757da6423a337f6eae75f7/pkg/api/validation/objectmeta.go",
+      "local": "tests/fixtures/contracts/manifest-apply-transport-contract/pkg__api__validation__objectmeta.go.txt",
+      "bytes": 18217,
+      "sha256": "9930a19ca9cdabe68625370624de7a2bc5e9ebea6727b670f5ef8c5a4ee7be80"
+    },
+    {
+      "repo": "kubernetes/apiextensions-apiserver",
+      "commit": "78b55771e5935f10d7d8d187de1b2f3c934cdcb9",
+      "path": "pkg/registry/customresource/validator.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/apiextensions-apiserver/78b55771e5935f10d7d8d187de1b2f3c934cdcb9/pkg/registry/customresource/validator.go",
+      "local": "tests/fixtures/contracts/manifest-apply-transport-contract/pkg__registry__customresource__validator.go.txt",
+      "bytes": 9662,
+      "sha256": "b1a4b7b85d30e65c6b38e10021fb8408c743b63923afe96f9d1ba26edf221b40"
+    },
+    {
+      "repo": "kubernetes/apiextensions-apiserver",
+      "commit": "78b55771e5935f10d7d8d187de1b2f3c934cdcb9",
+      "path": "pkg/registry/customresource/strategy.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/apiextensions-apiserver/78b55771e5935f10d7d8d187de1b2f3c934cdcb9/pkg/registry/customresource/strategy.go",
+      "local": "tests/fixtures/contracts/manifest-apply-transport-contract/pkg__registry__customresource__strategy.go.txt",
+      "bytes": 15192,
+      "sha256": "e87ea2a1c841c33a6eebe4bb3b3ec4048de1af6623a467b7fd3efeec084b852b"
+    }
+  ]
+}

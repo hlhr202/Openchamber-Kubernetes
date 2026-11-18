@@ -1,0 +1,70 @@
+name: openchamber-kubernetes-development
+
+x-development: &development
+  image: openchamber-kubernetes-development:node24-pnpm12-linux-x64-v1
+  build:
+    context: .
+    dockerfile: docker/dev.Dockerfile
+  platform: linux/amd64
+  user: '1000:1000'
+  working_dir: /workspace
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  init: true
+  pids_limit: 256
+  mem_limit: 2g
+  cpus: 2
+  environment:
+    HOME: /home/node
+    OPENCHAMBER_K8S_DEVELOPMENT: '1'
+    PNPM_CONFIG_PM_ON_FAIL: error
+    PNPM_CONFIG_RUNTIME_ON_FAIL: error
+    COREPACK_ENABLE_NETWORK: '0'
+  volumes:
+    - type: bind
+      source: .
+      target: /workspace
+    - type: bind
+      source: ${K8S_INPUT_SNAPSHOT:-.}
+      target: /input
+      read_only: true
+    - type: volume
+      source: development_modules_x64
+      target: /workspace/node_modules
+    - type: volume
+      source: development_store_x64
+      target: /pnpm/store
+    - type: volume
+      source: development_home_x64
+      target: /home/node
+  tmpfs:
+    - /tmp:rw,noexec,nosuid,size=128m
+  restart: 'no'
+
+services:
+  dev:
+    <<: *development
+    working_dir: /input
+    network_mode: none
+    command: [node, --version]
+  dependencies:
+    <<: *development
+    profiles: [prepare]
+    networks: [preparation]
+    command: [pnpm, install, --frozen-lockfile, --ignore-scripts]
+
+  bootstrap:
+    <<: *development
+    profiles: [bootstrap]
+    working_dir: /workspace
+    network_mode: none
+    command: [node, --experimental-strip-types, scripts/bootstrap-cluster/server.ts]
+
+networks:
+  preparation: {}
+
+volumes:
+  development_modules_x64: {}
+  development_store_x64: {}
+  development_home_x64: {}

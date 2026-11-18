@@ -1,0 +1,2569 @@
+{
+  "schemaVersion": 2,
+  "commit": "f54aef89a48c64e3df66af4a75cc5dd3d80f4a75",
+  "evidence": "M1-E009",
+  "excludedEntries": [
+    {
+      "commandId": "extension.vsKubernetesDebounceActivation",
+      "evidence": "M1-E057",
+      "scope": "excluded-internal-activation",
+      "reason": "内部activation去竞态空回调，不是用户功能或后续业务操作",
+      "sources": [
+        "src/extension.ts#L267-L267",
+        "src/extension.ts#L2010-L2019"
+      ],
+      "cases": {
+        "INTERNAL": "首轮等待50ms后执行空命令以让provider注册settle，后续不重复",
+        "NO_PRODUCT": "不实现同名空用户按钮，不把noop当业务能力已完成",
+        "BOUNDARY": "不用于绕过provider依赖或触发自动安装登录/生命周期"
+      }
+    },
+    {
+      "commandId": "extension.vsKubernetesRefreshCloudExplorer",
+      "evidence": "M1-E057",
+      "scope": "excluded-clouds-view",
+      "reason": "独立Clouds视图已按Product排除，不排除其他Palette可达配置导入能力",
+      "sources": [
+        "src/extension.ts#L212-L212",
+        "src/components/cloudexplorer/cloudexplorer.ts#L47-L54"
+      ],
+      "cases": {
+        "NORMAL": "原Clouds refresh仅发树数据invalidated，provider注册延迟触发",
+        "EXCLUDED": "不新增独立Clouds标题/刷新按钮/任意provider加载",
+        "DISTINCT": "与Clusters/Helm Refresh、M4配置Merge/Save分别归属，不能混同"
+      }
+    },
+    {
+      "commandId": "kubernetes.cloudExplorer.findProviders",
+      "evidence": "M1-E057",
+      "scope": "excluded-clouds-view",
+      "reason": "独立Clouds provider Marketplace发现入口排除，不影响已定AKS/Telepresence功能",
+      "sources": [
+        "src/extension.ts#L264-L264",
+        "src/extension.ts#L2418-L2428",
+        "src/components/cloudexplorer/cloudexplorer.ts#L19-L23"
+      ],
+      "cases": {
+        "NORMAL": "原入口显式打开固定cloud-provider Marketplace搜索，不是安装或创建集群",
+        "EXCLUDED": "不移植Clouds默认视图/无provider消息节点或自动安装器",
+        "DISTINCT": "不据此排除Local Tunnel发现或Create/Add的实际provider集成"
+      }
+    }
+  ],
+  "entries": [
+    {
+      "entry": "extension.vsKubernetesCopy",
+      "commandId": "extension.vsKubernetesCopy",
+      "milestone": "M2",
+      "evidence": "M1-E057",
+      "requirements": [
+        "M2-F6",
+        "M2-F8"
+      ],
+      "task": "Phase 5：为后续 milestone 提供菜单和详情插槽，标明未接入依赖，不将占位入口计为完成。",
+      "dependencies": [
+        "当前validated context/资源/分支页metadata与原身份",
+        "官方SDK2.5.1显式writeClipboard/固定限额",
+        "最终树/Helm Release与配置键入口仍独立待实现"
+      ],
+      "verification": "pure-name-projection-auto-clipboard-only-human",
+      "sources": [
+        "src/extension.ts#L231-L231",
+        "src/extension.ts#L2238-L2252"
+      ],
+      "cases": {
+        "NORMAL": "复制原contextName/resource.name/releaseName/key，不是带当前标记的label/URI/正文",
+        "MISSING": "不支持节点/缺选择无剪贴板写，失效页/原目标或config代次漂移拒旧选择",
+        "PRIVACY": "只明确点击SDK clipboard，不自动复制、存储、聊天或透传Secret值",
+        "FAILURE": "宿主拒绝/超时固定反馈不重试，pending真实未settle限1，切视图迟到不投递"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M2-E018",
+        "scope": "context/内置资源与CRD/子资源诊断页Copy Name显式点击→当前页strict selection/身份/ready非stale纯名称投影→官方SDK clipboard，每bridge1真实pending/finally释放与固定未确认不重试反馈。18新纯投影/11文本静态和第二轮1079/354/类型/lint/release过，无真实或mock clipboard/SDK执行。无正文/任意复制字符串/自动写；config-key仅helper未增默认键菜单，Helm release/最终树/视觉/真实SDK与平台仍缺"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesRefreshExplorer",
+      "commandId": "extension.vsKubernetesRefreshExplorer",
+      "milestone": "M2",
+      "evidence": "M1-E057",
+      "requirements": [
+        "M2-F6",
+        "M2-F7",
+        "M2-F8"
+      ],
+      "task": "Phase 5：实现可访问树、独立选择/展开、折叠/刷新、焦点与键盘行为、状态图标和 tooltip。",
+      "dependencies": [
+        "原配置/target与独立分支失效/懒加载",
+        "真实renderer与当前可见/展开集合",
+        "认证/cache只读审查，不将Helm刷新或配置写混入"
+      ],
+      "verification": "auth-cache-review-before-human-tree-refresh",
+      "sources": [
+        "src/extension.ts#L210-L210",
+        "src/components/clusterexplorer/explorer.ts#L169-L178",
+        "src/components/clusterexplorer/explorer.ts#L195-L228"
+      ],
+      "cases": {
+        "NORMAL": "原工具栏Refresh仅发tree invalidation，后续按可见展开节点重新查询，不是Describe Refresh或Helm repo update",
+        "FAILURE": "重新读取失败保stale/固定错误，不伪装健康空树或切配置",
+        "STALE": "新实例/来源/target拒旧响应，不复用裸resource kind或跨context全扫",
+        "BOUNDARY": "不借Refresh执行写/认证刷新/下载/生命周期，也不把现有诊断Read按钮当完整树刷新"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M2-E035",
+        "scope": "仅树失效刷新：refreshAll一次性将全部查询行标记stale并中止pending，随后仅对可见展开分支经原自动刷新队列重读（原2槽/64次/失败需显式重试）；折叠分支只失效不重读，失败保stale固定错误不伪装健康空树，suspend/clear下惰性；不触发Describe Refresh/Helm更新/配置切换/写/认证刷新/Watch生命周期/跨context扫描。诊断Read按钮非完整树刷新；最终树renderer/菜单/几何/辅助技术与正式平台仍缺，真实运行未验"
+      }
+    },
+    {
+      "entry": "extension.showInfoMessage",
+      "commandId": "extension.showInfoMessage",
+      "milestone": "M2",
+      "evidence": "M1-E057",
+      "requirements": [
+        "M2-F6",
+        "M2-F7"
+      ],
+      "task": "Phase 5：接通分支 loading/error/empty/stale/retry 与取消，区分权限拒绝和资源为空。",
+      "dependencies": [
+        "原Helm repo消息节点来源/错误与普通资源区分",
+        "安全有界本地化消息展示/无body或原错误泄漏",
+        "最终树消息节点与明确点击，不以占位冒充资源"
+      ],
+      "verification": "pure-message-text-auto-explicit-host-notice-human",
+      "sources": [
+        "src/extension.ts#L270-L270",
+        "src/extension.ts#L2414-L2416",
+        "src/helm.repoExplorer.ts#L99-L119"
+      ],
+      "cases": {
+        "NORMAL": "非manifest声明但真实注册；消息节点点击只显示该提示，不运行Helm/刷新或安装",
+        "PRIVACY": "原message视为不可信文本，有界固定错误/提示不透传凭证或控制HTML",
+        "EMPTY_FAILURE": "区分空数据与读取失败消息，不让消息节点支持资源写菜单",
+        "BOUNDARY": "不自动发通知/聊天/复制，不将纯消息函数或SDK控制组件当完整renderer"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M2-E036",
+        "scope": "树内message节点激活仅显示schema-bounded标签文本（无控制字符/固定上限），非message节点与未就绪树不显示；选择其他行或dispose清除；无Helm/刷新/安装/写菜单/通知/chat/剪贴板/HTML，消息节点永不携带query（expandable=false契约）。诊断状态区非最终renderer/几何/辅助技术；完整树UI/正式平台仍缺，真实运行未验"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesRun",
+      "commandId": "extension.vsKubernetesRun",
+      "milestone": "M4",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M4-F5",
+        "M4-F9"
+      ],
+      "task": "Phase 3：实现 Server 侧 Run 的项目/image 选择、已有构建工具适配、镜像构建/推送与资源运行全链路。",
+      "dependencies": [
+        "可信Server工作区/内容与构建工具/镜像tag身份",
+        "G4逐步骤构建/推送/原context-namespace运行归账",
+        "Docker/Buildah/Git明确外部依赖与认证环境，不自动安装登录"
+      ],
+      "verification": "static-only-human-project-image-cluster-operation",
+      "sources": [
+        "src/extension.ts#L848-L878",
+        "src/extension.ts#L928-L949",
+        "src/extension.ts#L986-L1042",
+        "src/image/imageUtils.ts#L29-L41",
+        "src/image/imageToolRegistry.ts#L7-L64"
+      ],
+      "cases": {
+        "NORMAL": "单Server工作区名/版本/imageUser形成镜像，Docker build或Buildah bud成功后push，确定成功再kubectl run；非CronJob入口",
+        "CANCEL_FAILURE": "无工作区/工具缺失/build或push失败不运行资源，不能把未await回调当已完成",
+        "PARTIAL_UNKNOWN": "构建/推送/集群分别归账，已推镜像不自动删/重放，失败未知阻断依赖步骤",
+        "TARGET": "冻结Server工作区与原context/namespace，不随全局current改变或拼本地shell，运行真实链仍未实现"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E029",
+        "scope": "Run服务器执行已接（M4-E029）：build→push→kubectl-run形状Pod单次直连POST"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesConfigureFromCluster",
+      "commandId": "extension.vsKubernetesConfigureFromCluster",
+      "milestone": "M7",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M7-F6",
+        "M7-F8",
+        "M7-F9"
+      ],
+      "task": "Phase 4：按基线真实调用链实现 AKS 等已批准 provider 的 Create Cluster 和 Add Existing Cluster，而非仅显示 provider 列表。",
+      "dependencies": [
+        "AKS实际provider身份/版本/许可/运行时与显式认证契约",
+        "tenant/account/subscription/resourceGroup/cluster完整目标而非label",
+        "M4导入/合并G4与配置锁/冲突/结果归账"
+      ],
+      "verification": "static-only-human-provider-auth-credential-config-operation",
+      "sources": [
+        "src/extension.ts#L2021-L2079",
+        "src/components/cloudprovider/aksprovider.ts#L8-L42",
+        "src/components/cloudprovider/aksprovider.ts#L70-L203",
+        "src/components/kubectl/kubeconfig.ts#L112-L240"
+      ],
+      "cases": {
+        "NORMAL": "AKS provider选择/认证/订阅/cluster选择/取user credentials，再明确await M4合并结果，不是旧wizard入口",
+        "CANCEL": "选择或认证取消不启后续；凭证获取已提交时保真实结果，未写配置不等于零副作用",
+        "FAILURE_UNKNOWN": "账户/云请求/解码/冲突/文件失败各自分类，未知不重取凭证/重放merge，原始token/config不进panel或日志",
+        "IDENTITY": "实际账户租户订阅资源组cluster与原配置绑定，不以同名列表首项或伪Pod目标授权"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E075",
+        "scope": "ConfigureFromCluster已接（M7-E075）：minikube kubectl config view有界读取→显式M4-E030合并确认视图（绝不自动合并）"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesCreateCluster",
+      "commandId": "extension.vsKubernetesCreateCluster",
+      "milestone": "M7",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M7-F6",
+        "M7-F8",
+        "M7-F9"
+      ],
+      "task": "Phase 4：接通账户/订阅/资源选择、创建参数、费用与环境影响说明，防止隐式切换默认账户。",
+      "dependencies": [
+        "AKS委派实际发行/云创建参数与插件内完整等价路径仍待核实",
+        "Server账户/订阅/provider版本与显式创建授权",
+        "G4逐步骤/费用/取消未知与就绪/配置合并"
+      ],
+      "verification": "static-only-human-provider-cluster-create-operation",
+      "sources": [
+        "src/extension.ts#L2021-L2051",
+        "src/extension.ts#L2083-L2093",
+        "src/components/cloudprovider/aksprovider.ts#L44-L68"
+      ],
+      "cases": {
+        "DELEGATION": "当前只选AKS后调用aks.createCluster外部扩展，不以activation中的旧Azure/Minikube wizard冒充可达创建链",
+        "DEPENDENCY": "上游可提示安装ms-kubernetes-tools.vscode-aks-tools，本插件不得安装VS Code扩展/假API或省略实际云创建",
+        "CANCEL_FAILURE": "选择/认证/参数取消不创建，依赖缺失或API失败明确；真实参数/版本契约未核完不称可行",
+        "UNKNOWN_COST": "创建提交后断连/取消保云结果未知与费用风险，不自动重建/删资源/切默认账户，后续配置待确定结果"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E075",
+        "scope": "CreateCluster已接（M7-E075）：范围内provider清单（内置minikube；云provider经排除的云扩展委托）+创建经既有minikube start G4链"
+      }
+    },
+    {
+      "entry": "kubernetes.cloudExplorer.mergeIntoKubeconfig",
+      "commandId": "kubernetes.cloudExplorer.mergeIntoKubeconfig",
+      "milestone": "M4",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M4-F7",
+        "M4-F9"
+      ],
+      "task": "Phase 4：为 provider 导入/合并提供受控写入边界，供 M7 调用，不在树初始化时执行。",
+      "dependencies": [
+        "M7受控provider配置来源，不新增Clouds默认树",
+        "M4所选Server配置目标/来源优先级/内容版本/唯一写锁",
+        "重名Overwrite/Keep Both/Cancel与共享引用/G4/backup风险审查"
+      ],
+      "verification": "static-only-human-provider-kubeconfig-merge-operation",
+      "sources": [
+        "src/extension.ts#L2371-L2378",
+        "src/extension.ts#L2405-L2412",
+        "src/components/kubectl/kubeconfig.ts#L112-L240"
+      ],
+      "cases": {
+        "NORMAL": "provider配置获取后选定Server目标合并；原多路径只首path/每类首项，既有current-context保留，新文件设新context",
+        "COLLISION": "Overwrite/Keep Both/Cancel显式，Keep Both重写cluster/user/context及引用，不静默覆盖共享条目或既有backup",
+        "CANCEL": "原命令要求contributed node，缺来源或获取/冲突取消不写，不因排除Clouds而删除Palette可达能力",
+        "PARTIAL_UNKNOWN": "旧backup删除/原文件rename后再write非事务，失败逐步归账不自动rollback；现有namespace writer不能冒充已实现导入"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E030",
+        "scope": "MergeIntoKubeconfig服务器执行已接（M4-E030）：FIRST EXISTING路径G4合并+单次staged替换"
+      }
+    },
+    {
+      "entry": "kubernetes.cloudExplorer.saveKubeconfig",
+      "commandId": "kubernetes.cloudExplorer.saveKubeconfig",
+      "milestone": "M4",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M4-F7",
+        "M4-F9"
+      ],
+      "task": "Phase 4：为 provider 导入/合并提供受控写入边界，供 M7 调用，不在树初始化时执行。",
+      "dependencies": [
+        "M7受控provider配置来源/明确获取凭证授权",
+        "可信Server文件owner/path/权限/create-exclusive与G4",
+        "敏感配置仅用户明确保存，不自动known/active/偏好"
+      ],
+      "verification": "static-only-human-provider-kubeconfig-save-operation",
+      "sources": [
+        "src/extension.ts#L2380-L2412"
+      ],
+      "cases": {
+        "NORMAL": "先provider获取再选Server file目标，只创建不存在文件，无覆盖选项，不自动合并或设active/known",
+        "CANCEL": "SaveDialog取消不写，但前面的认证/凭证获取可能已发生，不能称整链零副作用",
+        "FAILURE": "非file/目标已存在/权限或符号链接问题失败，不能exists-then-write竞态覆盖",
+        "PRIVACY_UNKNOWN": "不将config/token进panel默认DTO/URL/storage/log/chat，写结果未知留原操作待归账，不自动删/重放"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E030",
+        "scope": "SaveKubeconfig链已接（M4-E030）：上游provider前置（无Clouds视图）恒cluster-required"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDebugLocalTunnel",
+      "commandId": "extension.vsKubernetesDebugLocalTunnel",
+      "milestone": "M7",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M7-F5",
+        "M7-F8",
+        "M7-F9"
+      ],
+      "task": "Phase 3：接通 Server 侧真实 Telepresence 工作流，完成目标选择、启动、进度、流量连接、调试、状态与停止/恢复，不以普通 port-forward 替代。",
+      "dependencies": [
+        "已定Telepresence版本/许可/运行时/daemon与Traffic Manager人工前置",
+        "原Pod/Job/Service/Deployment入口与实际后端/Server工作区",
+        "可信owner/G4/流量agent风险/停止恢复/结果账本与B-01"
+      ],
+      "verification": "static-only-human-traffic-debug-provider-operation",
+      "sources": [
+        "src/extension.ts#L205-L206",
+        "src/components/localtunneldebugger/localtunneldebugger.ts#L8-L44",
+        "src/components/localtunneldebugger/localtunneldebugprovider.extension.ts#L1-L4",
+        "src/api/implementation/localtunneldebugger/v1.ts#L8-L13"
+      ],
+      "cases": {
+        "NORMAL": "上游配置provider否则id排序首个，直接传target启动；本插件须真实Telepresence，不以原void调度当完整运行",
+        "MISSING": "指定provider缺失/零provider明确提示，用户选择Find才打开搜索，不静默改其他provider/安装或启动",
+        "TARGET_RISK": "Pod/Job/Service/Deployment原身份与后端/工作区，明确Server执行与流量/agent注入，不能无确认转发any目标",
+        "STOP_UNKNOWN": "真实状态/调试/停止恢复/归账独立实现；取消不等于流量恢复，不能Compose退出代跑业务清理"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E075",
+        "scope": "2026-11-17纠正：当前只接provider发现提示及结果展示，不是完整LocalTunnel。真正Telepresence原配置/daemon目标、intercept/调试/恢复界面仍缺；见action-chain-audit.md"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesFindLocalTunnelDebugProviders",
+      "commandId": "extension.vsKubernetesFindLocalTunnelDebugProviders",
+      "milestone": "M7",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M7-F5",
+        "M7-F8"
+      ],
+      "task": "Phase 1：实现 provider 注册/发现、身份与能力描述、选择和受控调用，区分元数据读取与有副作用的 lifecycle。",
+      "dependencies": [
+        "官方固定宿主公开受控外链与用户明确点击",
+        "已定Telepresence发现/依赖说明，不作Marketplace兼容宿主",
+        "固定公开搜索无资源身份/token，不自动加载远程代码"
+      ],
+      "verification": "static-only-human-explicit-provider-discovery-link",
+      "sources": [
+        "src/extension.ts#L2422-L2428",
+        "src/components/localtunneldebugger/localtunneldebugger.ts#L36-L44"
+      ],
+      "cases": {
+        "NORMAL": "明确命令打开固定local-tunnel-provider Marketplace搜索，不是安装或运行provider",
+        "CANCEL": "缺provider提示取消不开网页、不启动Telepresence或改配置",
+        "FAILURE": "外链打开失败可辨，已定Telepresence准备说明不代F5实际链",
+        "PRIVACY": "固定URL无原target/路径/凭证，不自动打开/注册远程代码或新增Clouds视图"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E075",
+        "scope": "FindLocalTunnelProviders已接（M7-E075）：固定Marketplace搜索URL经host.openUrl外部导航（无安装/无注册远程代码）"
+      }
+    },
+    {
+      "entry": "extension.vsMinikubeStart",
+      "commandId": "extension.vsMinikubeStart",
+      "milestone": "M7",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M7-F7",
+        "M7-F9"
+      ],
+      "task": "Phase 4：接通 Start/Stop/Status minikube 的实际执行、结果和树刷新，准确限制上游适用节点。",
+      "dependencies": [
+        "Minikube正式版本/格式/平台/driver/profile与运行依赖待核实",
+        "可信Server原节点profile/context与G4/owned进度账本",
+        "非特权可覆盖范围/人工环境，不安装升级或放宽权限"
+      ],
+      "verification": "static-only-human-minikube-start-lifecycle",
+      "sources": [
+        "src/extension.ts#L222-L222",
+        "src/components/clusterprovider/minikube/minikube.ts#L180-L210",
+        "src/components/clusterprovider/minikube/minikube.ts#L240-L277",
+        "src/binutil.ts#L53-L113"
+      ],
+      "cases": {
+        "NORMAL": "工具检查/状态后实际start，已运行警告；注册传空options，不新增旧wizard driver/additionalFlags默认入口",
+        "TARGET": "原节点Minikube profile/context须真正绑定，不照搬忽略target操作默认profile或拼任意flags",
+        "FAILURE_UNKNOWN": "依赖/启动失败或未知明确，await实际任务/就绪再刷新，不自动重启/stop或宣称回滚",
+        "NO_INSTALL": "不照搬Install dependencies/update-check/升级，缺工具反馈人类准备；无特权/socket/host network"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E074",
+        "scope": "minikube start服务器执行已接（M7-E074）：G4链单次--driver调用"
+      }
+    },
+    {
+      "entry": "extension.vsMinikubeStop",
+      "commandId": "extension.vsMinikubeStop",
+      "milestone": "M7",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M7-F7",
+        "M7-F9"
+      ],
+      "task": "Phase 4：接通 Start/Stop/Status minikube 的实际执行、结果和树刷新，准确限制上游适用节点。",
+      "dependencies": [
+        "Minikube实际工具/profile/context原目标绑定",
+        "明确用户生命周期授权/G4与真实状态账本",
+        "未知结果及环境停止/业务清理独立门禁"
+      ],
+      "verification": "static-only-human-minikube-stop-lifecycle",
+      "sources": [
+        "src/extension.ts#L221-L221",
+        "src/components/clusterprovider/minikube/minikube.ts#L212-L277"
+      ],
+      "cases": {
+        "NORMAL": "当前状态后实际stop非delete，未运行警告；不自动删卷/集群或照搬无target profile",
+        "CANCEL": "用户取消未提交步骤不启动，原已提交操作继续归账不当撤销",
+        "FAILURE_UNKNOWN": "失败/断连/退出未知不报已停止或重放，不结束他人会话",
+        "ENVIRONMENT": "不能借Compose stop/adapter退出代跑Minikube stop，空ps/旧状态不证明无人窗口"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E074",
+        "scope": "minikube stop服务器执行已接（M7-E074）：G4链单次调用"
+      }
+    },
+    {
+      "entry": "extension.vsMinikubeStatus",
+      "commandId": "extension.vsMinikubeStatus",
+      "milestone": "M7",
+      "evidence": "M1-E056",
+      "requirements": [
+        "M7-F7",
+        "M7-F9"
+      ],
+      "task": "Phase 4：接通 Start/Stop/Status minikube 的实际执行、结果和树刷新，准确限制上游适用节点。",
+      "dependencies": [
+        "Minikube版本/状态格式及命令/cache副作用独立审查",
+        "原Server工具/profile/context身份和有界只读输出",
+        "禁止自动start/stop/update/install，实际运行仅人工"
+      ],
+      "verification": "auth-cache-review-before-human-minikube-status",
+      "sources": [
+        "src/extension.ts#L223-L229",
+        "src/components/clusterprovider/minikube/minikube.ts#L240-L277",
+        "src/binutil.ts#L82-L113"
+      ],
+      "cases": {
+        "NORMAL": "Silent工具发现后真实status有界输出，不将非stopped都等同健康或用旧host行格式冒充正式矩阵",
+        "FAILURE": "工具缺失/非零/格式/权限失败明确，原错误不透传，不顺便安装/升级/start",
+        "STALE": "绑定原Server profile/context，目标变化拒迟到，不复用全局状态栏作新目标成功",
+        "SAFETY": "status名称不等于无cache/认证副作用，未审CLI前不自动运行，不用结果授权环境stop/recreate"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E074",
+        "scope": "minikube status只读CLI探测已接（M7-E074）：--output=json，无自动安装"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesTerminal",
+      "commandId": "extension.vsKubernetesTerminal",
+      "milestone": "M5",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M5-F1",
+        "M5-F3",
+        "M5-F7"
+      ],
+      "task": "Phase 2：接通 Pod/命令选择、container 选择和 shell 提示；shell 探测属于显式 Terminal 启动流程，不在浏览时执行。",
+      "dependencies": [
+        "M1官方PTY/实际运行时ABI与可信owner通路",
+        "M2原Pod UID/container/配置与完整namespace",
+        "M5有界交互/lease/进程归属，不借只读日志sink"
+      ],
+      "verification": "static-only-human-session-operation",
+      "sources": [
+        "src/extension.ts#L1444-L1504",
+        "src/extension.ts#L1233-L1268",
+        "src/extension.ts#L1353-L1438",
+        "src/utils/container-shell.ts#L4-L16",
+        "src/kubectl.ts#L420-L431"
+      ],
+      "cases": {
+        "TREE": "Pod节点先选容器再显式Exec探测/bin/bash，bash失败建议sh，再建真实-it PTY；不是只读日志Terminal",
+        "PICKER_CANCEL": "无节点先提示命令默认bash，再app Pod/回落当前namespace所有Pod与容器选择；任一步取消不启动后续",
+        "FAILURE": "缺shell/容器退出/权限拒绝反馈，不自动重发命令或安装工具",
+        "STALE_UNKNOWN": "原UID/container/namespace或owner失效拒控制，不连同名新Pod；本地停止不声称远端程序撤销"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M5-E006",
+        "scope": "2026-11-17修正：明确Pod/真实container、交互xterm/有界串行输入/显式resize、内存画面恢复和原会话结果已接代码；容器纯模型/源码检查通过，真实PTY/交互/平台未验。见action-chain-audit.md与当前候选"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesExec",
+      "commandId": "extension.vsKubernetesExec",
+      "milestone": "M5",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M5-F2",
+        "M5-F3",
+        "M5-F7"
+      ],
+      "task": "Phase 2：实现非交互 Exec 的容器命令/参数、stdout/stderr、结果未知和用户停止流程。",
+      "dependencies": [
+        "可信owner/会话目标与期限",
+        "原Pod UID/container/namespace重核",
+        "固定本地kubectl参数数组与明确容器命令语法"
+      ],
+      "verification": "static-only-human-session-operation",
+      "sources": [
+        "src/extension.ts#L1440-L1491",
+        "src/extension.ts#L882-L913",
+        "src/extension.ts#L1233-L1268",
+        "src/extension.ts#L1353-L1438",
+        "src/kubectl.ts#L407-L417"
+      ],
+      "cases": {
+        "NORMAL": "先输入命令再app Pod/当前namespace回落/容器，非-it Exec分别反馈stdout/stderr/退出；不运行Server shell",
+        "CANCEL": "空命令/Pod或容器取消不执行，不先探测shell",
+        "NAMESPACE": "修正上游非交互命令遗漏namespace，以原Pod namespace绑定，不跟当前全局目标",
+        "UNKNOWN": "超时断连不重放，原远端结果未知独立于本地进程退出，不把共享终端显示当成功"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M5-E006",
+        "scope": "2026-11-17修正：独立argv编码、容量预留先于Exec、快速结束与尾输出原结果交付、未知阻重试；源码已接，真实Exec未执行。见action-chain-audit.md"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesPortForward",
+      "commandId": "extension.vsKubernetesPortForward",
+      "milestone": "M5",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M5-F4",
+        "M5-F5",
+        "M5-F6",
+        "M5-F7"
+      ],
+      "task": "Phase 3：实现 Pod/Service/Deployment 的端口选择、Server 侧监听/进程启动、就绪与端口占用处理，明确远程 Server 本地端口不在客户端笔记本。",
+      "dependencies": [
+        "G4/可信owner/会话代次与目标联合",
+        "原Pod或Service/Deployment及实际后端UID/端口解析契约",
+        "B-01官方远程鉴权访问通路",
+        "loopback就绪与有界进程/端口预算"
+      ],
+      "verification": "static-only-human-session-operation",
+      "sources": [
+        "src/extension.ts#L232-L232",
+        "src/components/kubectl/port-forward.ts#L58-L226",
+        "src/components/kubectl/port-forward.ts#L235-L363",
+        "src/components/kubectl/port-forward.ts#L369-L449"
+      ],
+      "cases": {
+        "TARGET": "树Pod/Service/Deployment保原身份；无节点仅Pod文档否则当前namespace Pod picker，不泛化其他菜单",
+        "PORTS": "单或多LOCAL:REMOTE、仅REMOTE、:REMOTE与0:REMOTE自动Server端口；具名建议按已读端口解析，歧义/重复固定端口拒绝",
+        "CANCEL_FAILURE": "取消/非法端口无启动，监听冲突/后端消失/启动失败明确；ready前不宣称转发成功",
+        "STALE_REMOTE": "入口和实际Pod后端双显，父或后端世代变不迁移；仅Server loopback，不把远程localhost说成客户端可达"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M5-E006",
+        "scope": "2026-11-17修正：原Service/Deployment与backend端口、监听就绪/占用、每个明确TCP连接独立v4流、两字节端口首帧与owned清理；源码/纯值已核，真实转发未验。见action-chain-audit.md"
+      }
+    },
+    {
+      "entry": "kubernetes.portForwarding.showSessions",
+      "commandId": "kubernetes.portForwarding.showSessions",
+      "milestone": "M5",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M5-F5",
+        "M5-F7"
+      ],
+      "task": "Phase 3：实现转发会话列表、状态查看、目标展示和停止，接通基线入口。",
+      "dependencies": [
+        "可信会话registry/授权管理视图与原目标",
+        "全部自有Forward显式注册/结束移除",
+        "幂等owned停止和未知结果/业务清理分离"
+      ],
+      "verification": "static-only-human-session-operation",
+      "sources": [
+        "src/extension.ts#L239-L239",
+        "src/components/kubectl/port-forward-ui.ts#L5-L90",
+        "src/api/implementation/kubectl/v1.ts#L21-L77"
+      ],
+      "cases": {
+        "NORMAL": "列表显示原入口/实际后端和Server监听，选定后独立Stop Forwarding确认才停止所属会话",
+        "CANCEL": "列表/警告关闭不停止；无会话明确空状态，不自动清理",
+        "OWNERSHIP": "同名跨context/设备不碰撞，不凭猜session ID接管stdin或续租；管理停止重新授权",
+        "REGISTRATION_FAILURE": "不照搬普通树Forward未注册/API退出后残项，失败或未知不显示ready，不停他人进程"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M5-E006",
+        "scope": "会话列表已接（M5-E006）：注册表list+事件历史"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDashboard",
+      "commandId": "extension.vsKubernetesDashboard",
+      "milestone": "M5",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M5-F6",
+        "M5-F7",
+        "M5-F8"
+      ],
+      "task": "Phase 3：按 M1 核实的路径实现 Open Dashboard 所需 proxy/进程和打开行为，不自动安装集群组件。",
+      "dependencies": [
+        "原context与类型化proxy/Pod会话",
+        "实际Dashboard发现/存在与就绪",
+        "B-01官方鉴权远程访问，不返回虚假localhost",
+        "可信owner/有限输出与owned关闭"
+      ],
+      "verification": "static-only-human-session-operation",
+      "sources": [
+        "src/extension.ts#L218-L218",
+        "src/components/kubectl/dashboard.ts#L14-L189",
+        "src/components/kubectl/port-forward.ts#L399-L449"
+      ],
+      "cases": {
+        "PROXY": "普通路径显式启动原context proxy后确认就绪再提供可达入口，proxy无虚构Pod/container",
+        "AKS": "区分源码AKS启发式和kube-system Dashboard Pod路径，完整核Pod UID/端口/scheme，不猜空列表首项",
+        "MISSING_FAILURE": "Dashboard缺失/proxy绑定失败反馈，不安装Dashboard，不用固定2.5秒代替ready",
+        "STALE_REMOTE": "目标变化不复用全局terminal或其他context地址，不写包内proxy.out/tee日志，不假称Server localhost在客户端可达"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M5-E006",
+        "scope": "2026-11-17纠正：仅既有转发的有界单次代理预览；Dashboard发现、proxy启动与打开链仍缺实现。不能标Dashboard已接或归为仅待人工。见action-chain-audit.md"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDebug",
+      "commandId": "extension.vsKubernetesDebug",
+      "milestone": "M7",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M7-F1",
+        "M7-F3",
+        "M7-F4",
+        "M7-F9"
+      ],
+      "task": "Phase 3：接通 Launch 的构建/推送、debug 工作负载创建、就绪等待、端口连接和实际调试器启动。",
+      "dependencies": [
+        "Server工作区/镜像构建推送边界与G4逐步归账",
+        "M5可信会话/PTY或adapter/Forward与B-01",
+        "五语言和legacy adapter实际发行/许可/ABI/加载",
+        "原资源UID与用户启用的有限清理"
+      ],
+      "verification": "static-only-human-debug-operation",
+      "sources": [
+        "src/extension.ts#L1800-L1821",
+        "src/extension.ts#L1007-L1042",
+        "src/extension.ts#L1852-L1956",
+        "src/debug/providerRegistry.ts#L11-L76",
+        "src/debug/debugSession.ts#L56-L138",
+        "src/debug/debugSession.ts#L296-L500",
+        "src/kubectlUtils.ts#L404-L475",
+        "src/hostutils.ts#L3-L11"
+      ],
+      "cases": {
+        "NORMAL": "工作区/语言后构建推送/创建debug workload/就绪/Forward/真实adapter，不能仅生成launch配置",
+        "LEGACY": "legacy node仍可达，显式debug命令及后续可选Expose是独立写步骤，失败未知阻依赖不改成Attach",
+        "CANCEL_PARTIAL": "前置选择取消不启动后续；构建推送或创建后取消不冒充回滚，逐步骤保结果与待业务清理",
+        "CLEANUP": "用户明确选择/启用才删本次原UID资源；服务退出未知不自动清空，不借Compose停止触发删除"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E074",
+        "scope": "2026-11-17纠正：Debug安全阻断DEBUG_ADAPTER_REQUIRED；缺少真实语言adapter与Launch构建/部署/控制归账，不是已完成。见action-chain-audit.md"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDebugAttach",
+      "commandId": "extension.vsKubernetesDebugAttach",
+      "milestone": "M7",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M7-F1",
+        "M7-F2",
+        "M7-F4",
+        "M7-F9"
+      ],
+      "task": "Phase 2：实现项目、Pod/container、进程、环境、调试参数和 local/remote path 选择，明确应用/adapter 与 local path 均在 Server。",
+      "dependencies": [
+        "M5原Pod UID/container/namespace与可信owner",
+        "五语言provider/实际adapter独立运行时与路径",
+        "显式Exec进程探测/Node信号副作用和G4",
+        "M5 Forward/实际调试控制与B-01"
+      ],
+      "verification": "static-only-human-debug-operation",
+      "sources": [
+        "src/extension.ts#L1823-L1828",
+        "src/debug/debugSession.ts#L146-L294",
+        "src/debug/debugSession.ts#L337-L500",
+        "src/debug/debugUtils.ts#L61-L91",
+        "src/debug/nodejsDebugProvider.ts#L68-L119",
+        "src/debug/dotNetDebugProvider.ts#L35-L85",
+        "src/debug/pythonDebugProvider.ts#L36-L103",
+        "src/debug/goDebugProvider.ts#L34-L119",
+        "src/debug/javaDebugProvider.ts#L38-L129"
+      ],
+      "cases": {
+        "NORMAL": "选Server工作区/Pod/普通容器后探进程/语言/端口与路径，真正adapter断点栈变量控制，不仅Forward",
+        "SIDE_EFFECT": "Node Attach可Exec kill -s USR1 1，其他进程/shell/readlink探测也非自动只读，不静默安装VS Code扩展",
+        "CANCEL_FAILURE": "任一步取消不启下一步，语言缺依赖/不支持/DAP启动失败独立反馈；已发生信号不能声称撤销",
+        "IDENTITY": "namespace/container传到最终adapter，修正.NET遗漏与name匹配清理；失效不附同名新Pod，不跨视图接管"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E074",
+        "scope": "2026-11-17纠正：Node Inspector 9229是CDP，不是DAP；真实语言adapter/握手/附着仍缺，实现安全阻断而非伪连接成功。原owner/配置控制已加固，真实调试未运行。见action-chain-audit.md"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesRemoveDebug",
+      "commandId": "extension.vsKubernetesRemoveDebug",
+      "milestone": "M7",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M7-F3",
+        "M7-F9"
+      ],
+      "task": "Phase 3：实现 Remove Debug 与用户启用的清理设置，记录本次资源身份和部分成功，限制删除范围。",
+      "dependencies": [
+        "M4 G4-submit原目标UID/期限/逐步骤归账",
+        "Server工作区命名与本次资源所有权",
+        "M7 debug资源账本/待业务清理，不靠名字判owned"
+      ],
+      "verification": "static-only-human-debug-cleanup-operation",
+      "sources": [
+        "src/extension.ts#L928-L949",
+        "src/extension.ts#L1958-L2000",
+        "src/debug/debugSession.ts#L371-L395"
+      ],
+      "cases": {
+        "NORMAL": "显式Delete才清所确认的本次debug Deployment/Service，非通用删除所有-debug资源",
+        "CANCEL_EMPTY": "无资源明确nothing；警告关闭不删，读取失败不冒充不存在",
+        "PARTIAL_UNKNOWN": "每个删除独立结果/依赖，失败未知不串行落穿或重放，不报全成功",
+        "SCOPE": "legacy固定名与provider时间戳名不同，不能按工作区名字误删他人资源；Compose/adapter退出不得自动代跑"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E074",
+        "scope": "2026-11-17纠正：原owner控制检查已接，关闭旧桥/转发不等于真实RemoveDebug业务清理；实际adapter/Launch/资源归属清理仍缺。见action-chain-audit.md"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesSelectPod",
+      "commandId": "extension.vsKubernetesSelectPod",
+      "milestone": "M7",
+      "evidence": "M1-E054",
+      "requirements": [
+        "M7-F2",
+        "M7-F9"
+      ],
+      "task": "Phase 2：实现项目、Pod/container、进程、环境、调试参数和 local/remote path 选择，明确应用/adapter 与 local path 均在 Server。",
+      "dependencies": [
+        "M2当前namespace身份与认证审查",
+        "M7引用的Pod选择结果重绑原UID/namespace",
+        "有界JSON元数据而非只凭name继续执行"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L207-L207",
+        "src/extension.ts#L1830-L1850"
+      ],
+      "cases": {
+        "NORMAL": "当前namespace Pod列表显示name/nodeName并返回选择，不启动Exec/Debug/Forward",
+        "CANCEL_EMPTY": "picker取消/空列表无后续；读取失败可辨而非伪装无Pod",
+        "STALE": "新项目/context/同名重建后旧选择不可用于会话，执行前重核原身份",
+        "PRIVACY": "仅必要选择元数据，不返回凭证/完整Pod spec或默认持久化选择历史"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M7-E074",
+        "scope": "SelectPod已接（M7-E074）：既有pods读取name/nodeName纯投影"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesRefreshHelmRepoExplorer",
+      "commandId": "extension.vsKubernetesRefreshHelmRepoExplorer",
+      "milestone": "M6",
+      "evidence": "M1-E050",
+      "requirements": [
+        "M6-F2",
+        "M6-F7",
+        "M6-F8"
+      ],
+      "task": "Phase 2：接通用户触发 Refresh、失败提示与新索引刷新树，不修改用户仓库配置。",
+      "dependencies": [
+        "M1 Helm版本/下载插件/来源审查",
+        "G4-submit目标确认/去重/未知归账",
+        "插件隔离缓存与来源清单，不复用用户cache写目标"
+      ],
+      "verification": "static-only-human-cache-operation",
+      "sources": [
+        "src/extension.ts#L211-L211",
+        "src/helm.repoExplorer.ts#L62-L66",
+        "src/helm.repoExplorer.ts#L90-L93"
+      ],
+      "cases": {
+        "NORMAL": "明确Refresh才更新所确认仓库的插件隔离索引缓存并刷新树，不改用户repositories.yaml",
+        "FAILURE": "下载/认证/插件失败保原失败状态，不无条件当刷新成功或自动重试",
+        "CANCEL_UNKNOWN": "取消/超时保已写缓存与未知结果，不回滚或清理用户缓存，也不重放来源",
+        "STARTUP": "展开/配置变化/恢复偏好只读已有数据，缺索引明确提示，不照搬上游配置change自动repo update"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E037",
+        "scope": "用户显式刷新：单次 helm repo update，用户 repositories.yaml 仅经 --repository-config 只读，下载只写入插件隔离缓存（服务home下 .openchamber-kubernetes/helm-cache/<原名镜像>）；非零退出保已写缓存不回滚/重放，固定失败码（HELM_INDEX_MISSING等），单并发无队列；成功仅使仓库视图失效由下次读取拾取，绝不改用户配置/真实缓存；展开/配置变化/偏好恢复绝不自动触发。链为写式（写插件自有缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesLoad",
+      "commandId": "extension.vsKubernetesLoad",
+      "milestone": "M3",
+      "requirements": [
+        "M3-F1"
+      ],
+      "task": "Phase 1：实现 Load、Get、Describe、Refresh、Cluster Info 和 Explain 的只读查询及独立输出模型。",
+      "dependencies": [
+        "M2配置/认证与GVR读取",
+        "M2有界传输及代次",
+        "M4编辑文档交接另项"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L754-L774",
+        "src/kuberesources.virtualfs.ts#L19-L26",
+        "src/kuberesources.virtualfs.ts#L69-L105"
+      ],
+      "cases": {
+        "NORMAL": "树namespace/name或命令picker的单资源/全部以YAML/JSON打开",
+        "CANCEL": "自由输入取消不打开；空输入进入picker而非取消",
+        "FAILURE": "缺CLI/认证拒绝/资源消失显示失败，不返回空成功",
+        "STALE": "切配置或同名重建后拒绝旧文档响应"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E023",
+        "scope": "原内置Load/文档流纯分析/分块/词法/dirty保持；CRD实例显式YAML/JSON Load每块原CRD UID/RV/精确served GVR与discovery前后proof、≤5GET/8MB、原finite2池，custom-document用途严格绑定引用/路径且worker再核。原lossless/60秒HMAC游标与client definition身份/冻结缓冲；Get/Describe另经E024明确inspection审查接通，Delete/Explain/generic verifyReference仍内置白名单。分类all/picker/完整树/其他文件与Save/Apply/Diff/G4/真实平台仍缺，无真实SDK/CLI/集群或写链运行"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesGet",
+      "commandId": "extension.vsKubernetesGet",
+      "milestone": "M3",
+      "requirements": [
+        "M3-F1"
+      ],
+      "task": "Phase 1：实现 Load、Get、Describe、Refresh、Cluster Info 和 Explain 的只读查询及独立输出模型。",
+      "dependencies": [
+        "M2配置/认证与完整GVR",
+        "M2有限输出与身份",
+        "M3只读输出模型，不借M5 Exec"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L796-L815",
+        "src/kubectl.ts#L127-L164"
+      ],
+      "cases": {
+        "NORMAL": "资源/分类输出get -o wide，不变成Load YAML文档",
+        "CANCEL": "编辑器识别失败后的picker取消不发起查询",
+        "FAILURE": "只读输出失败可辨识，不能沿用共享终端旧文本当成功",
+        "STALE": "namespace/项目变化后的旧wide输出不覆盖新目标"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E024",
+        "scope": "内置真实Get wide保持，新增具名CRD实例显式Get：原CRD/精确served GVR/discovery/实例→独立custom-wide真printer→实例/CRD/discovery前后核对，单TYPE/NAME/cache哨兵/原finite2池/≤7响应12MB。续块≤5GET8MB proof后读原16份4MiB60秒snapshot不重跑AGE，显式Refresh只采同UID新RV且definition不变；client原身份/有界文本/目标失效已接。分类/all/picker/最终树、内部HTTP/heap与正式平台仍缺，Delete/Explain/写/Watch不扩"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDescribe",
+      "commandId": "extension.vsKubernetesDescribe",
+      "milestone": "M3",
+      "requirements": [
+        "M3-F1"
+      ],
+      "task": "Phase 1：实现 Load、Get、Describe、Refresh、Cluster Info 和 Explain 的只读查询及独立输出模型。",
+      "dependencies": [
+        "M2发现/认证与资源身份",
+        "M3只读文档输出"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L1285-L1319",
+        "src/kuberesources.virtualfs.ts#L100-L115"
+      ],
+      "cases": {
+        "NORMAL": "树资源与minimal/完整命令picker都生成只读Describe而非可写Load",
+        "CANCEL": "发现失败/用户取消不打开文档",
+        "FAILURE": "描述权限失败保留错误分类",
+        "STALE": "目标变化丢弃旧Describe正文"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E024",
+        "scope": "内置Describe保持，新增具名CRD实例真实Describe含Events与单TYPE/NAME禁前缀回落；原CRD/served GVR/discovery与实例前后proof、custom-describe严格引用/path/namespace/worker再核、原cache哨兵/finite2/≤7响应12MB，续块≤5GET8MB只读原snapshot不重跑。独立纯文本无编辑/PTY/写；分类/all/picker/最终树、相关内部HTTP/heap/正式平台仍缺，CRD Delete/Explain/写/Watch不扩"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDescribe.Refresh",
+      "commandId": "extension.vsKubernetesDescribe.Refresh",
+      "milestone": "M3",
+      "requirements": [
+        "M3-F1"
+      ],
+      "task": "Phase 1：实现 Load、Get、Describe、Refresh、Cluster Info 和 Explain 的只读查询及独立输出模型。",
+      "dependencies": [
+        "M3 Describe已绑定的文档/资源",
+        "M2代次及取消"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L1321-L1335"
+      ],
+      "cases": {
+        "NORMAL": "只替换Describe显示缓冲，无远端Apply",
+        "NOT_APPLICABLE": "无活动Describe时无操作",
+        "FAILURE": "读取失败不清空旧显示，标注过期",
+        "STALE": "旧刷新返回时不得替换新文档"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E024",
+        "scope": "原内置Refresh保持，CRD Describe显式Refresh仅捕获原同UID实例新RV、definition UID/RV/精确served GVR保持；原配置/实例/CRD/discovery前后proof与实际printer，flag-free新source/cursor绑定捕获RV且续块不重跑，client definition比较/失败保旧stale/禁续块。不同UID/定义/版本/历史目标不采用，不改Load/dirty或写确认；完整树导航/内部HTTP-heap/正式认证两平台仍未验"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesLoadConfigMapData",
+      "commandId": "extension.vsKubernetesLoadConfigMapData",
+      "milestone": "M3",
+      "requirements": [
+        "M3-F2"
+      ],
+      "task": "Phase 1：接通 ConfigMap/Secret 键内容与解码，处理文本、二进制、空内容和缺失键，不增加确认弹窗。",
+      "dependencies": [
+        "M2身份/键名白名单",
+        "M3专用有界内容通路",
+        "认证/权限审查"
+      ],
+      "verification": "auth-cache-review-before-human-secret-read",
+      "sources": [
+        "src/configMap.ts#L16-L47"
+      ],
+      "cases": {
+        "NORMAL": "ConfigMap文本/Secret base64直接查看，不加Secret确认",
+        "EMPTY_BINARY": "空键、二进制和缺失键区分",
+        "FAILURE": "拒绝/解码失败不在错误或URL中泄露正文",
+        "STALE": "同名重建/键变化后的旧选择失效"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E001",
+        "scope": "专用键GET/解码/分块/SDK与诊断键按钮已接；完整DOM树单击入口、编辑交接和真实平台运行未完成，不代表完整菜单或命令已验收"
+      }
+    },
+    {
+      "entry": "editor.k8s-resource.save",
+      "commandId": null,
+      "milestone": "M4",
+      "requirements": [
+        "M4-F1"
+      ],
+      "task": "Phase 1：通过官方 2.5.1 公开能力/插件 service 接通 Server OS 身份下的工作区文件选择、保存/覆盖确认，保持 Save 不隐式 Apply，防止路径/符号链接逃逸。",
+      "dependencies": [
+        "M3完整Load/独立file buffer",
+        "M4-E020独立G4-file意图/grant/确认/原版本与成功receipt",
+        "M4-E021原来源比较proof/保dirty显式重绑定/范围内文件选择/独立SaveAs草稿；read scope不授权写，B-01/正式平台与完整编辑器仍待"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/kuberesources.virtualfs.ts#L119-L134"
+      ],
+      "cases": {
+        "NORMAL": "编辑资源Save写所选Server工作区，集群保持不变",
+        "CANCEL": "目录/覆盖取消不写且保留dirty",
+        "FAILURE": "权限/符号链接逃逸拒绝不写其他目录",
+        "UNKNOWN": "文件提交后响应丢失按原路径归账，不自动再写"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E020",
+        "scope": "完整live/file快照→独立grant/分块/限时确认→共享锁/真实link或乐观rename→原归账/精确ack已接；E021另接原24h比较proof/保dirty显式新范围/目录文件选择/冲突草稿仅独立SaveAs，原位置在receipt前拒绝。允许独立只读/文本静态检查通过，所有写链运行未验，成功Save后旧proof不匹配、完整编辑器快捷键/真实两平台远程/ACL-xattrs外部CAS与持久归账仍缺，不代表完整F1或一期验收"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDelete",
+      "commandId": "extension.vsKubernetesDelete",
+      "milestone": "M4",
+      "requirements": [
+        "M4-F2",
+        "M4-F8",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Create、Apply、文件 Create/Apply/Delete 和普通 Delete 的真实服务执行及结果处理；Namespace删除另依赖G4-config。",
+      "dependencies": [
+        "M4 G4-submit",
+        "M4 G4-config（Namespace）",
+        "M2身份重新核对"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L1540-L1621"
+      ],
+      "cases": {
+        "NORMAL": "树Delete确认；裸kind --all范围明确",
+        "CANCEL": "default/内容未知/资源数量任一警告取消不进入后续步骤",
+        "PARTIAL_UNKNOWN": "切namespace成功而delete失败或未知分别归账；切换未知阻断delete",
+        "STALE": "配置/UID/RV或确认过期、重复提交拒绝误操作"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E010",
+        "scope": "单个稳定内置Delete与Namespace风险/有界内容/原UID-RV已接；Namespace删除支持default/file/有序merge，全来源预览，当前namespace按origin切default、stage hook、实际writer版本/预期内容/其他来源复核再重绑目标与原Namespace后才DELETE；非当前不写配置、已default无stage，部分成功原结果不回滚。仍无完整wait/刷新/bulk/CRD/文件/完整菜单或两平台运行证据"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDeleteNow",
+      "commandId": "extension.vsKubernetesDeleteNow",
+      "milestone": "M4",
+      "requirements": [
+        "M4-F2",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Pod Delete Now 的 --now 语义，核对确认与适用节点，不替换成强制删除。",
+      "dependencies": [
+        "M4 G4-submit",
+        "M2 Pod UID/namespace身份"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L186-L187",
+        "src/extension.ts#L1547-L1584"
+      ],
+      "cases": {
+        "NORMAL": "仅Pod菜单发出--now，不追加--force",
+        "CANCEL": "Delete确认取消无提交",
+        "FAILURE_UNKNOWN": "失败/超时/断连维持不同结果，不盲目重试",
+        "STALE": "同名Pod重建或确认过期拒绝旧提交"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E002",
+        "scope": "Pod单对象now映射gracePeriodSeconds=1、不force；与普通单步删除同view/确认/UID-RV/专用worker/原结果，accepted非已消失；完整wait/失效刷新/树菜单与真实平台未验"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesSync",
+      "commandId": "extension.vsKubernetesSync",
+      "milestone": "M4",
+      "requirements": [
+        "M4-F5",
+        "M4-F9"
+      ],
+      "task": "Phase 3：按源码实现 Sync 的容器/image tag → Git commit 识别、提示与确认 checkout 流程，保护未提交内容，不转译成集群同步。",
+      "dependencies": [
+        "M4 G4-submit",
+        "M2 Pod/container身份",
+        "Server工作区Git路径/兼容"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L907-L913",
+        "src/extension.ts#L1353-L1382",
+        "src/extension.ts#L1506-L1538",
+        "src/components/git/git.ts#L13-L27"
+      ],
+      "cases": {
+        "NORMAL": "匹配App Pod及容器tag后明确OK才Git checkout，集群不写",
+        "CANCEL": "无匹配Pod/选择取消/关闭OK提示不checkout",
+        "FAILURE": "镜像tag格式/不存在commit/未提交变更冲突清晰反馈，不force/reset",
+        "UNKNOWN": "切项目或响应丢失不将checkout归到新工作区，不自动重放"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E029",
+        "scope": "Sync服务器执行已接（M4-E029）：只读git log探测→单次git checkout"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesAddFile",
+      "commandId": "extension.vsKubernetesAddFile",
+      "milestone": "M4",
+      "requirements": [
+        "M4-F6",
+        "M4-F9"
+      ],
+      "task": "Phase 3：接通 Add File(s) 的服务器文件读取、文本/base64 编码、多文件等待和逐键覆盖决定。",
+      "dependencies": [
+        "M4 G4-submit",
+        "M2原namespace/UID/RV",
+        "Server文件边界"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/configMap.ts#L85-L127"
+      ],
+      "cases": {
+        "NORMAL": "多文件basename键/文本或base64编码；等待全部决定后replace",
+        "CANCEL": "dialog取消无写；逐键覆盖拒绝不影响其他明确接受的键",
+        "EMPTY_CONFLICT": "已存在空字符串键也须覆盖决定；RV冲突不覆盖新数据",
+        "PARTIAL_UNKNOWN": "replace失败/未知不伪报全部成功或自动重试"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E032",
+        "scope": "仅core/v1 ConfigMap/Secret行+每次恰一个Server工作区文件（原读取proof独立capture，拒Save receipt，不读dirty编辑器）：文件核验+原对象UID/RV证明+固定60秒确认（即上游逐键覆盖决定，UI明示可能覆盖恰该键）；确认后GET钉住原对象，按上游编码语义（ConfigMap文本/Secret标准base64）设置该键后的完整对象单次PUT replace（RV门禁），其他键/binaryData保留；文件漂移/父对象重建/409冲突固定失败不重试，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。上游多文件dialog/逐键分别提示/F6父项/完整G4/正式平台仍缺，真实或mock写链均未运行"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDeleteFile",
+      "commandId": "extension.vsKubernetesDeleteFile",
+      "milestone": "M4",
+      "requirements": [
+        "M4-F6",
+        "M4-F9"
+      ],
+      "task": "Phase 3：接通 Delete File 及配置数据更新，保留其他键与身份版本，正确展示不可变字段或冲突错误。",
+      "dependencies": [
+        "M4 G4-submit",
+        "M2原namespace/UID/RV与键身份"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/configMap.ts#L50-L83"
+      ],
+      "cases": {
+        "NORMAL": "只删除目标data键，保留其他键，不删父资源或工作区文件",
+        "CANCEL": "取消Delete确认不GET/replace",
+        "FAILURE": "键已消失/不可变/RV冲突明确，不切到当前namespace其他同名对象",
+        "UNKNOWN": "replace结果丢失按原对象/操作归账，不自动再次提交"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E031",
+        "scope": "仅core/v1 ConfigMap/Secret行：原UID/RV证明+固定60秒确认+恰一个可打印basename键；确认后GET钉住原对象，按上游removeKey语义仅删目标data键（其他键/binaryData原样保留），单次完整PUT replace携带钉住RV作乐观并发门禁；键缺失/不可变/409冲突/无权限固定失败不重试，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。Add File(s)/多键/工作区文件删除/最终树菜单/完整G4/正式平台仍缺，真实或mock写链均未运行"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesLogs",
+      "commandId": "extension.vsKubernetesLogs",
+      "milestone": "M3",
+      "evidence": "M1-E012",
+      "requirements": [
+        "M3-F3",
+        "M3-F4",
+        "M3-F7",
+        "M3-F8"
+      ],
+      "task": "Phase 2：实现 Pod/Job 对应选择流程、容器列表、日志参数及默认值映射，确保每条输出有明确来源。",
+      "dependencies": [
+        "M2配置/认证与Pod或Job完整身份",
+        "M3有界只读任务/分块/消费者取消",
+        "M3到M5只读输出DTO，不创建PTY"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/components/kubectl/logs.ts#L23-L219",
+        "src/utils/containercontainer.ts#L18-L41",
+        "src/extension.ts#L1385-L1438",
+        "src/components/logs/logsWebview.ts#L21-L139",
+        "src/components/logs/app/main.js#L296-L339",
+        "src/components/logs/app/main.js#L561-L595",
+        "src/components/logs/app/main.js#L647-L708",
+        "src/components/config/config.ts#L373-L423"
+      ],
+      "cases": {
+        "NORMAL": "Pod/Job及活动Pod文档/当前namespace picker，单容器直接绑定、多容器含init选择",
+        "OPTIONS": "默认不autorun/follow；since非正无时间过滤、tail非正全量但有传输限额，Terminal仅只读输出",
+        "CANCEL": "picker取消无查询；Stop只终止所属读任务，Clear显示与Stop订阅分开",
+        "FAILURE_STALE": "容器消失/认证失败/Pod同名重建/切context明确报错或拒旧，不能复用跨集群面板"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E017",
+        "scope": "原有限Pod/Job实际来源、默认等待/Follow/viewer/标量偏好/一次autorun决策与M3→M5只读Terminal DTO/背压已接；新增s/m/h时长picker/乘后有界整数秒与精确恢复、Webview白名单SGR安全typed styles/可见文字过滤Find分页保色、明确关闭颜色看原转义文本，不输入HTML或终端控制/保存样式。Save/真实xterm/DOM/SDK/autorun执行器未运行，旧包同候选回归；完整regex/schemaColors/非白名单ANSI/连续滚动/最终树/正式矩阵/内部heap仍缺"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesShowEvents",
+      "commandId": "extension.vsKubernetesShowEvents",
+      "milestone": "M3",
+      "evidence": "M1-E012",
+      "requirements": [
+        "M3-F5",
+        "M3-F8"
+      ],
+      "task": "Phase 3：实现 Show Events / Follow Events 的 namespace 绑定、版本兼容、排序和重复计数。",
+      "dependencies": [
+        "M2 namespace/配置身份和认证审查",
+        "M3有界只读输出，不借用M5执行会话"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L236-L237",
+        "src/components/kubectl/events.ts#L11-L28"
+      ],
+      "cases": {
+        "NORMAL": "namespace节点name或当前namespace输出get events，非对象involvedObject过滤",
+        "FAILURE": "namespace消失/403/认证拒绝保持失败，不能展示旧终端输出为成功",
+        "STALE": "配置/namespace变化后丢弃旧响应，其他资源name不能冒充namespace"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E018",
+        "scope": "原Namespace诊断/current有限事件页、UID-RV/series与legacy时间计数已接；新增core-v1首collection404才单次events.k8s.io/v1选择、严格版本专属字段投影、sealed cursor/client续页API与实际UI来源绑定。非404/Namespace404/JSON错误/继续页不回退，明确Refresh才重选。更多历史API/通用discovery/最终树菜单/事件Terminal/正式认证平台与内部heap仍缺，所有真实运行未验"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesFollowEvents",
+      "commandId": "extension.vsKubernetesFollowEvents",
+      "milestone": "M3",
+      "evidence": "M1-E012",
+      "requirements": [
+        "M3-F5",
+        "M3-F8"
+      ],
+      "task": "Phase 3：实现 Show Events / Follow Events 的 namespace 绑定、版本兼容、排序和重复计数。",
+      "dependencies": [
+        "M2 namespace/配置身份和认证审查",
+        "M3有界观察任务与取消/lease/旧句柄拒绝"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L236-L237",
+        "src/components/kubectl/events.ts#L11-L28"
+      ],
+      "cases": {
+        "NORMAL": "同Show的namespace执行get events -w持续输出，不调用Exec",
+        "CANCEL": "停止只释放所属事件读任务，不清理集群或其他消费者",
+        "FAILURE_STALE": "断连/403/服务重启/切目标终止旧代投递，错误不伪装空事件"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E022",
+        "scope": "原Namespace UID/事件API/有限初始list/真实watch与公共读预算保持；新增必需single-410-relist、初始RESYNC及首watch410等旧transport settle后250ms退避/原Namespace同API完整20页重同步/新List RV续watch。RELISTING清旧UID-name行/未完成快照/持久历史缺口、计数替换，第二410或List/核对/其他错误不重试，不重置原期限/8MB/256有限GET/4096含marker/10watch预算。一般网络恢复/其他历史API/最终树/事件Terminal/内部heap/正式认证两平台仍缺，真实运行全空"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesExplain",
+      "commandId": "extension.vsKubernetesExplain",
+      "milestone": "M3",
+      "evidence": "M1-E012",
+      "requirements": [
+        "M3-F1",
+        "M3-F8"
+      ],
+      "task": "Phase 1：实现 Load、Get、Describe、Refresh、Cluster Info 和 Explain 的只读查询及独立输出模型。",
+      "dependencies": [
+        "M2目标/认证与有界schema读取",
+        "插件编辑器的YAML/JSON字段定位与纯解释展示",
+        "schema按完整API版本分区而非全局Swagger promise"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L412-L474",
+        "src/extension.ts#L506-L557",
+        "src/explainer.ts#L15-L69",
+        "src/explainer.ts#L147-L242"
+      ],
+      "cases": {
+        "NORMAL": "活动编辑器显式启用/停用Explain；YAML/JSON字段和kind返回说明，不冒充kubectl explain命令",
+        "NOT_APPLICABLE": "无编辑器明确错误；无kind/非法文档无字段说明，不永远loading",
+        "FAILURE": "schema不可用/不存在字段/认证拒绝是有限失败或未支持，不打印原始敏感错误",
+        "STALE": "切context/API版本或关闭Explain使旧schema/hover失效，不能使用其他集群schema"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E025",
+        "scope": "原完整Load实际字段/显式文档选择/OpenAPI v3保持；新增CRD Load字段Explain独立strict definition admission、source/page/editor origin与target核对，只发原type/definition/path/documentIdentity/revision无正文/实例身份。同原finite2槽内CRD/discovery→OpenAPI index/schema/index→CRD/discovery，精确served GVR/唯一GVK/local refs投影，≤7GET16MB/schema8MB，无实例读取/缓存/版本fallback/新worker用途；回包核definition。未分析多文档/其他GVK仍拒；hover/任意文件/复杂schema/最终树/内部硬预算与正式两平台仍缺，Delete/generic verifyReference/CRD写/Watch不扩"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesClusterInfo",
+      "commandId": "extension.vsKubernetesClusterInfo",
+      "milestone": "M3",
+      "evidence": "M1-E012",
+      "requirements": [
+        "M3-F1",
+        "M3-F8"
+      ],
+      "task": "Phase 1：实现 Load、Get、Describe、Refresh、Cluster Info 和 Explain 的只读查询及独立输出模型。",
+      "dependencies": [
+        "M2活动context/配置身份与认证审查",
+        "M3有界只读文本输出"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L2219-L2222"
+      ],
+      "cases": {
+        "NORMAL": "绑定活动context显示cluster-info文本，不打开Dashboard或创建proxy",
+        "FAILURE": "无CLI/认证/连接失败独立反馈，不沿用旧共享终端内容",
+        "STALE": "查询中切context/配置拒绝旧输出，节点参数不能把目标切换到其他集群"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E007",
+        "scope": "当前available context真实CLI cluster-info、固定kube-system/缓存哨兵/配置前后核对、同inspection有界内存续块及SDK诊断已接；地址/proxy/dump hint仅文本不执行。M2-E016全局current metadata使active行off-page仍可读取，最终树/完整入口、内部HTTP内存硬预算/正式认证规模与平台仍未完成"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesApply",
+      "commandId": "extension.vsKubernetesApply",
+      "milestone": "M4",
+      "evidence": "M1-E015",
+      "requirements": [
+        "M4-F1",
+        "M4-F2",
+        "M4-F3",
+        "M4-F9"
+      ],
+      "task": "Phase 1：实现基线 Diff 比较与提示分支，并让 Apply 的决定绑定具体比较内容及目标。",
+      "dependencies": [
+        "M3文档/live读取与完整目标",
+        "M4文档版本/选择/dirty-save",
+        "G4-submit身份/目标/内容期限/去重与原操作归账"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L586-L655",
+        "src/extension.ts#L664-L750",
+        "src/extension.ts#L1628-L1694",
+        "src/extension.ts#L1727-L1798"
+      ],
+      "cases": {
+        "NORMAL": "成功打开Diff后明确Apply才提交同一绑定内容，Succeeded不是已检测到变化",
+        "CREATE": "明确NotFound警告Create后执行create，不偷偷改成apply或dry-run",
+        "UNCOMPARABLE": "kind推断失败/GET失败明确风险后才能Apply，不输出原stderr",
+        "CANCEL": "关闭确认/dirty Save取消或失败均不提交，不能落穿旧文件比较或二次callback",
+        "STALE_UNKNOWN": "比较后切文档/配置或内容变化使旧确认失效；已提交未知保留原归账不重试"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E027",
+        "scope": "仅单个完整非stale已Load CRD实例内存buffer：独立source/grant/上传/限时确认、Server原CRD/discovery get+patch/instance UID-RV快照、真实last-applied三方JSON merge/固定UID-RV patch SHA、共享锁/final proof/低层单次HTTPS PATCH/原结果与metadata stale已接。E027新增缺失→明确Create分支：fresh 404+get+create五GET证明、剥离Load残留旧uid/RV的单次collection POST（kubectl-create语义，新UID≠旧UID），独立create-missing-crd-object确认。初始仅HTTPS根地址/内联bearer/可选内联CA且拒调试注入环境，无重试/force/SSA/replace/隐式apply，不清dirty/改Load origin；内置strategic/OpenAPI回退/文件dirty-save/多文档/CRD定义生命周期/完整认证与公共G4/最终树视觉/内部硬预算/正式平台仍缺，所有真实或mock写链均未运行"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDiff",
+      "commandId": "extension.vsKubernetesDiff",
+      "milestone": "M4",
+      "evidence": "M1-E015",
+      "requirements": [
+        "M4-F1",
+        "M4-F3"
+      ],
+      "task": "Phase 1：实现基线 Diff 比较与提示分支，并让 Apply 的决定绑定具体比较内容及目标。",
+      "dependencies": [
+        "M3有限live读取/namespace/GVR",
+        "M4独立文档快照及纯Diff展示",
+        "显式文件/外部Diff隔离与敏感正文无日志"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L693-L750",
+        "src/extension.ts#L1702-L1798"
+      ],
+      "cases": {
+        "NORMAL": "选区/untitled/文件与live显示差异，不运行kubectl diff或server-side dry-run",
+        "NO_INPUT": "无输入/无法推断kind/NotFound/GET失败可辨，不把NothingToDiff当相同内容的计算结果",
+        "CANCEL": "dirty保存取消/失败不继续比较或提交，Diff关闭没有写集群动作",
+        "PRIVACY_STALE": "并发Diff无固定temp文件互串，正文/Secret不进console，旧目标/文档结果拒绝"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E025",
+        "scope": "沿E022独立只读Diff的逐文档精确GET/UID-RV捕获/分块/本地字面对齐与各错误分支；新增用户显式的本地last-applied三方JSON值模型、所有权/注解防递归/捕获身份再核与有限预算，一次仅保一份模型，不新增网络/上传/文件/策略选择/写授权。JSON数组整体替换非内置strategic列表或服务器预测，模型排版非Go encoder字节一致；真正Apply/ApplyFile/执行前UID-RV proof/冻结确认/单次PATCH与原结果、完整编辑器/CRD生命周期/最终树视觉/内部硬预算及正式平台仍缺，模型不使Apply变partial，所有真实运行未验"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesApplyFile",
+      "commandId": "extension.vsKubernetesApplyFile",
+      "milestone": "M4",
+      "evidence": "M1-E015",
+      "requirements": [
+        "M4-F2",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Create、Apply、文件 Create/Apply/Delete 和普通 Delete 的真实服务执行及结果处理。",
+      "dependencies": [
+        "G4-submit完整静态门禁",
+        "Server工作区文件选择/版本/路径与符号链接边界",
+        "批量/多文档逐项结果及刷新"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L184-L185",
+        "src/kubectlUtils.ts#L507-L523"
+      ],
+      "cases": {
+        "NORMAL": "显式所选文件apply -f，独立于活动编辑器Diff/dirty缓冲，不扩展任意路径或shell",
+        "CANCEL": "选择/确认关闭不提交，不因上游缺额外确认绕公共门禁",
+        "FAILURE": "非file/越界/替换/并发版本或CLI失败可辨；未知不自动重放，批量部分成功保留"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E028",
+        "scope": "ApplyFile(apply动词)服务器执行已接（M4-E028）：≤16文档流式解析+逐文档探测+单次逐文档直连PATCH/POST；create/delete文件动词窄协议+人工包"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesAddWatch",
+      "commandId": "extension.vsKubernetesAddWatch",
+      "milestone": "M3",
+      "evidence": "M1-E015",
+      "requirements": [
+        "M3-F6",
+        "M3-F8"
+      ],
+      "task": "Phase 3：实现 Watch / Stop Watching，按目录或对象共享合适的只读订阅并合并树刷新。",
+      "dependencies": [
+        "M2完整GVR/discovery/scope/原namespace与身份",
+        "M3有界观察/消费者代次/lease/有限退避与刷新延迟",
+        "认证/cache审查，独立于Rolldown watcher R-07"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L818-L845",
+        "src/components/clusterexplorer/explorer.ts#L113-L158",
+        "src/components/clusterexplorer/explorer.ts#L195-L284",
+        "src/components/clusterexplorer/node.resource.ts#L60-L87",
+        "src/components/clusterexplorer/node.folder.resource.ts#L43-L69",
+        "src/components/kubectl/watch.ts#L25-L49",
+        "src/components/config/config.ts#L292-L300"
+      ],
+      "cases": {
+        "NORMAL": "目录/对象节点按实际scope与原namespace建只读观察，成功后显示状态；无节点无picker/动作",
+        "AUTO_EXPAND": "显式配置label或已知观察ID的分支展开观察，无配置不扫全部context",
+        "FAILURE": "建链/403/断连/410有限失败或受限重list退避，不提前声称Watching成功",
+        "STALE_CANCEL": "并发建链去重，切目标/末消费者退出取消pending注册，迟到回调不得复活旧目标"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E026",
+        "scope": "原内置raw Watch/ACK/单410relist/公共任务/同target树合并保持；E026独立strict custom type-definition-listKind接纳CRD目录/原UID对象显式Watch，原finite槽CRD/discovery list+watch proof、初始exact UID/RV/精确served GVR与private custom-resource-watch-relist/worker再核。proof累计256GET8MB，加原10watch+20List共30响应8MB，总286响应16MB，公共流2/finite2/原期限不增。同target/definition列表stale拒续页/迟到，不改Load/dirty/写引用；28新只读8静态及第二轮1107/362/类型/lint/release过，无真实运行。最终renderer/自动观察配置/inactive恢复/一般网络恢复/正式认证平台与内部硬预算仍缺，runtimeEvidence空"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDeleteWatch",
+      "commandId": "extension.vsKubernetesDeleteWatch",
+      "milestone": "M3",
+      "evidence": "M1-E015",
+      "requirements": [
+        "M3-F6",
+        "M3-F8"
+      ],
+      "task": "Phase 3：实现 Watch / Stop Watching，按目录或对象共享合适的只读订阅并合并树刷新。",
+      "dependencies": [
+        "M3共享只读任务引用/代次/lease",
+        "M2节点展开/收起与完整目标",
+        "M3 pending取消与旧句柄拒绝"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L828-L845",
+        "src/extension.ts#L2207-L2215",
+        "src/components/clusterexplorer/explorer.ts#L161-L167",
+        "src/components/clusterexplorer/explorer.ts#L239-L284",
+        "src/components/kubectl/watch.ts#L51-L75"
+      ],
+      "cases": {
+        "NORMAL": "停止只释放所属读消费者；上游保留inactive ID，收起再展开可恢复，不伪称永久删偏好",
+        "SHARED": "一个视图退出不终止其他消费者，末消费者才释放底层读取，无集群清理",
+        "PENDING_STALE": "stop/clear发生在pending建链时，迟到注册/重连不得复活；重启旧取消句柄不影响新任务"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M3-E026",
+        "scope": "E026复用原consumer/lease/实际未settle槽与headless Stop队列边界，CRD proof/410退避/finite排队/List/迟到结果期间Stop或target/分支切换阻新事件与RESYNC/续watch；peer不误停/原期限预算不延长，不调用业务清理或变更写引用。28新合成只读8文本静态及第二轮1107/362等过，无真实SDK/worker/CLI运行。最终renderer/自动观察配置/inactive恢复/正式worker-FIFO-平台与内部硬预算仍缺，runtimeEvidence空"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesCreate",
+      "commandId": "extension.vsKubernetesCreate",
+      "milestone": "M4",
+      "evidence": "M1-E018",
+      "requirements": [
+        "M4-F1",
+        "M4-F2",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Create、Apply、文件 Create/Apply/Delete 和普通 Delete 的真实服务执行及结果处理。",
+      "dependencies": [
+        "G4-submit完整静态门禁",
+        "M3/M4文档版本/选区/Save确定结果",
+        "Server文件/受限stdin与多文档逐项归账"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L177-L179",
+        "src/extension.ts#L586-L655",
+        "src/extension.ts#L664-L686"
+      ],
+      "cases": {
+        "NORMAL": "选区优先于全文/磁盘，untitled非空或非file正文按明确文档快照create，不隐式Diff/Apply",
+        "CANCEL": "无编辑器/空untitled/dirty保存取消或失败不提交，不把返回true当写成功",
+        "STALE": "Save后文档/目标/文件变化使旧意图失效，不让活动编辑器改变原提交内容",
+        "PARTIAL_UNKNOWN": "批量部分成功/响应丢失保留原结果，未知不自动重试，不泄露临时正文"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E024",
+        "scope": "沿E023具名内存/选区/多文档/v1 List grant/确认/实际POST/原结果，新增普通完整文件dirty先明确Save与精确成功ack后用户重提Create、Server原proof或同位置原Save成功账本/当前metadata核验、实际磁盘同portable parser核source及payload SHA/字节，finish/每项/final gate文件再核；不上传body冒充文件、不延public scope或清dirty/换origin。generateName/Typed List/多文件/完整编辑器与SaveAs URI关联/CRD定义生命周期/Apply/完整公共G4/最终树视觉/内部硬预算/正式平台仍缺，所有写链仅静态与待人工"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesCreateFile",
+      "commandId": "extension.vsKubernetesCreateFile",
+      "milestone": "M4",
+      "evidence": "M1-E018",
+      "requirements": [
+        "M4-F2",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Create、Apply、文件 Create/Apply/Delete 和普通 Delete 的真实服务执行及结果处理。",
+      "dependencies": [
+        "G4-submit完整静态门禁",
+        "Server所选文件路径/符号链接/版本绑定",
+        "多文档/批量错误和部分成功归账"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L180-L181",
+        "src/kubectlUtils.ts#L496-L498",
+        "src/kubectlUtils.ts#L511-L523"
+      ],
+      "cases": {
+        "NORMAL": "所选磁盘文件create -f，非活动dirty缓冲，不额外Apply/自动Save",
+        "INVALID_CANCEL": "非file/缺文件/取消/路径越界或链接替换不提交，不扩展任意服务器路径",
+        "STALE_UNKNOWN": "内容/目标版本改变拒绝旧确认，未知不重放，逐项保留多对象结果"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E024",
+        "scope": "明确所选Server根/相对文件的独立磁盘capture，不改活动dirty编辑器/原文/baseline/revision，capture前冻结cluster target；Server原proof精确核root/path/metadata/body并新私有短读scope，实际磁盘同portable parser核source及payload SHA/bytes，独立Create确认/逐项final文件与目标再核/真实raw POST stdin及原结果已接。scope/proof非写grant、完整文件无body上传、未知不重试；仅单个明确具名文件，多文件/生成名/Typed List/原生文件关联/CRD定义生命周期/完整公共G4/最终树/视觉/内部硬预算/正式平台仍缺，写链仅静态与待人工"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDeleteUri",
+      "commandId": "extension.vsKubernetesDeleteUri",
+      "milestone": "M4",
+      "evidence": "M1-E018",
+      "requirements": [
+        "M4-F2",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Create、Apply、文件 Create/Apply/Delete 和普通 Delete 的真实服务执行及结果处理。",
+      "dependencies": [
+        "G4-submit完整静态门禁",
+        "Server文件内容/路径版本及Delete确认绑定",
+        "批量对象身份/namespace与未知归账"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L182-L183",
+        "src/kubectlUtils.ts#L500-L505",
+        "src/kubectlUtils.ts#L511-L523"
+      ],
+      "cases": {
+        "NORMAL": "明确Delete后以所选磁盘文件delete -f，不转树picker/--now/--force",
+        "CANCEL": "Cancel/关闭不执行，非file明确失败；确认绑定的文件不能随后替换",
+        "FAILURE_UNKNOWN": "CLI失败/部分删除/响应丢失可辨，不把取消视为远端撤销或自动重放"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E033",
+        "scope": "仅一个Server工作区文件且恰一份descriptor面内文档（原读取proof独立capture，拒Save receipt，缺省namespace=目标namespace）：文件核验→解析→活对象UID/RV钉住+固定60秒确认（即上游Delete警告）→再次核文件与活对象后单次DELETE携带DeleteOptions preconditions（uid/resourceVersion）+Background传播，非裸名删除、无--now/--force/树picker；文件漂移/对象重建/404/409固定失败不重试，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。上游多文档/非file URI/ApplyFile与完整G4/正式平台仍缺，真实或mock写链均未运行"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesScale",
+      "commandId": "extension.vsKubernetesScale",
+      "milestone": "M4",
+      "evidence": "M1-E018",
+      "requirements": [
+        "M4-F4",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Scale、CronJob Run Now、Expose 的参数流程、种类限制和结果刷新。",
+      "dependencies": [
+        "G4-submit完整静态门禁",
+        "M2原namespace/GVR/UID/RV与picker",
+        "非负安全整数参数和API不支持反馈"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L952-L984",
+        "src/kuberesources.ts#L41-L47"
+      ],
+      "cases": {
+        "NORMAL": "树目标或五类picker后指定replicas，0有效，绑定原namespace而非当前全局目标",
+        "CANCEL_INVALID": "空/取消不执行，负数/小数/数值后缀/不安全整数不调用CLI",
+        "FAILURE": "Job在上游picker但服务端无scale能力时明确失败，不改成重建或伪成功",
+        "STALE_UNKNOWN": "目标/资源变化或确认过期拒绝，响应丢失按原操作未知且不自动重放"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E028",
+        "scope": "上游五类规则+非负int32 replicas输入、原对象UID/RV fresh证明+固定60秒确认、kubectl前置条件分支（GET scale子资源固定RV→单次完整PUT替换replicas）、共享配置锁/单次直连HTTPS（内联bearer/CA根地址）、409/404固定失败不重试/不重建、原账本与accepted仅metadata stale已接。当前精确引用面可达Deployment/StatefulSet/Job；ReplicaSet/RC待树描述符扩展后自然可达，协议不放宽引用面。Job无scale子资源404明确失败；上游不传RV，插件按G4固定RV为已记录保守偏离。Expose/CronJob Run Now/最终树菜单/完整G4/正式平台仍缺，真实或mock写链均未运行"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesExpose",
+      "commandId": "extension.vsKubernetesExpose",
+      "milestone": "M4",
+      "evidence": "M1-E018",
+      "requirements": [
+        "M4-F4",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Scale、CronJob Run Now、Expose 的参数流程、种类限制和结果刷新。",
+      "dependencies": [
+        "G4-submit完整静态门禁",
+        "M2资源picker与完整目标",
+        "Server Dockerfile路径/EXPOSE受限端口及内容绑定"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L776-L794",
+        "src/extension.ts#L1270-L1282",
+        "src/kuberesources.ts#L49-L55"
+      ],
+      "cases": {
+        "NORMAL": "五类资源选择后expose创建Service，Dockerfile仅第一EXPOSE，不新增端口/Service类型picker",
+        "NO_PORT_CANCEL": "无Dockerfile/无EXPOSE省略port而非默认80，取消不提交；坏端口拒绝不拼shell",
+        "STALE_FAILURE": "原资源/文件/端口或目标改变使旧意图失效，CLI不支持/未知结果不为空成功或自动重放"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E030",
+        "scope": "仅引用面可达三类（Deployment/Pod/Service）：原UID/RV证明+固定60秒确认+显式1-65535端口（可空=唯一推导端口）与可选targetPort/type/protocol（默认TCP/ClusterIP）；确认后GET钉住原对象，按固定kubectl mapbasedselector/portsfor推导与内联createService映射构造Service，对services collection单次POST；matchExpressions/无labels/无selector/同名Service固定失败不重试，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。上游五类中ReplicaSet/RC待引用面扩展；最终树菜单/完整G4/正式平台仍缺，真实或mock写链均未运行"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesCronJobRunNow",
+      "commandId": "extension.vsKubernetesCronJobRunNow",
+      "milestone": "M4",
+      "evidence": "M1-E018",
+      "requirements": [
+        "M4-F4",
+        "M4-F9"
+      ],
+      "task": "Phase 2：接通 Scale、CronJob Run Now、Expose 的参数流程、种类限制和结果刷新。",
+      "dependencies": [
+        "G4-submit完整静态门禁",
+        "M2 CronJob picker及原namespace/UID/RV",
+        "Server时钟默认Job名/名称校验/未知创建归账"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L2317-L2369",
+        "src/extension.ts#L1206-L1221",
+        "src/kubectlUtils.ts#L348-L367",
+        "src/utils/naming.ts#L1-L19"
+      ],
+      "cases": {
+        "NORMAL": "节点或CronJob选择后输入可修改的本地时间默认名，create job --from原CronJob，不启动日志/Exec",
+        "CANCEL_EMPTY": "无CronJob/GET失败/两次picker输入取消不创建，空名称不提交",
+        "CONFLICT_STALE": "Job已存在/非法名/API不支持/原CronJob重建或切目标明确失败，不换名自动重试",
+        "UNKNOWN": "提交后响应丢失按原Job名/目标归账，不能再次Create或假称取消已撤销"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E029",
+        "scope": "仅batch/v1 CronJob行：原UID/RV证明+固定60秒确认+可编辑本地时钟默认job名；确认后GET钉住UID/RV的原CronJob，按固定kubectl createJobFromCronJob语义（instantiate=manual注解、jobTemplate labels/spec、Controller ownerReference无BlockOwnerDeletion）对jobs collection单次POST；同名Job/模板漂移/无权限固定失败不重试/不静默换名，unknown只查原账本；直连仅HTTPS根地址/内联bearer/可选内联CA。Expose/F4其余/最终树菜单/完整G4/正式平台仍缺，真实或mock写链均未运行"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesUseNamespace",
+      "commandId": "extension.vsKubernetesUseNamespace",
+      "milestone": "M4",
+      "evidence": "M1-E023",
+      "requirements": [
+        "M4-F7",
+        "M4-F9"
+      ],
+      "task": "Phase 4：复用 Phase 1 的 G4-config 接通 use-context、Use Namespace 和 Delete from kubeconfig 的 UI/真实变更、确认与共享引用处理，不另起绕过门禁的执行器。",
+      "dependencies": [
+        "G4-submit目标/内容/期限/去重/归账",
+        "G4-config所选Server文件版本及并发锁",
+        "M2配置读取与实际current-context"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L217-L217",
+        "src/components/kubectl/namespace.ts#L12-L57",
+        "src/kubectlUtils.ts#L348-L391"
+      ],
+      "cases": {
+        "NORMAL": "节点name或namespace自由输入/picker后实际写原current-context.namespace，成功才刷新",
+        "CANCEL_SAME": "输入/picker/确认取消不写，同namespace无内容变更",
+        "CONFLICT": "文件版本/路径/current-context或确认期限变化拒绝旧意图，不force覆盖",
+        "UNKNOWN": "替换后断连/IO失败按原文件目标归账，不自动重写，暂存残留需人工核对"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E016",
+        "scope": "已有context的空/flow mapping缺namespace可安全源区间补值，普通JSON/尾注释/已有逗号保留，后验原引用与context数不变，旧NS-09拒绝预期更新。E015原非空current缺stanza显式CREATE first-existing namespace-only、必需action/缺失性/同锁/全来源/唯一writer/source hook不变；已有origin仍winning、不建文件/补引用/改current或放宽删除认证。原单15/多20/配置身份18/创建24例同候选回归；null/复杂不安全位置/完整G4/最终树/真实平台仍待"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesUseKubeconfig",
+      "commandId": "extension.vsKubernetesUseKubeconfig",
+      "milestone": "M4",
+      "evidence": "M1-E025",
+      "requirements": [
+        "M4-F7",
+        "M4-F9"
+      ],
+      "task": "Phase 4：实现 Set Kubeconfig、已知配置管理与配置文件身份变更；处理多文件来源和不存在路径。",
+      "dependencies": [
+        "G4-config来源选择/偏好版本与原结果",
+        "官方公开插件非敏感偏好/Server路径选择",
+        "M2配置缺失/merge与目标代次"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L2095-L2189",
+        "src/components/config/config.ts#L24-L103",
+        "src/components/kubectl/kubeconfig.ts#L76-L110"
+      ],
+      "cases": {
+        "NORMAL": "选择known或单Server文件并持久化active来源，确定成功才发身份变化；不是改kubeconfig内容",
+        "CANCEL": "picker取消/多选/空路径不激活，缺失路径No保留known，Yes仅移除条目",
+        "PARTIAL_UNKNOWN": "新增known后激活失败或偏好响应丢失逐项归账，不把提示当持久化成功，不自动重放",
+        "STALE_REMOTE": "配置选择版本/Server实例切换后旧动作拒绝，merge列表不按一个路径检查，不误用客户端磁盘"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E014",
+        "scope": "E013显式Server文件名称metadata浏览/hidden/blocked项/100分页/HMAC代次与草稿已接，原30例同候选回归；E006 known-active修订与18例同候选回归，同HOME共享非SDK instance且卸载保留。默认来源按service实际收到的KUBECONFIG/HOME冻结有界列表，官方不转发Server变量时保显式single/merge适配，不自动解析/保存新草稿。完整Server环境/最终树/复杂配置/真实目录与平台仍待"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesUseContext",
+      "commandId": "extension.vsKubernetesUseContext",
+      "milestone": "M4",
+      "evidence": "M1-E025",
+      "requirements": [
+        "M4-F7",
+        "M4-F9"
+      ],
+      "task": "Phase 4：复用 Phase 1 的 G4-config 接通 use-context、Use Namespace 和 Delete from kubeconfig 的 UI/真实变更、确认与共享引用处理，不另起绕过门禁的执行器。",
+      "dependencies": [
+        "G4-config多来源/current-context实际写落点",
+        "M2所有context读取与错误/空区分",
+        "原配置版本/目标context条目/共享写锁/期限/去重"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L2191-L2217",
+        "src/kubectlUtils.ts#L104-L135"
+      ],
+      "cases": {
+        "NORMAL": "context节点或inactive picker后实际写current-context，确定成功才刷新旧代，非仅panel选择",
+        "CANCEL_ERROR": "picker取消/缺目标/读取失败不写，失败不伪造无其他context或成功刷新",
+        "STALE": "原来源/目标context条目/文件版本或期限变化拒绝旧确认，不跟新全局context写",
+        "UNKNOWN": "配置替换后响应丢失保留原文件/context结果未知，不重试/回滚，不丢其他已提交结果"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E014",
+        "scope": "E013完整snapshot inactive搜索/100分页/SDK选择只返回元数据，bridge核原scope才开E008确认；新默认多来源与reader用同冻结列表，first-existing而非context origin，原全来源/版本/global已active无stage/同锁/唯一writer/source hook/原结果不变。原picker30/单16/多18例同候选回归；官方未转发环境/缺失条目创建/复杂YAML/最终树/真实平台仍待"
+      }
+    },
+    {
+      "entry": "extension.vsKubernetesDeleteContext",
+      "commandId": "extension.vsKubernetesDeleteContext",
+      "milestone": "M4",
+      "evidence": "M1-E025",
+      "requirements": [
+        "M4-F7",
+        "M4-F9"
+      ],
+      "task": "Phase 4：复用 Phase 1 的 G4-config 接通 use-context、Use Namespace 和 Delete from kubeconfig 的 UI/真实变更、确认与共享引用处理，不另起绕过门禁的执行器。",
+      "dependencies": [
+        "G4-config来源/版本与精确条目删除",
+        "全部共享cluster/user引用与原current-context披露",
+        "逐步骤依赖/失败未知阻断/原结果/共享锁"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L2224-L2236",
+        "src/kubectlUtils.ts#L137-L172"
+      ],
+      "cases": {
+        "NORMAL": "仅context节点，警告后精确删除所确认配置条目，不删除真实集群/provider资源",
+        "CANCEL_SHARED": "无节点或取消不写，共享cluster/user引用披露并保护其他context，不无声删除",
+        "PARTIAL_UNKNOWN": "每步失败/未知阻断依赖，原已完成保持，不能以最终context删除成功宣称关联条目全成功",
+        "STALE_CURRENT": "配置/条目/共享引用变化拒绝旧确认，原current-context后果明确，不擅自切换集群或重放"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M4-E011",
+        "scope": "诊断Context行支持default/file/有序merge，cluster-user-context各一次winning-origin逐步删除/不追shadow，全部物理context共享引用保护/缺失跳过、全来源及每步origin-next与contextAfter风险披露；保current-context，同锁/唯一writer/逐文件实际metadata版本与四个完整内容HMAC checkpoint、stage后source hook/失败unknown阻断/原结果已接。复杂YAML/创建/完整picker/树菜单与真实平台未完成"
+      }
+    },
+    {
+      "entry": "extension.helmVersion",
+      "commandId": "extension.helmVersion",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F8"
+      ],
+      "task": "Phase 1/4：接通既有Helm路径/版本检查与Helm Version，区分语法探测和批准支持矩阵。",
+      "dependencies": [
+        "Server已有Helm路径/兼容矩阵与无隐式安装",
+        "有界只读结果与固定错误投影"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L241-L241",
+        "src/helm.exec.ts#L64-L114",
+        "src/helm.exec.ts#L756-L883"
+      ],
+      "cases": {
+        "NORMAL": "语法探测后version输出；v2用-c，v3/v4无-c，不能把字符串识别当正式兼容通过",
+        "FAILURE": "缺CLI/版本未知/非零固定失败，不自动安装或修改检查偏好",
+        "STALE": "可执行文件/配置代次变化不能沿用全局旧语法缓存"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E034",
+        "scope": "只读Helm版本检查：按固定上游探测顺序每次重新判定语法（v2先答version --short -c，否则version --short辨v3/v4，未知不猜），再按语法输出version（v2带-c）；无全局语法缓存（上游STALE风险的保守偏离）、PATH+空HOME隔离环境不读真实配置/插件/凭证/集群、不安装；缺CLI/版本未知/非零为固定失败码，stderr不保留；输出≤4KiB/读取≤16KiB、单并发、7秒总期。语法探测成功不等于正式支持矩阵通过；其余Helm写操作/缓存/正式平台仍缺，真实或mock CLI运行未执行"
+      }
+    },
+    {
+      "entry": "extension.helmTemplate",
+      "commandId": "extension.helmTemplate",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7"
+      ],
+      "task": "Phase 4：接通Template真实Chart选择/执行/输出，披露磁盘输入与执行副作用。",
+      "dependencies": [
+        "可信Server工作区与Chart文件版本",
+        "固定Helm参数/预算/显式执行与敏感输出边界"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L242-L242",
+        "src/helm.exec.ts#L116-L130",
+        "src/helm.exec.ts#L639-L754"
+      ],
+      "cases": {
+        "NORMAL": "唯一Chart直接选择，多Chart显式picker后template所选路径输出，不Apply",
+        "CANCEL": "无工作区/零Chart明确失败，取消多Chart选择不执行",
+        "FAILURE_STALE": "磁盘Chart/来源变化或CLI失败保持失败，不取另一个dirty编辑器或自动重试"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E042",
+        "scope": "用户显式Template窄入口（规范workspace chart目录=root+相对path均schema校验，绝无任意文件系统路径/shell字符串；chart picker浏览入口与TemplatePreview文档流后续）：单次 helm template <目录>（隔离PATH+空HOME，用户repositories.yaml只读，缺依赖下载只写插件隔离缓存）；非零退出=渲染失败（固定失败码；上游显示错误流——本实现stderr绝不保留的披露偏离）；输出仅bounded渲染清单≤16KiB（超限BUDGET_EXCEEDED拒绝而非静默截断）；30s固定期限/单并发无队列/不自动重试；诊断面板bounded表单非最终chart picker/renderer。链为写式（至多写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmTemplatePreview",
+      "commandId": "extension.helmTemplatePreview",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7"
+      ],
+      "task": "Phase 4：接通Preview Template明确文档/Chart/磁盘版本与安全输出，不在自动检查运行模板。",
+      "dependencies": [
+        "Server文件/活动文档身份及保存决定",
+        "Helm语法版本与模板输出预算"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L243-L243",
+        "src/extension.ts#L329-L345",
+        "src/helm.exec.ts#L132-L153",
+        "src/helm.documentProvider.ts#L165-L231"
+      ],
+      "cases": {
+        "NORMAL": "模板文件归属Chart后v3/v4 --show-only，v2 --execute；不是把dirty缓冲自动保存",
+        "CANCEL_FAILURE": "无编辑器/非模板/无Chart/CLI或YAML失败明确，不挂起promise或执行其他文件",
+        "STALE": "固定preview URI不能跨活动编辑器/项目错投；保存刷新须显式受控且不变自动验证授权"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E077",
+        "scope": "TemplatePreview服务器执行已接（M6-E077）：单模板--show-only渲染（工作区文件新鲜proof+图表结构归因+YAML校验+上游固定错误分支）"
+      }
+    },
+    {
+      "entry": "extension.helmLint",
+      "commandId": "extension.helmLint",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7"
+      ],
+      "task": "Phase 4：接通Chart Lint参数/真实CLI/有界输出与失败，不将作者执行器列入自动只读集合。",
+      "dependencies": [
+        "Chart工作区版本与明确选择",
+        "已审Helm路径/执行预算/敏感输出"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L244-L244",
+        "src/helm.exec.ts#L242-L254",
+        "src/helm.exec.ts#L639-L754"
+      ],
+      "cases": {
+        "NORMAL": "所选Chart执行lint，stdout/stderr安全输出且无Apply",
+        "CANCEL": "多Chart取消不执行，无工作区或无Chart不假成功",
+        "FAILURE": "非零/依赖缺失/超时明确失败或未知，不自动下载修复/重试"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E041",
+        "scope": "用户显式Lint窄入口（规范workspace chart目录=root+相对path，均schema校验，绝无任意文件系统路径/shell字符串；chart picker浏览入口后续）：单次 helm lint <目录>（隔离PATH+空HOME，用户repositories.yaml只读，缺依赖下载只写插件隔离缓存）；非零退出=lint发现（确定性failed=true结果而非失败码，stderr绝不保留——上游同时记录stderr的披露偏离）；输出仅bounded stdout≤16KiB；30s固定期限/单并发无队列/固定失败码不自动重试；诊断面板bounded表单非最终chart picker/renderer。链为写式（至多写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmDryRun",
+      "commandId": "extension.helmDryRun",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7",
+        "M6-F8"
+      ],
+      "task": "Phase 4：接通Dry Run真实install参数分支与输出，按显式操作处理而非只读豁免。",
+      "dependencies": [
+        "Chart/配置/context/namespace内容绑定与执行门禁",
+        "已审Helm版本/插件/hooks/cache风险"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L247-L247",
+        "src/helm.exec.ts#L312-L328"
+      ],
+      "cases": {
+        "NORMAL": "v3 --dry-run/--generate-name/--debug，v4 --dry-run=client，不偷换成真实发布或新server dry-run",
+        "CANCEL": "Chart picker取消不执行，不以dry-run名义自动触发",
+        "FAILURE_UNKNOWN": "错误/超时与可能缓存/外部执行保留，输出不写日志/聊天，不自动重试清理"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E043",
+        "scope": "用户显式Dry Run窄入口（按显式操作处理非只读豁免；规范workspace chart目录=root+相对path均schema校验；chart picker浏览入口后续）：每次先经版本读取器重新探测语法（响应回显），再单次 helm install --dry-run[--dry-run=client(v4)] [--generate-name(v3/v4)] --debug <目录>（上游参数分支逐字；隔离PATH+空HOME；用户repositories.yaml只读，缺依赖下载只写插件隔离缓存；绝不触碰集群写面/kubeconfig）；非零退出=失败固定码（stderr绝不保留——披露偏离）；输出仅bounded文本≤16KiB超限拒绝；30s固定期限/单并发无队列/不自动重试；诊断面板bounded表单非最终chart picker/renderer。链为写式（至多写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmDepUp",
+      "commandId": "extension.helmDepUp",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7"
+      ],
+      "task": "Phase 4：接通Dependency Update真实工作区charts/锁文件与隔离缓存结果，绑定原Chart。",
+      "dependencies": [
+        "Server工作区文件/覆盖/内容版本门禁",
+        "网络/getter依赖和隔离缓存/取消未知"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L248-L248",
+        "src/helm.exec.ts#L155-L180",
+        "src/helm.requirementsCodeLens.ts#L1-L29"
+      ],
+      "cases": {
+        "NORMAL": "file URI/TextDocument父目录或Chart picker执行dep up，实际修改依赖文件而非仅刷新树",
+        "CANCEL": "无参数picker取消不执行，非file scheme明确拒绝",
+        "PARTIAL_STALE": "下载/工作区已有部分修改保留归账，Chart或内容变化拒旧意图，不重试回滚或递归清理"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E045",
+        "scope": "用户显式Dependency Update窄入口（规范workspace chart目录=root+相对path全schema校验，绝无任意文件系统路径/shell字符串；上游pickChart/文件URI目录推导入口后续）：单次 helm dep up <chart目录>（隔离PATH+空HOME；用户repositories.yaml只读，依赖下载只写插件隔离缓存）；工作区写仅限该chart目录内（Chart.lock与charts/子树）；非零退出=更新失败固定码（stderr绝不保留——披露偏离）；输出仅bounded stdout≤16KiB；60s固定期限（下载可能较慢）/单并发无队列/部分更新如实报告不自动重试；诊断面板bounded表单非最终chart picker/renderer。链为真实工作区写链（写chart目录内），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmCreate",
+      "commandId": "extension.helmCreate",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7"
+      ],
+      "task": "Phase 4：接通Create Chart所选Server工作区/名称/覆盖/结果与可选打开，不隐式安装。",
+      "dependencies": [
+        "工作区可信范围/规范路径/链接与覆盖门禁",
+        "已审Helm路径和文件结果归账"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L250-L250",
+        "src/helm.exec.ts#L182-L240"
+      ],
+      "cases": {
+        "NORMAL": "先选工作区再输入名称create完整路径，成功才提供Open Chart.yaml/Open Folder",
+        "CANCEL": "选目录/输入取消或空名称不创建，创建后取消打开动作不撤销Chart",
+        "FAILURE_STALE": "路径穿越/已有目标/版本变化拒旧意图，部分创建/未知不删目录或重试"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E046",
+        "scope": "用户显式Create Chart窄入口（规范workspace父目录=root+相对path全schema校验+bounded名称与仓库资源管理器同一token集——上游将原始输入内插进shell字符串，此处为严格移植；workspace folder picker/输入框浏览入口后续）：单次 helm create <父目录>/<名称> 脚手架新chart（隔离PATH+空HOME）；无隐式安装；不自动打开Chart.yaml/文件夹（仅报告路径——上游打开为主机UI动作的披露偏离）；非零退出=创建失败固定码（stderr绝不保留——披露偏离）；输出仅bounded stdout≤16KiB；30s固定期限/单并发无队列/不自动重试；诊断面板bounded表单非最终workspace folder picker/renderer。链为真实工作区写链（脚手架写入规范父目录内），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmFetch",
+      "commandId": "extension.helmFetch",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F3",
+        "M6-F7"
+      ],
+      "task": "Phase 2：接通Fetch指定Chart/version下载解包到所选工作区与覆盖/取消/部分结果。",
+      "dependencies": [
+        "可信repo来源/指定Chart版本与getter凭证边界",
+        "Server工作区/安全解包/预算/覆盖门禁"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L253-L253",
+        "src/helm.exec.ts#L456-L524"
+      ],
+      "cases": {
+        "NORMAL": "chart用默认version、version节点固定--version，fetch --untar到所选工作区并可打开文件/目录",
+        "CANCEL": "自由输入/工作区取消不下载，成功后取消打开不删除已取得Chart",
+        "PARTIAL_STALE": "不安全参数/解包穿越/覆盖/来源变化拒绝或明确部分结果，不以CLI code零代路径完整"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E047",
+        "scope": "用户显式Fetch窄入口（chart引用+可选版本=共享严格token schema（上游isSafe严格移植）+规范workspace目标=root+相对path全schema校验；输入框/树节点/folder picker浏览入口后续）：单次 helm fetch <chart> --untar [--version v] -d <目标>（隔离PATH+空HOME；用户repositories.yaml只读，仓库下载只写插件隔离缓存）；解包chart树只写入指定目标目录（目标自动创建）；非零退出=获取失败固定码（含HELM_INDEX_MISSING缺chart；stderr绝不保留——披露偏离）；输出仅bounded stdout≤16KiB；60s固定期限（下载较慢）/单并发无队列/部分结果如实报告不自动重试；诊断面板bounded表单非最终输入框/folder picker renderer。链为真实工作区写链（解包写目标目录），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmInspectChart",
+      "commandId": "extension.helmInspectChart",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F3",
+        "M6-F7"
+      ],
+      "task": "Phase 2：接通Inspect Chart版本绑定/文件Chart归属/内容获取与安全预览，下载限隔离缓存。",
+      "dependencies": [
+        "可信Chart/version来源与下载隔离",
+        "Server文件边界及有界内存展示"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L246-L246",
+        "src/helm.exec.ts#L265-L310",
+        "src/helm.documentProvider.ts#L55-L125"
+      ],
+      "cases": {
+        "NORMAL": "repo chart/version用inspect all（v2无all），file分支实际inspect values；不把两种输出合并伪装",
+        "CANCEL_FAILURE": "无目标/坏引用/缺Chart/CLI失败明确，不留未settle provider或下载重试",
+        "STALE_PRIVACY": "来源/版本/文件变化拒旧响应，输出/values不进URL或日志，所有标题/内容安全文本"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E038",
+        "scope": "用户显式Inspect Chart窄入口（仅repo/chart[+version]，不含文件Chart分支）：每次先经版本读取器重新探测语法（仅v2省略all），单次 helm inspect [all] <chart> [--version v]，用户repositories.yaml只读，chart下载只写插件隔离缓存（服务home下镜像原cache目录名）；输出仅bounded预览文本≤16KiB（schema强制），stderr绝不保留；30s固定期限/单并发无队列/固定失败码（HELM_INDEX_MISSING等），失败不自动重试；诊断面板表单非最终虚拟文档renderer，不落盘values文件。链为写式（写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmFetchValues",
+      "commandId": "extension.helmFetchValues",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F3",
+        "M6-F7"
+      ],
+      "task": "Phase 2：接通Fetch values内容生成与明确Save到工作区，保留虚拟文档和实际落盘之别。",
+      "dependencies": [
+        "Chart/version下载来源与隔离缓存",
+        "M4文件owner/内容版本/明确保存与覆盖边界"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L245-L245",
+        "src/extension.ts#L273-L276",
+        "src/helm.exec.ts#L256-L310",
+        "src/helm.documentProvider.ts#L128-L163",
+        "src/utils/preview.ts#L21-L32"
+      ],
+      "cases": {
+        "NORMAL": "repo分支inspect values生成原始虚拟文档，打开不等于写磁盘，明确Save才生成所选文件",
+        "CANCEL_FAILURE": "无目标/保存取消不落盘，file-authority上游provider缺失须明确失败而非永久pending",
+        "STALE_PRIVACY": "版本/来源或dirty文档改变拒旧保存，values不放URI/日志/storage或自动剪贴板"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E039",
+        "scope": "用户显式Fetch values窄入口（仅repo/chart[+version]，文件/目录分支后续）：单次 helm inspect values <chart> [--version v]（上游FETCH_VALUES_SCHEME+generateFile分支，无all作用域、无需语法探测），用户repositories.yaml只读，chart下载只写插件隔离缓存（服务home下镜像原cache目录名）；输出仅bounded预览文本≤16KiB（schema强制，含savedTo字段不存在契约），stderr绝不保留；30s固定期限/单并发无队列/固定失败码，失败不自动重试；与上游虚拟文档一致本链不向任何工作区落盘，是否保存由用户在平台侧决定；诊断面板bounded表单非最终虚拟文档renderer。链为写式（仅写插件自有隔离缓存），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmDependencies",
+      "commandId": "extension.helmDependencies",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F3",
+        "M6-F7"
+      ],
+      "task": "Phase 2：接通Show Dependencies的下载/dep list/展示，不能用默认索引依赖字段冒充完整命令。",
+      "dependencies": [
+        "用户明确Chart/version与隔离临时缓存/getter边界",
+        "有界archive/表格解析/安全展示和owned清理"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L257-L257",
+        "src/helm.exec.ts#L581-L637",
+        "src/helm.documentProvider.ts#L233-L260"
+      ],
+      "cases": {
+        "NORMAL": "repo/version或自由输入先fetch archive再dep list，原version保持；下载与内存表格分开归账",
+        "CANCEL_FAILURE": "输入取消不下载，fetch/dep list失败和无依赖区别明确，不取临时目录任意第一项",
+        "STALE_PRIVACY": "目标漂移/超时拒旧投递，未转义依赖字段不执行HTML，不通过业务cleanup自动验证"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E040",
+        "scope": "用户显式Show Dependencies窄入口（仅repo/chart[+version]，树节点/InputBox分支后续）：单次 helm fetch <chart> [--version v] -d <插件自有临时目录（服务home下helm-tmp/vsk-fetchfordeps-*，非系统tmp）> 后对该压缩包单次 helm dep list，按上游制表符分隔解析（首行表头）；随后按上游finally删除压缩包与临时目录。用户repositories.yaml只读，下载只写插件隔离缓存+插件自有临时目录；输出仅bounded表（≤64行×≤4列×≤256字符，schema强制），stderr绝不保留；仅表头=无依赖（上游以错误串表达，此处为确定性空表并披露），不用默认索引依赖字段冒充完整命令；30s固定期限/单并发无队列/固定失败码不自动重试。链为写式（仅写插件自有目录），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmGet",
+      "commandId": "extension.helmGet",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F4",
+        "M6-F7",
+        "M6-F8"
+      ],
+      "task": "Phase 3：接通Get Release与指定revision输出，补原context/namespace/发布世代绑定。",
+      "dependencies": [
+        "Release/history真实身份/兼容驱动与原配置",
+        "有界输出/敏感values和跨目标失效"
+      ],
+      "verification": "auth-cache-review-before-human-read",
+      "sources": [
+        "src/extension.ts#L251-L251",
+        "src/helm.exec.ts#L330-L348",
+        "src/helm.exec.ts#L422-L430",
+        "src/kuberesources.virtualfs.ts#L69-L110",
+        "src/components/clusterexplorer/node.helmrelease.ts#L16-L66"
+      ],
+      "cases": {
+        "NORMAL": "Release当前或history指定revision，v3/v4 get all与--revision，非可编辑资源或自动Apply",
+        "CANCEL_FAILURE": "无节点/错误nodeType不读取，缺CLI/认证/发布不存在明确失败而非空成功",
+        "STALE_PRIVACY": "原配置/namespace/发布快照或revision变化拒旧输出，不沿用仅name与nonce虚拟URI，不泄露values"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E075",
+        "scope": "helmGet只读纯Node解析已接（M6-E075）：release.v1 Secret内存解码（manifest/config/hooks）"
+      }
+    },
+    {
+      "entry": "extension.helmInstall",
+      "commandId": "extension.helmInstall",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F5",
+        "M6-F7",
+        "M6-F8"
+      ],
+      "task": "Phase 3：接通Chart/version Install真实参数/生成release名称/namespace与结果，遵守公共门禁。",
+      "dependencies": [
+        "G4身份/内容确认/去重/未知结果与原配置",
+        "Helm发布身份/Chart来源/隔离缓存/hooks风险"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L254-L254",
+        "src/helm.exec.ts#L526-L579"
+      ],
+      "cases": {
+        "NORMAL": "chart默认或指定version、原namespace，v3/v4 --generate-name；上游没有独立release/values picker，不凭Spec猜新增流程",
+        "CANCEL": "自由输入取消不Install，执行前公共门禁绑定实际参数/目标，不偷偷下载或改namespace",
+        "PARTIAL_UNKNOWN_STALE": "NAME行缺失不伪造发布成功身份；配置/内容漂移拒旧意图，hooks/超时已变更可能保留未知，不重试回滚"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E076",
+        "scope": "helmInstall服务器执行已接（M6-E076）：G4链+HELM_KUBETOKEN零物化CLI"
+      }
+    },
+    {
+      "entry": "extension.helmUninstall",
+      "commandId": "extension.helmUninstall",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F5",
+        "M6-F7"
+      ],
+      "task": "Phase 3：接通Release Uninstall确认/原namespace与发布世代核对/实际执行及结果刷新。",
+      "dependencies": [
+        "G4提交/确认期限/去重/未知结果",
+        "原配置/Release驱动身份与hooks/清理副作用"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L255-L255",
+        "src/helm.exec.ts#L350-L376"
+      ],
+      "cases": {
+        "NORMAL": "仅release节点，警告并明确Uninstall才del，确定成功才刷新原树",
+        "CANCEL": "无节点/错误类型/取消警告无提交，不自动运行清理",
+        "PARTIAL_UNKNOWN_STALE": "同名重建/历史/配置变化拒旧确认；失败/超时保原结果，不因进度结束宣称全部删除或重试"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E076",
+        "scope": "helmUninstall服务器执行已接（M6-E076）：G4链+世代证明+零物化CLI"
+      }
+    },
+    {
+      "entry": "extension.helmRollback",
+      "commandId": "extension.helmRollback",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F5",
+        "M6-F7"
+      ],
+      "task": "Phase 3：接通指定历史revision Rollback及cleanup-on-fail副作用披露、原目标核对和结果。",
+      "dependencies": [
+        "原Release存储身份/当前历史与所选revision快照",
+        "G4确认/去重/取消未知与hooks边界"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L256-L256",
+        "src/helm.exec.ts#L378-L420"
+      ],
+      "cases": {
+        "NORMAL": "非deployed历史项警告确认后rollback所选revision --cleanup-on-fail，非滚到最新",
+        "CANCEL": "当前deployed提示不执行，无节点或取消警告无提交",
+        "PARTIAL_UNKNOWN_STALE": "发布重建/历史变化/过期确认拒旧请求；cleanup-on-fail不是插件自动回滚许可，失败或超时不重放"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E076",
+        "scope": "helmRollback服务器执行已接（M6-E076）：G4链+世代证明+零物化CLI"
+      }
+    },
+    {
+      "entry": "extension.helmPackage",
+      "commandId": "extension.helmPackage",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7"
+      ],
+      "task": "Phase 4：接通Chart Package选择输入/输出目录与覆盖及生成产物身份，不写运行缓存代工作区。",
+      "dependencies": [
+        "Server Chart与输出目录可信路径/版本/覆盖",
+        "固定Helm参数及文件结果归账"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L252-L252",
+        "src/helm.exec.ts#L432-L454"
+      ],
+      "cases": {
+        "NORMAL": "选Chart再选单个filesystem目录，package Chart -d目录生成tgz，不发布或上传",
+        "CANCEL": "Chart/目录选择取消不打包，非file输出明确拒绝",
+        "FAILURE_STALE": "输入/目标版本变化/已有文件/超时明确，不未经确认覆盖或删旧产物"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E044",
+        "scope": "用户显式Package窄入口（chart目录与打包目标均为规范workspace位置=root+相对path全schema校验，绝无任意文件系统路径/shell字符串；上游pickChart+Save单文件夹对话框语义，chart picker/对话框浏览入口后续）：单次 helm package <chart> -d <目标目录>（隔离PATH+空HOME；用户repositories.yaml只读，缺依赖下载只写插件隔离缓存）；唯一文件系统效果=目标workspace目录内的.tgz归档（目标目录自动创建）；非零退出=失败固定码（stderr绝不保留——披露偏离）；输出仅bounded stdout≤16KiB（含saved-to身份）；30s固定期限/单并发无队列/部分产物如实报告不自动重试；诊断面板bounded四字段表单非最终chart picker/保存对话框renderer。链为真实工作区写链（写用户指定目标），静态审查交付，运行归人工包；自动测试仅纯协议/投影值"
+      }
+    },
+    {
+      "entry": "extension.helmInsertReq",
+      "commandId": "extension.helmInsertReq",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F8"
+      ],
+      "task": "Phase 4：接通Insert Dependency已读仓库来源/版本与活动文档buffer插入，不照搬旧路径缓存假设。",
+      "dependencies": [
+        "当前Helm已审仓库/index来源与默认版本语义",
+        "文档版本/选择范围/安全编辑和无隐式保存"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L249-L249",
+        "src/helm.exec.ts#L885-L955",
+        "src/helm.requirementsCodeLens.ts#L1-L29"
+      ],
+      "cases": {
+        "NORMAL": "repo/chart输入匹配依赖后插入name/version/repository snippet，编辑buffer不隐式落盘",
+        "CANCEL_FAILURE": "取消/缺repo/chart/index/无活动文档明确，不把错误或依赖正文写日志",
+        "STALE": "文档/来源变化拒旧编辑；上游HELM_HOME/repo.cache/第一版本不是v3默认来源或可信最新证明"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E048",
+        "scope": "用户显式Insert Dependency窄入口（纯读链：无CLI/spawn/写）：按仓库名+chart名经既有repository-file只读边界与纯投影查最新版本（上游searchForChart/releases[0]语义），生成上游Requirement文本形状但repository字段用@别名引用——仓库URL（可能内嵌凭证）绝不离开读取边界（披露偏离）；不自动插入任何文档/剪贴板（上游insertSnippet为主机编辑器动作；此处仅显示bounded文本≤512由人放置）；缺仓库/chart/索引→NOT_FOUND/HELM_INDEX_MISSING固定码；5s调度期限与仓库读取链一致；诊断面板bounded表单非最终输入框/renderer。读链静态审查交付，运行归人工包；自动测试仅纯协议/投影值+合成注入读"
+      }
+    },
+    {
+      "entry": "extension.helmConvertToTemplate",
+      "commandId": "extension.helmConvertToTemplate",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7"
+      ],
+      "task": "Phase 4：接通资源/文件/活动缓冲Convert to Template到Chart文件，绑定输入和实际工作区副作用。",
+      "dependencies": [
+        "M4文件owner/安全路径/覆盖/多步骤归账",
+        "原资源Load身份或文件/dirty文档版本与Chart创建边界"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L2255-L2261",
+        "src/helm.authoring.ts#L25-L175"
+      ],
+      "cases": {
+        "NORMAL": "选工作区后从资源YAML/所选文件/活动文本取得输入，选已有或创建Chart，清元数据/status并真实写templates文件",
+        "CANCEL_PARTIAL": "新Chart可能先于模板名称输入创建，之后取消只能报告已创建Chart，不伪称无副作用或自动删目录",
+        "FAILURE_STALE": "输入/Chart/目标路径变化与覆盖拒旧意图，禁止路径逃逸/无界扫描/数字损坏/静默覆盖，不自动Save或Apply资源"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E049",
+        "scope": "用户显式Convert to Template窄入口（资源YAML随请求体≤45KiB单文档；chart为显式规范workspace位置=root+相对path全schema校验+bounded模板名token——无chart自动发现/quick-pick/自动创建（上游取消可留半成品目录，显式表单从根上避免该部分副作用，披露更窄范围））：parsing层templatise严格移植（剥集群metadata/status与last-applied注解、设fullname名表达式与chart标签表达式、修正引号，双侧bounded）后，adapter以独占wx标志在chart templates/下单次写入<名称>.yaml新文件——绝不覆盖既有文件（上游TODO承认缺存在检查；DOCUMENT_DIRTY拒绝，披露增强）；不自动打开文档（主机UI动作）；不触发Save/Apply/集群。非YAML/多文档→CONTENT_INVALID/INVALID_INPUT固定码；30s期限/单并发；诊断面板bounded表单+textarea非最终picker/renderer。链为真实工作区写链（单新文件），静态审查交付，运行归人工包；自动测试仅纯协议/投影/变换值"
+      }
+    },
+    {
+      "entry": "extension.helmParameterise",
+      "commandId": "extension.helmParameterise",
+      "milestone": "M6",
+      "evidence": "M1-E055",
+      "requirements": [
+        "M6-F6",
+        "M6-F7"
+      ],
+      "task": "Phase 4：接通Convert to Template Parameter的字段选择/两文档编辑/缺values文件创建与失败归账。",
+      "dependencies": [
+        "Helm实际字段/选择范围和两个文档版本",
+        "M4文件owner/明确创建与buffer编辑分离/冲突未知"
+      ],
+      "verification": "static-only-human-operation",
+      "sources": [
+        "src/extension.ts#L2263-L2289",
+        "src/helm.authoring.ts#L189-L355"
+      ],
+      "cases": {
+        "NORMAL": "常量字段转.Values路径并在values缓冲插入实际值，已有键消歧，显示插入位置；不自动保存两缓冲",
+        "CANCEL_FAILURE": "无编辑器/非Helm模板/非字段/不能定位或applyEdit false明确，values文件可能先创建须记部分副作用",
+        "STALE": "任一文档/selection/目标文件变动拒旧编辑，多文件非原子与外部竞态披露，不无限递归消歧或自动重试"
+      },
+      "implementation": "partial",
+      "candidateId": "m2-06193c4a10751965badefdda7fb17001da21a94d932a62575cbd42b3b7cb0215",
+      "runtimeEvidence": [],
+      "implementationEvidence": {
+        "evidence": "M6-E050",
+        "scope": "用户显式Parameterise窄入口（纯变换计算链：无CLI/无文件/无缓冲写）：在所供模板YAML文本（≤45KiB、≤4000行）中定位唯一`字段: 值`标量赋值行（任意缩进、值至行尾、无尾注释），替换为`{{ .Values.<模板名>.<字段> }}`并生成values条目文本（<模板名>:\\n  <字段>: 原值）——上游对两缓冲applyEdit为主机编辑器动作，此处仅显示两个bounded文本由人放置（披露偏离）；不自动保存/写文件/剪贴板。找不到赋值→NOT_FOUND（上游Selection is not a YAML field类比）；多于一个精确匹配→显式STATE_UNAVAILABLE绝不猜测/递归消歧；模板/字段名token集（上游sanitize在此为恒等）；字面值单行≤1024；文档级控制字符守卫容忍换行/制表。48KB路由/单飞行；诊断面板bounded表单+textarea非最终symbol picker/renderer。纯读形计算静态审查交付，运行归人工包；自动测试仅纯协议/投影/变换值"
+      }
+    }
+  ]
+}

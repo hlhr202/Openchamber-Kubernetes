@@ -1,0 +1,14 @@
+{
+  "records": [
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v1.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/create/create_job.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/create/create_job.go",
+      "local": "tests/fixtures/contracts/manifest-cronjob-run-contract/pkg__cmd__create__create_job.go.txt",
+      "bytes": 8169,
+      "sha256": "491e779c041e9cd80186514c5ebdc9b348fb67655b4d0fba006143238902e2ae"
+    }
+  ]
+}

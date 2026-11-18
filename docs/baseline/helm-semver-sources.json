@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "evidence": "M1-E052",
+  "scope": "source-parsing-contract-not-cli-support-or-runtime-evidence",
+  "records": [
+    {
+      "repo": "helm/helm",
+      "tag": "v3.19.0",
+      "commit": "3d8990f0836691f0229297773f3524598f46bda6",
+      "path": "go.mod",
+      "url": "https://raw.githubusercontent.com/helm/helm/3d8990f0836691f0229297773f3524598f46bda6/go.mod",
+      "bytes": 9035,
+      "sha256": "b7911e46e951001cb367fbb8859f42db90508b33430f582b200bd158c37ab305"
+    },
+    {
+      "repo": "Masterminds/semver",
+      "tag": "v3.4.0",
+      "commit": "61fc460d28283a91c53be65c2e0f20b494ac8ad9",
+      "path": "version.go",
+      "url": "https://raw.githubusercontent.com/Masterminds/semver/61fc460d28283a91c53be65c2e0f20b494ac8ad9/version.go",
+      "bytes": 20074,
+      "sha256": "8355b3625e19b5d0b1b326a838995846c1ed55ca623b8a550da57f23e5a19cb7"
+    },
+    {
+      "repo": "Masterminds/semver",
+      "tag": "v3.4.0",
+      "commit": "61fc460d28283a91c53be65c2e0f20b494ac8ad9",
+      "path": "constraints.go",
+      "url": "https://raw.githubusercontent.com/Masterminds/semver/61fc460d28283a91c53be65c2e0f20b494ac8ad9/constraints.go",
+      "bytes": 17139,
+      "sha256": "7811d6286f9190a0ecdd196c7059c2cc95ee247981388bcb2d22ebafabcb19ad"
+    },
+    {
+      "repo": "Masterminds/semver",
+      "tag": "v3.4.0",
+      "commit": "61fc460d28283a91c53be65c2e0f20b494ac8ad9",
+      "path": "version_test.go",
+      "url": "https://raw.githubusercontent.com/Masterminds/semver/61fc460d28283a91c53be65c2e0f20b494ac8ad9/version_test.go",
+      "bytes": 24257,
+      "sha256": "fa702fd0565bff5e659135b065be1eb2c528cd7090ed3547c6b0ca7396337b55"
+    },
+    {
+      "repo": "Masterminds/semver",
+      "tag": "v3.4.0",
+      "commit": "61fc460d28283a91c53be65c2e0f20b494ac8ad9",
+      "path": "constraints_test.go",
+      "url": "https://raw.githubusercontent.com/Masterminds/semver/61fc460d28283a91c53be65c2e0f20b494ac8ad9/constraints_test.go",
+      "bytes": 36366,
+      "sha256": "d09d0b562f99fb50b7998fee2dd1789cc6d65b90e3945172daa2304e3cd64842"
+    },
+    {
+      "repo": "Masterminds/semver",
+      "tag": "v3.4.0",
+      "commit": "61fc460d28283a91c53be65c2e0f20b494ac8ad9",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/Masterminds/semver/61fc460d28283a91c53be65c2e0f20b494ac8ad9/README.md",
+      "bytes": 11688,
+      "sha256": "4266e5ca721d8f7bb73efc19be6ce82a197dcc90965b28319986719494567fc8"
+    },
+    {
+      "repo": "Masterminds/semver",
+      "tag": "v3.4.0",
+      "commit": "61fc460d28283a91c53be65c2e0f20b494ac8ad9",
+      "path": "LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/Masterminds/semver/61fc460d28283a91c53be65c2e0f20b494ac8ad9/LICENSE.txt",
+      "bytes": 1078,
+      "sha256": "2db9097f7b3750c1c9426996d21fe443d339131fb758c2167d2d5fabe8e6cbf9"
+    }
+  ]
+}

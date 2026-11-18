@@ -1,0 +1,45 @@
+{
+  "purpose": "M4-E023-preparatory-public-text-only-not-reviewed-or-runtime-evidence",
+  "records": [
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/apply/apply.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/apply/apply.go",
+      "bytes": 36077,
+      "sha256": "1bc39a7f141e9af12e3e2b337b0a026865cf9e089c3ebfaa5102ef0a2984d34c",
+      "local": "tests/fixtures/contracts/manifest-write-contract/pkg__cmd__apply__apply.go.txt"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/apply/patcher.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/apply/patcher.go",
+      "bytes": 16755,
+      "sha256": "8ce896b398cdc9ef78d8b31124402bb3c045e1c0ae67c3c99acc4f54a9de1c47",
+      "local": "tests/fixtures/contracts/manifest-write-contract/pkg__cmd__apply__patcher.go.txt"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/create/create.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/create/create.go",
+      "bytes": 10030,
+      "sha256": "d3a9ac3c53252de3af128473f470f0293d2e5298aa27cd4beef7b18b6f88d35b",
+      "local": "tests/fixtures/contracts/manifest-write-contract/pkg__cmd__create__create.go.txt"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v0.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/util/apply.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/util/apply.go",
+      "bytes": 4465,
+      "sha256": "f5bec33aba3ab080c8d3dfa5693a2ee0901ca3d0a4641dd6a755f559cb171fcb",
+      "local": "tests/fixtures/contracts/manifest-write-contract/pkg__util__apply.go.txt"
+    }
+  ]
+}

@@ -1,0 +1,2335 @@
+{
+  "sources": [
+    {
+      "id": "kubernetes",
+      "repo": "vscode-kubernetes-tools/vscode-kubernetes-tools",
+      "tag": "1.4.1",
+      "commit": "f54aef89a48c64e3df66af4a75cc5dd3d80f4a75"
+    },
+    {
+      "id": "openchamber",
+      "repo": "openchamber/openchamber",
+      "tag": "v2.5.1",
+      "commit": "3e9ef4db17bd184f1f2713eb6356261304d6aee7"
+    }
+  ],
+  "records": [
+    {
+      "source": "kubernetes",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "source": "kubernetes",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/package.json",
+      "sha256": "a360afb5e0784750ee053386709064d444cb6c9c1dd5b2a0a8a7158ae3f7d2e0",
+      "bytes": 59335
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/@types/dockerfile-parse.d.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/@types/dockerfile-parse.d.ts",
+      "sha256": "276aa1ea4e5c490a09332e51833b0f4d08ca91f1f62b15f46600d11dd23c492f",
+      "bytes": 117
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/@types/fuzzysearch.d.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/@types/fuzzysearch.d.ts",
+      "sha256": "3ce5fc74b1671028b9b41753e599c848c264d99d0a04c4e9c09909e29c13422e",
+      "bytes": 128
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/@types/node-yaml-parser.d.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/@types/node-yaml-parser.d.ts",
+      "sha256": "740513926ba52723d2fd16d26ca9e1a19987dae31c7bfe0d046ddc7669d4c4bb",
+      "bytes": 859
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/@types/opn.d.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/@types/opn.d.ts",
+      "sha256": "231fb835921fbaf1feccc48ff53152c87462b2c7644cce133a83635b3556c14a",
+      "bytes": 81
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/api.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/api.ts",
+      "sha256": "8efb544a7d371aa94f20881cbfec422a04cdf6b11e68bc89b01edf6a7a099fe8",
+      "bytes": 1346
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/cloudexplorer/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/cloudexplorer/v1.ts",
+      "sha256": "cddca691e965aef24172481287d860ecbafdee080e9698defe3f73bd5bd65dd9",
+      "bytes": 1062
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/cluster-explorer/v1_1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/cluster-explorer/v1_1.ts",
+      "sha256": "7e22383143c49329ab3dea7d60ce9ce41df46345c7b4b085ce47ecd36fec7cda",
+      "bytes": 3882
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/cluster-explorer/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/cluster-explorer/v1.ts",
+      "sha256": "e09432bacc4b5fdcee1f439a90f741623516ce1ca56d461367fd145b277f35e4",
+      "bytes": 3890
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/clusterprovider/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/clusterprovider/v1.ts",
+      "sha256": "248d03b0360fcb49f34c6c4b2017249bdbad165b01988f7a2d41be7490a5a4d9",
+      "bytes": 1043
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/configuration/v1_1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/configuration/v1_1.ts",
+      "sha256": "91431ff8491e174d45104daa0cf8ebfb8cf9ccfc6b5a65325f3dbd889dff9858",
+      "bytes": 842
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/configuration/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/configuration/v1.ts",
+      "sha256": "f098bd7d24c4932eafb1fe8889f6a4daf13f841ead2bf0f8d0347ce33f975a91",
+      "bytes": 612
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/helm/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/helm/v1.ts",
+      "sha256": "86973d1f39d23ecdf628157c68797b97a0d46618b484e0915d4435b2091124f0",
+      "bytes": 432
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/kubectl/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/kubectl/v1.ts",
+      "sha256": "9244823a60c9349e466689221edc75661044aa8eff2209d5d671ac99fbfd3c20",
+      "bytes": 1129
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/contract/localtunneldebugger/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/contract/localtunneldebugger/v1.ts",
+      "sha256": "4b6708746a4805f95f5ea0a6f9d72b6ee1f9b7fa6ffac75e57eb3f45505e10d3",
+      "bytes": 517
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/apibroker.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/apibroker.ts",
+      "sha256": "7f9790e573fb5a107419ae6520844f29ffd99830657a25d9d06a1d9877f06fcf",
+      "bytes": 2712
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/apiutils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/apiutils.ts",
+      "sha256": "785d69f2494c59164c40c196d17599418c8f5ff57960092489aa38bb3dfdc810",
+      "bytes": 310
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/cloudexplorer/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/cloudexplorer/v1.ts",
+      "sha256": "df90febec682123fa474cc5daf3d77d389d5d16b61f705412d29dfe9786d5ec6",
+      "bytes": 1236
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/cloudexplorer/versions.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/cloudexplorer/versions.ts",
+      "sha256": "a5d82a942e1b588cec6821a16a3dd8aa43f928d3060b1591a6b112fafec0ffa6",
+      "bytes": 417
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/cluster-explorer/common.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/cluster-explorer/common.ts",
+      "sha256": "cc45a802841c9dd9a4c99a3583638e075aa6598524c11e3e53ba5f27cf89b3fc",
+      "bytes": 9388
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/cluster-explorer/v1_1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/cluster-explorer/v1_1.ts",
+      "sha256": "9806fde127ffb28e0834c6565db54d1fd6ae9487273cf24b075bb5efc68d371e",
+      "bytes": 1330
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/cluster-explorer/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/cluster-explorer/v1.ts",
+      "sha256": "5674a6b4dc69829fb72f48156d92b2fa7900d9ada93deecff41ded58a23a2988",
+      "bytes": 1279
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/cluster-explorer/versions.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/cluster-explorer/versions.ts",
+      "sha256": "ba5fed88fbb2843b3c8fbe86a4f0dbfeaec67c6fd1d49842d33b922892957294",
+      "bytes": 548
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/clusterprovider/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/clusterprovider/v1.ts",
+      "sha256": "59ff0cdbbf5a9dba73cd08caa3a3f18bf35f738fdf1be8c687983d3b4c06e6bb",
+      "bytes": 686
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/clusterprovider/versions.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/clusterprovider/versions.ts",
+      "sha256": "f1bff6e8f908c329eeef6a567e3530cb36f747e58764837b2d505df3f1307e36",
+      "bytes": 449
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/configuration/v1_1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/configuration/v1_1.ts",
+      "sha256": "f1d6d5502c27ccc938666286e60dd6bc228abfc5f49f506d295f82cfd2f3cac0",
+      "bytes": 1473
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/configuration/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/configuration/v1.ts",
+      "sha256": "e9212f6b282464b7c0f7cb91b49c4d2fcdfede95834e220cb18ac402dcacc356",
+      "bytes": 384
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/configuration/versions.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/configuration/versions.ts",
+      "sha256": "c0da37177e379b28cc84f7b8165f084582519ae44753270e207ecc9d72d601dc",
+      "bytes": 884
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/helm/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/helm/v1.ts",
+      "sha256": "be38e6c99463edd3d44eb618a0eecbdd9d24334c4828c9526172076caca3773c",
+      "bytes": 329
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/helm/versions.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/helm/versions.ts",
+      "sha256": "766542a67acc5ba748d6b4bb771070faacd9c1cafed5f565f0a515cc74eba7cc",
+      "bytes": 303
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/kubectl/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/kubectl/v1.ts",
+      "sha256": "8537cfe2070a18ec97bdc2e28f55852c2d5bd8473fb8729353b9286c1ce6da98",
+      "bytes": 3211
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/kubectl/versions.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/kubectl/versions.ts",
+      "sha256": "dad80835d552fffa32b0d98c04c56e66fd6fbfdecc769917e1c4a71a96020d64",
+      "bytes": 550
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/localtunneldebugger/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/localtunneldebugger/v1.ts",
+      "sha256": "deabf82a71039a9b76d94bd0b4d8640a97cdb903de5688598b622b1d1c69ae06",
+      "bytes": 651
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/api/implementation/localtunneldebugger/versions.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/api/implementation/localtunneldebugger/versions.ts",
+      "sha256": "6f14a23575313bd28203a5db7652be50120d6e45be49ffd2556969a961a482cd",
+      "bytes": 451
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/assets.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/assets.ts",
+      "sha256": "fd8ff9977dc0afb275fb4c1bb4decad05463268e3e37498475494be989280a9f",
+      "bytes": 615
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/binutil.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/binutil.ts",
+      "sha256": "231e6a63873352dcb8407b638790d73694c12d48fc739e118c532e5345a38191",
+      "bytes": 3486
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/binutilplusplus.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/binutilplusplus.ts",
+      "sha256": "59b7683c5d0588e1c2ad1570b5ed9cbb3a6d13114bca597183ce011bd8bf87ff",
+      "bytes": 14832
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/cloudexplorer/cloudexplorer.extension.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/cloudexplorer/cloudexplorer.extension.ts",
+      "sha256": "7504d70d6583fcfb58c3d7aa30817788281c9f4aae4ee1cf13c08937e29e5e09",
+      "bytes": 237
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/cloudexplorer/cloudexplorer.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/cloudexplorer/cloudexplorer.ts",
+      "sha256": "ddaa1fa0d34a29ac266cc8054824153f65998aa5947089bbc00268f8c7503054",
+      "bytes": 3799
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/cloudprovider/aksprovider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/cloudprovider/aksprovider.ts",
+      "sha256": "a5163a14dc59da9102e2bcf233fd8d96d069dcc8b29767921bf799e30d5408e3",
+      "bytes": 8116
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/cloudprovider/cloudprovider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/cloudprovider/cloudprovider.ts",
+      "sha256": "9f872c49cb41da1004e63d604d64d28b009d38094c4f4a9a0877275e758c25ee",
+      "bytes": 215
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/explorer.extension.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/explorer.extension.ts",
+      "sha256": "495c0dcb416b6734d5ce5a72a71c72192314baaf28c067374396986a9747d602",
+      "bytes": 288
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/explorer.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/explorer.ts",
+      "sha256": "49a9b38a41c666c933cb451db1fdf4ac468b6993db7f46ab06dd8cc0184514aa",
+      "bytes": 13137
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/extension.nodesources.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/extension.nodesources.ts",
+      "sha256": "d08d4bb47fa335c006a01aed4231ca38cd0ba7f47f17b7dc27f3b721be06602e",
+      "bytes": 3167
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.configurationvalue.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.configurationvalue.ts",
+      "sha256": "5835bf2aea3164dc4b5cd198628ce6082453e7aedf523997d287dd6755f0f46e",
+      "bytes": 1301
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.context.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.context.ts",
+      "sha256": "fcbf9a239644e280023240e81fcbd0fce8c7c0f39d0146992498a85135a1cac3",
+      "bytes": 3128
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.folder.crdtypes.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.folder.crdtypes.ts",
+      "sha256": "3007562ba93851ec8ea6a40b4f61b2743a75c17867e0735d4f0fbd525031cf42",
+      "bytes": 755
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.folder.grouping.custom.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.folder.grouping.custom.ts",
+      "sha256": "2493e3f3321d92b548ce4d4a89ba912fe61c043147bd2c01efd1b6a60954b89d",
+      "bytes": 1005
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.folder.grouping.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.folder.grouping.ts",
+      "sha256": "5b7ac3585ff206892c5ab1f62d3c4337c9c911988b4bb8a548e107e476207ce2",
+      "bytes": 2278
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.folder.helmreleases.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.folder.helmreleases.ts",
+      "sha256": "f3aabd799bd5c52090a94f37ec68a7e33d1aa58928fd24f6d368ae557e4958c1",
+      "bytes": 1244
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.folder.resource.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.folder.resource.ts",
+      "sha256": "d5c63d1adaa8e2c36e2cd71025fe96fe706a74d6bb12cc70cbe54d3c0fe4cfe7",
+      "bytes": 2838
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.folder.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.folder.ts",
+      "sha256": "0e00381c7386eb59829cb309650e82829b206ce03ebdf4c7e2f606d0aa1d0425",
+      "bytes": 1056
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.helmrelease.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.helmrelease.ts",
+      "sha256": "6af12b3ab744b1f8f794987df3948445a2dbc8f32c2125231675b459f5dfb690",
+      "bytes": 3560
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.message.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.message.ts",
+      "sha256": "14f17dce7154088d76320fd446633cd4d73eb8202fb76cc8944f539cb5645008",
+      "bytes": 1251
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.resource.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.resource.ts",
+      "sha256": "ad6097bfa552a2bcf6d129a140f5b38b9b2a3d84b37f7dc348dc92054e9ef1cd",
+      "bytes": 3937
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/node.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/node.ts",
+      "sha256": "8b6759e58009a214e61477c317e6e680ae02ae1a874a36f033a70b5f40afad5f",
+      "bytes": 3548
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/resourcekinds/resourcekind.namespace.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/resourcekinds/resourcekind.namespace.ts",
+      "sha256": "bf9dae6a1e3be85dd67ad5dceeac226cfaa04020f3c987392d0deda3a8bf0c89",
+      "bytes": 982
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/resourcekinds/resourcekind.node.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/resourcekinds/resourcekind.node.ts",
+      "sha256": "31aef9a0d5cc8b51049da30b390a97bfb04ee70388933f74a78c546512cf6f43",
+      "bytes": 679
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/resourcekinds/resourcekind.pod.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/resourcekinds/resourcekind.pod.ts",
+      "sha256": "f064da56e72d5ea78e218bb5b100968db8927eae746523fe2f638a201c54e82a",
+      "bytes": 2931
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/resourcekinds/resourcekinds.configuration.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/resourcekinds/resourcekinds.configuration.ts",
+      "sha256": "c56266b74faa9600081354aff9f3aba9f4ca001575cc898c1be2be3bd4181f96",
+      "bytes": 1214
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/resourcekinds/resourcekinds.selectspods.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/resourcekinds/resourcekinds.selectspods.ts",
+      "sha256": "87685df1b556434f59cadd6f1f9ccff3c31d732c82c0828d6449d418049250d5",
+      "bytes": 1092
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterexplorer/resourceui.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterexplorer/resourceui.ts",
+      "sha256": "daad2463e9b39c57887a11efff18c69a410aee41831120f90471b91c156abd16",
+      "bytes": 3489
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/azure/azure.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/azure/azure.ts",
+      "sha256": "5122076f1ef5d8d236122b2a4c13b9e9b5c2e2d827f5adcfb3d0d922f63b9253",
+      "bytes": 14323
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/azure/azureclusterprovider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/azure/azureclusterprovider.ts",
+      "sha256": "86b09e8029f26c1c17839dbffc740f55a011e11c6748aede35999210cd108251",
+      "bytes": 15542
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/clusterproviderregistry.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/clusterproviderregistry.ts",
+      "sha256": "10fbb0809925f5f0c6ea511190f29b891dcd6a2d1348553c350ae0bad08e0401",
+      "bytes": 1064
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/clusterproviderserver.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/clusterproviderserver.ts",
+      "sha256": "67a6609ec3b36e197d5d4877775a17592a60c1fa3f6a04e2b147c98071968dcb",
+      "bytes": 3750
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/common/cacheinfo.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/common/cacheinfo.ts",
+      "sha256": "8f707a63997cd16ffaaea6c994ecca35ced5675ba9bee23a2c158bdbedd6d260",
+      "bytes": 2443
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/common/explorer.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/common/explorer.ts",
+      "sha256": "56df5337e82dabd8c58281f8f8052fd4798d995bab2ec277e1a82b0852184f21",
+      "bytes": 176
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/common/form.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/common/form.ts",
+      "sha256": "a0275b4096d894dee2b8890463666497c0ea409b40700f189efd7c1e984ac432",
+      "bytes": 1328
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/minikube/minikube.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/minikube/minikube.ts",
+      "sha256": "dd81ac76a383936a4dccca8978337afe52200e8e9229601e19174f70eb2be9b5",
+      "bytes": 9304
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/minikube/minikubeclusterprovider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/minikube/minikubeclusterprovider.ts",
+      "sha256": "3a2dd57993502a8e30e5e88566c43f14fbcefb0b97fe5852ee4be79fe371544d",
+      "bytes": 7002
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/clusterprovider/readinesstracker.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/clusterprovider/readinesstracker.ts",
+      "sha256": "b2bd9622ea2f42a27ebb6a8f69e16bec673eae51ab305f419f910e266e536f04",
+      "bytes": 1079
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/config/config.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/config/config.ts",
+      "sha256": "969d9165a9e0bb5df9cc8b05429668e1b05d1a9553029f58cc1cce0fc3ec5ec4",
+      "bytes": 16900
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/contextmanager/active-context-tracker.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/contextmanager/active-context-tracker.ts",
+      "sha256": "58170e902b2a3d0e8cb7dfc7c97fe22b81ca35beaec5dfcee76bb893153f649e",
+      "bytes": 850
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/contextmanager/active-value-tracker.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/contextmanager/active-value-tracker.ts",
+      "sha256": "131463de9e00709e435cded7978369bcb3be01a2542456e62ed95d2aa1f45147",
+      "bytes": 1539
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/contextmanager/background-context-cache.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/contextmanager/background-context-cache.ts",
+      "sha256": "ff1d51b9d6d254fdb7c7233d81c766b41c448c9333ea54638862e3c4c9c0ee88",
+      "bytes": 3018
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/download/download.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/download/download.ts",
+      "sha256": "5090c78f7124d500cd1566e04cbd853fbbcfc41dc675f63e280f31ca84bba094",
+      "bytes": 3005
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/git/git.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/git/git.ts",
+      "sha256": "2a5cd69fa834b5742cc5996937b33107769c618bc4655ae5a64593f3877db269",
+      "bytes": 894
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/installer/fixwriteablebinaries.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/installer/fixwriteablebinaries.ts",
+      "sha256": "1ea4126e71efe7fc95dfb40409f2f9cc077fe31a5579cede23dc3ab1fba6d0e1",
+      "bytes": 2694
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/installer/installationlayout.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/installer/installationlayout.ts",
+      "sha256": "b5916271c7af35dffb63cacae8a6cb00b560cc23282077d38bd864f7b056c612",
+      "bytes": 2200
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/installer/installdependencies.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/installer/installdependencies.ts",
+      "sha256": "fd06ccc989c2b1a2ed473c496b180b32008ca87c5ca9c93a2dc675741eee8fb6",
+      "bytes": 2125
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/installer/installer.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/installer/installer.ts",
+      "sha256": "e5aa6d13cf4ae27e757ec7a1eda13a54646892ce6ecbef99922f41acd62d9f5c",
+      "bytes": 10253
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/json/jsonhierarchicalsymbolprovider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/json/jsonhierarchicalsymbolprovider.ts",
+      "sha256": "f36e535ba66904051364f62c67bebaeaac9f33071bfaf67f0864c06efd199248",
+      "bytes": 2724
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/autoversion.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/autoversion.ts",
+      "sha256": "f1278acc82b0777b69919ddf596cc8ca3ce0fdf214f7c590d964d2e051fa036c",
+      "bytes": 8218
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/compatibility.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/compatibility.ts",
+      "sha256": "f9e15f0a3bcfcece76649a0c07f6d2bcaef6526cbfa747a07850b49cfba9fc93",
+      "bytes": 1830
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/dashboard.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/dashboard.ts",
+      "sha256": "08223e4e232c363f5db226513f57fadcb787970613b566d44d790c74ce268d2c",
+      "bytes": 6415
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/events.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/events.ts",
+      "sha256": "7d2b6f4f72082a046bce1c28ffffedb74141accbd7fdb7076d835c7b2b083590",
+      "bytes": 863
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/kubeconfig.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/kubeconfig.ts",
+      "sha256": "2b3b3ab3150c69cf8e777ca0438f8605e415d47cba9b9cfd97b58b290bace365",
+      "bytes": 9178
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/logs.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/logs.ts",
+      "sha256": "a7bfc731c8e1d2aa83ad18b64075c18b2ee7bbd8f9a4212cf43b8acc53613dbd",
+      "bytes": 6347
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/namespace.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/namespace.ts",
+      "sha256": "8133c6e193f8cd156e1576e2b5b57b7c4905e871e3905f1c40048f00e4566567",
+      "bytes": 2275
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/port-forward-ui.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/port-forward-ui.ts",
+      "sha256": "4b80176ee20ad041899bc211ff6634d090481bda1b0e16079b9a8c51c0e41f94",
+      "bytes": 3416
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/port-forward.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/port-forward.ts",
+      "sha256": "c8e55aae3f417e2799574c41bd6d91f2002a87ef58af7e3a033069e34f5131dc",
+      "bytes": 16479
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/proxy.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/proxy.ts",
+      "sha256": "17aadab2815c1479fed74c98c5ed60db7f5cda7b7cb07b1dbed8a7e94afacafb",
+      "bytes": 2626
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/kubectl/watch.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/kubectl/watch.ts",
+      "sha256": "1cbeba79eecd53f812ade3c923a0ac0486a2849346eaf1ffc5ac574f05621d3f",
+      "bytes": 2400
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/lint/linter.impl.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/lint/linter.impl.ts",
+      "sha256": "0f27677d9f5b3be583f26adf41a2977949e58efd4210a7a91cd5c6e131e202bb",
+      "bytes": 2020
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/lint/linter.utils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/lint/linter.utils.ts",
+      "sha256": "59b893787c701d1c3a8bf5d97df2c48504051618f89f59f43ecb17b8154eef45",
+      "bytes": 728
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/lint/linters.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/lint/linters.ts",
+      "sha256": "0ec0365541589ef0036b141a6aeaf1de1c21372316eb46c4bd5f0dd9029b0a88",
+      "bytes": 334
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/lint/resourcelimits.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/lint/resourcelimits.ts",
+      "sha256": "e18faebbe1ed805589a67802acedcfe705be75b7c4253b56329938764313d098",
+      "bytes": 4111
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/localtunneldebugger/localtunneldebugger.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/localtunneldebugger/localtunneldebugger.ts",
+      "sha256": "64f8c5ba54c4dc834ee39ace07ffc7360867e3cc8e24e08b96737301a72c41c6",
+      "bytes": 1886
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/localtunneldebugger/localtunneldebugprovider.extension.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/localtunneldebugger/localtunneldebugprovider.extension.ts",
+      "sha256": "87ffd7bc21535e202731922c06b85e5f3f116b9e04fc7475b2ac59f673e1a5b1",
+      "bytes": 122
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/logs/app/index.html",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/logs/app/index.html",
+      "sha256": "8129ecf4311d6e2e60c62b632e8cb78d16df67df34fd6c04e16d3ec5be3f79ae",
+      "bytes": 8519
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/logs/app/main.js",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/logs/app/main.js",
+      "sha256": "6b3ab99a116ce05b1947ac57767258e3463b9c4f8fb7672d2c3628a4c88c51e6",
+      "bytes": 21105
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/logs/logsWebview.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/logs/logsWebview.ts",
+      "sha256": "72ad853a33734165e69347e8bb3924bc64c0617121bbaa768f3e0d306b63d6dc",
+      "bytes": 7997
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/platform/browser.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/platform/browser.ts",
+      "sha256": "c0dad8866c22e27f089ed8181256f49792def2d764e202aab8528b1e4cb40650",
+      "bytes": 277
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/platform/clipboard.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/platform/clipboard.ts",
+      "sha256": "429418a8d414d5a1ab87c5ea2b7f60af5c7929dcaf0c6938ee196290a659f263",
+      "bytes": 362
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/recommender/extension-recommender.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/recommender/extension-recommender.ts",
+      "sha256": "31d8e293f58844cf127b4935548911d351472ff627054adc5f111fb18ecf1057",
+      "bytes": 2706
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/swagger/swagger.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/swagger/swagger.ts",
+      "sha256": "4489b81c145f7ae6902a0aedef6b0af6f8078935bb986c1ac5ddf9e69194f9a3",
+      "bytes": 2951
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/webpanel/webpanel.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/webpanel/webpanel.ts",
+      "sha256": "647215121b510b10eaf6d727747a1b3ef751fb8e65a90ed93bcb53be2adc976e",
+      "bytes": 2415
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/components/wizard/wizard.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/components/wizard/wizard.ts",
+      "sha256": "a3e8238cb8a7f8eec402fedb4063c3aceec186d5f298ad2c6fe1315c83d33856",
+      "bytes": 2099
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/configMap.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/configMap.ts",
+      "sha256": "373bc6405fa81627dfd6cf5f63e37b55a606a9d691befcacca33112e1a9ae4da",
+      "bytes": 5436
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/debugProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/debugProvider.ts",
+      "sha256": "e2a637afa3dd58ec9b49a1eee9264224adceaf583fc99d54492007a6377ed327",
+      "bytes": 2909
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/debugSession.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/debugSession.ts",
+      "sha256": "049b50b4b036d2b88b8b138721578b6c7a0e5c67118b1e7f1245fa85275267a6",
+      "bytes": 23102
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/debugUtils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/debugUtils.ts",
+      "sha256": "54896f1c7c99f258b3e0c1843fb2ff549d5103ac33f20a24d39bfd37c5ed564a",
+      "bytes": 4085
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/dotNetDebugProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/dotNetDebugProvider.ts",
+      "sha256": "1dfcece6567e336feebc59030cd756fcfad2ef2ec699f75d672a606c526b3ad2",
+      "bytes": 4002
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/goDebugProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/goDebugProvider.ts",
+      "sha256": "dd16e83b1bfef8c545177d04901b49ab8ecbcfaf281e41cb1b40b32605cec18b",
+      "bytes": 5124
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/javaDebugProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/javaDebugProvider.ts",
+      "sha256": "d4c9cbacbafdb740a9ff9581c72855a84d839863d234caf91a290de074ed23b0",
+      "bytes": 6395
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/nodejsDebugProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/nodejsDebugProvider.ts",
+      "sha256": "f6f3f0c180cd146dd712cbb72c46d7526d53db4f100bc70f8e1051df8be6a11e",
+      "bytes": 5800
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/providerRegistry.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/providerRegistry.ts",
+      "sha256": "bd407b27e11eb977c578c00e2ecbe4f77e73715683ed07a1a229738d73eb44bc",
+      "bytes": 2933
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/debug/pythonDebugProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/debug/pythonDebugProvider.ts",
+      "sha256": "a9dbfc396303c947835c5c1c56dfbf55c0040e89fd21aea1e6c08051bb9e83ef",
+      "bytes": 4489
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/docker.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/docker.ts",
+      "sha256": "6c07dee3d92c4f5ae670a1241fc414ff3382c247f3c3c8ccc7cf0a935ce63c57",
+      "bytes": 423
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/docker/dockerfileParser.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/docker/dockerfileParser.ts",
+      "sha256": "659b97b4c498a6eb2251f14c4224696385264a728bbd132ac3dffe4753d0db3a",
+      "bytes": 3442
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/docker/dockerUtils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/docker/dockerUtils.ts",
+      "sha256": "31d3b011cf7fc2dc945e963b186f0fe510b7fa13db64e55c791784f9078df1f0",
+      "bytes": 1795
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/docker/parser.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/docker/parser.ts",
+      "sha256": "6f7ba7bf4f457fb8da94e427ad7b5d5607424f97de1047e3bcc25689f9107e53",
+      "bytes": 651
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/errorable.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/errorable.ts",
+      "sha256": "8a2313e24fc4f5132ce5306e5ec4d58621e6b2752a15db04de9a066d51d9c791",
+      "bytes": 644
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/explainer.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/explainer.ts",
+      "sha256": "09cb6ac046a1f7f81f0dbefa723e9bd986bf902f99009500bcbad0678bc361b5",
+      "bytes": 10670
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/extension.api.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.api.ts",
+      "sha256": "8ebb27f71f06af6771fc47271b1469f8caa1a1a7e30bc2b35c8f9f6cdda8f2ff",
+      "bytes": 252
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/extension.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extension.ts",
+      "sha256": "d861ac83f37d326369bcf306fac86c094fd9d80eb7904bae5faa5e65e32a48ee",
+      "bytes": 96547
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/extensionUtils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/extensionUtils.ts",
+      "sha256": "7aad15c93ff4de6e1b8fc5b7a6d3a0a3abb3281f09e4a3cb9ba1eee416d227a3",
+      "bytes": 1717
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/fs.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/fs.ts",
+      "sha256": "fe9fd53f9c70db7866705075b4241b808754cd110b562fb56db569f60c9e85a9",
+      "bytes": 2487
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.authoring.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.authoring.ts",
+      "sha256": "279d28e63a379ddc728aadc4817195a776f26069bbd16bfc353d6760d5b33672",
+      "bytes": 13270
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.blockMatchingProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.blockMatchingProvider.ts",
+      "sha256": "d6532780827b4b355cace02e13e46576ccc9db4ee8c957b5f940ce62597b4d0e",
+      "bytes": 5158
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.completionProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.completionProvider.ts",
+      "sha256": "044c409ecfb12e25ae1f18e17c28fd47233a251a87297556c51db8387f6c0532",
+      "bytes": 6035
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.documentProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.documentProvider.ts",
+      "sha256": "17bcc6074af9da42ad40ea7d5ef7dd3dcefb5a353968f74c24dd568829129e30",
+      "bytes": 11715
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.exec.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.exec.ts",
+      "sha256": "e9c4e8bbf64d8b8df9ba5480f99dae3408a8852052785740be4c8a74646ea4ed",
+      "bytes": 35963
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.funcmap.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.funcmap.ts",
+      "sha256": "06433f9ef6fb0ec418c5ad48ec71233c8ef670c9e0fe6ada3edf2095b8dc0e39",
+      "bytes": 17246
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.hoverProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.hoverProvider.ts",
+      "sha256": "4067bfa2433c779c264c0b07e147b111ac86011d15bc6e8ca0a6980e4a7e7ee5",
+      "bytes": 3784
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.repoExplorer.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.repoExplorer.ts",
+      "sha256": "00b3edeb4c1efad6f2951df9b311bf87a08bc34d17f1d7dd4fedcee190a1ee0e",
+      "bytes": 9409
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.requirementsCodeLens.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.requirementsCodeLens.ts",
+      "sha256": "00a84c2ad873fe7cf64bf10966896eced021d03c1a1ea337dd9d6105ad22f838",
+      "bytes": 957
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.resources.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.resources.ts",
+      "sha256": "6fb9200cca11da476545758d6a97383a6f5afd14a43acad6c44a2959a5a11dae",
+      "bytes": 4214
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.symbolProvider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.symbolProvider.ts",
+      "sha256": "cfc6ecfb99c467a26905b5ff9563f34e343e133bec784c3a94a767d1d5393c2e",
+      "bytes": 7447
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/helm.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/helm.ts",
+      "sha256": "1aef40a54826a2a74e8a47acd06d660880061123105263c7f5e33db9426b2ffc",
+      "bytes": 738
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/host.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/host.ts",
+      "sha256": "8c254f56e9b829a67d1f24ad1efbee83adef648db4af6b11fd8879cb2ef2905c",
+      "bytes": 7354
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/hostutils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/hostutils.ts",
+      "sha256": "381c12be63c31f2b5f7aa35822b5c57d2a86e9947213e1e02efbd73b0caa9e20",
+      "bytes": 467
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/image/imageToolRegistry.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/image/imageToolRegistry.ts",
+      "sha256": "774173bc802e551ad4b8887958dfb1a267289a6e8efa2ef15b3ed80d1f9a02de",
+      "bytes": 2229
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/image/imageUtils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/image/imageUtils.ts",
+      "sha256": "57d620c09cbc50ab633117f40ea79eef824901be47c769eda461509a3e65607f",
+      "bytes": 3259
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/kubeChannel.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/kubeChannel.ts",
+      "sha256": "94c1e57fc93d8e24208d8adcc21fbec4ade73e4ffb2b9d3ee781fcb76904d869",
+      "bytes": 767
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/kubectl.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/kubectl.ts",
+      "sha256": "2128526b495736404a72000a5a775b3af58c23ee67a9a351c680029e8e9ce09c",
+      "bytes": 20810
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/kubectlUtils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/kubectlUtils.ts",
+      "sha256": "2198661ac4f40fbaf788018dbe0aada22336cbc3d66e034c96ff658e77d34af9",
+      "bytes": 23418
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/kuberesources.linkprovider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/kuberesources.linkprovider.ts",
+      "sha256": "37dbbbf8d16e443221c6758e1739515977dfa73ea965bba0cc3d639bf00e7d8c",
+      "bytes": 6643
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/kuberesources.objectmodel.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/kuberesources.objectmodel.ts",
+      "sha256": "28c8e3d9ecebcbf0a497accb92ab0b5e5d6460ea78ad83bba1bae76b4a1e43a3",
+      "bytes": 1723
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/kuberesources.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/kuberesources.ts",
+      "sha256": "cab28b4c2325a2aeeb0b92815c1291321b01532ab7791ddf80ac6650d458faab",
+      "bytes": 3074
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/kuberesources.virtualfs.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/kuberesources.virtualfs.ts",
+      "sha256": "265153112a0a0c2108c1a52b958ff2cfec00e8d465d0ee98cecc66b512ce9c2d",
+      "bytes": 6435
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/logger.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/logger.ts",
+      "sha256": "839ebfa3c7202b803202f75a30cd65fb6caa54fa33e6650d2b34f54e35d59cc8",
+      "bytes": 1018
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/outputUtils.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/outputUtils.ts",
+      "sha256": "a5f27ad80b54f8380f17449dd936eeb125981030c8b12fdc58d58eb7142b2faa",
+      "bytes": 1802
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/schema-formatting.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/schema-formatting.ts",
+      "sha256": "00f209518a25222268c45f94343f9cd9fb0812464e3e9326e0bb22274f0a744b",
+      "bytes": 1443
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/shell.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/shell.ts",
+      "sha256": "e234890dcae77d02f724ffa6afcae8f999cafad4164c3c424ecb21327d9c2ce1",
+      "bytes": 9682
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/sleep.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/sleep.ts",
+      "sha256": "b86ccf6af94eeb52f1cb1b6074ee5d88d03648724c33795f6585c6e35dd27ee5",
+      "bytes": 137
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/telemetry-helper.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/telemetry-helper.ts",
+      "sha256": "07248f5353eafeb57b3f8327488fc141e9848db5e1722cdab86ccf953273d292",
+      "bytes": 8745
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/telemetry.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/telemetry.ts",
+      "sha256": "2d9987c6a9af4c7db0a96a5db56c6dcfee2c343b1823c48370898b07241638c8",
+      "bytes": 906
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/array.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/array.ts",
+      "sha256": "a8df377438fa8e3cc733b90e8276aa8bd2cf57b1aef58bbbfa31a74b75865516",
+      "bytes": 623
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/cancellation.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/cancellation.ts",
+      "sha256": "9c6923bdaa4dbee5ef2794ce44934c14577f27cdb848cf4ff4621e370755822e",
+      "bytes": 151
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/container-shell.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/container-shell.ts",
+      "sha256": "22e502cf22166b4dd6a506dd6cd8038d11bf9acb81dd37b2fb33ad2be4624ddf",
+      "bytes": 849
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/containercontainer.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/containercontainer.ts",
+      "sha256": "7a53b366c346070bf13e383fda1d27ce13ca1cd03eb3024c2e3e03f25af6a203",
+      "bytes": 1588
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/dictionary.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/dictionary.ts",
+      "sha256": "9c7f56379bf969721a226a45583401fe4a0b858d3803a55b60390f3ee4156cc4",
+      "bytes": 158
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/filebacked.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/filebacked.ts",
+      "sha256": "edaa6cacc1029397b16a66a4fbccee63e58b505ac42f207b4f837559eed3f5d1",
+      "bytes": 836
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/interpolation.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/interpolation.ts",
+      "sha256": "c64be954a0ede78428aca39d60369701c5e41985a9ade1639c999bad0e322f2c",
+      "bytes": 5344
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/naming.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/naming.ts",
+      "sha256": "b89e42071ca8f0ee9795e8d94430ae8e703d72ef94b3b8976db7d7a95c2a54ce",
+      "bytes": 705
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/never.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/never.ts",
+      "sha256": "f0e30131725f7b0f4c32f620e88f8bafe4a1b89d059059285488ffe7fe225113",
+      "bytes": 61
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/notification.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/notification.ts",
+      "sha256": "881631cf9d75acb44854736d836d50193b779f37228198c47de95fab43263179",
+      "bytes": 306
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/observable.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/observable.ts",
+      "sha256": "4de4d3f0b2f668110023bb36b460b4bd1d6e1dde8a32ea95cf27330414bfbcc2",
+      "bytes": 442
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/preview.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/preview.ts",
+      "sha256": "5fe857bc2d103a5aea03869d719d262e4c4a009a9a2d8389c77a21955be61c8d",
+      "bytes": 1138
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/providerresult.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/providerresult.ts",
+      "sha256": "a95b4ddc7499ad91acc473c325205952426ef884901646781fa5e300b2d6fc29",
+      "bytes": 2475
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/utils/shell-escape.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/utils/shell-escape.ts",
+      "sha256": "d91184846ad9e4da3b58dbc2f9a829a7e78c1bfdc4d410b33d30c0ad829ec341",
+      "bytes": 451
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/v1.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/v1.ts",
+      "sha256": "3489871860d0f79d48ecc6a10303f1590bd98a913607e0c20d096ced10583f13",
+      "bytes": 722684
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/wizard.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/wizard.ts",
+      "sha256": "060dff5633e13f14cd1dcf2bf5f228c1f0a65f4f6287a9d7f1edf745ef2c9705",
+      "bytes": 3293
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/wsl-fs.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/wsl-fs.ts",
+      "sha256": "d16892c9d6c0bf127cbf5182b515ec970e4905b8c3d9a8153d44f88fce9fc93d",
+      "bytes": 1617
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/consideration-filter.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/consideration-filter.ts",
+      "sha256": "1e8df01f3369cb2ef555e7a7f4917e28e3001c1296583bca06e873df87e6238c",
+      "bytes": 2323
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/jsonalike-symbol-provider.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/jsonalike-symbol-provider.ts",
+      "sha256": "e06100cab2ccfdd0ccd692d1e54b738ea1d7bc13eaa633a4060c719db52849bc",
+      "bytes": 6389
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/schema-holder.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/schema-holder.ts",
+      "sha256": "dbb6b2ed35d7ff019f67eb40a3f099db45598f72bad8ce2c554808af8745c17d",
+      "bytes": 13628
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/yaml-constant.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/yaml-constant.ts",
+      "sha256": "e51b9a3775076b4e2d57042ba73c11ac4d64946b30325b7409333a6222a93304",
+      "bytes": 652
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/yaml-locator.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/yaml-locator.ts",
+      "sha256": "8e149129b92dab7dc252cda568c09f8bf87ed49fb65fa9528d5b8ee9f548c401",
+      "bytes": 4472
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/yaml-navigation.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/yaml-navigation.ts",
+      "sha256": "ab3e7cb406eff3d0956c1bdb0e612a5a4f4afc90ae05bed7111259bfb59b14f2",
+      "bytes": 680
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/yaml-schema.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/yaml-schema.ts",
+      "sha256": "65b622e67c58402f23768174e49cf276d9f97fb34b730b3a3436cb34b4beb35e",
+      "bytes": 6550
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/yaml-snippet.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/yaml-snippet.ts",
+      "sha256": "a58d04ef88f9e25f3675f2f5f5eaed5a45b894ced76f6e1e1e368fecf5066893",
+      "bytes": 2383
+    },
+    {
+      "source": "kubernetes",
+      "path": "src/yaml-support/yaml-util.ts",
+      "url": "https://raw.githubusercontent.com/vscode-kubernetes-tools/vscode-kubernetes-tools/f54aef89a48c64e3df66af4a75cc5dd3d80f4a75/src/yaml-support/yaml-util.ts",
+      "sha256": "de185c82e48348b1457a1b4a732b2246f9e66bad98b21f3e4db51c5151fec258",
+      "bytes": 4921
+    },
+    {
+      "source": "openchamber",
+      "path": "bun.lock",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/bun.lock",
+      "sha256": "be817f8ea1827ed0a06e590e98b827df1e58f18da3b6a0852da7bba8aca56d12",
+      "bytes": 456782
+    },
+    {
+      "source": "openchamber",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/LICENSE",
+      "sha256": "1f6e869a3feff6b4eb07907afc89176562b1f4324389f163d9fd94f09864b44e",
+      "bytes": 1074
+    },
+    {
+      "source": "openchamber",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/package.json",
+      "sha256": "3703aa24c9bc99c4daa5941d0c359b29c31247aac3cc1d59f47a3b890945919a",
+      "bytes": 9576
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/docs/content/docs/preview.mdx",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/docs/content/docs/preview.mdx",
+      "sha256": "49847155c0847193232c8ba01f3b64cb513b836ad762ee6c362402e49d6a8d06",
+      "bytes": 1833
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/electron/entry.mjs",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/electron/entry.mjs",
+      "sha256": "b272fb69242359ff52953d4fa8711d89d7f8b014273bbf8aae9c77d2c8a5793c",
+      "bytes": 5050
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/electron/main.mjs",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/electron/main.mjs",
+      "sha256": "cf8a57b002a68514233a72cf03f6f082d5f9afebd9559d6cca359624aa7b65d4",
+      "bytes": 261208
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/electron/package.json",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/electron/package.json",
+      "sha256": "e296eb8cf382c4c50f38dd0733aa2e1e73b16383730e2b7c904a79c16d735ccc",
+      "bytes": 7950
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/electron/packaged-runtime-config.mjs",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/electron/packaged-runtime-config.mjs",
+      "sha256": "0cf7f74b5d73cbc68006edb9c36acbebc8a3d79cdfa453da538f7bbcd9f7df2b",
+      "bytes": 3770
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/electron/packaged-runtime-config.test.mjs",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/electron/packaged-runtime-config.test.mjs",
+      "sha256": "005e7a07e39040058b5ccb3bd61d2b6fc4df49c2090a7c5091416d2695c5e5b5",
+      "bytes": 5691
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/electron/runtime-request-headers.mjs",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/electron/runtime-request-headers.mjs",
+      "sha256": "cfdb47eaf58c5445230a17e5521758b7198012beb907e32f54e24222383b4d05",
+      "bytes": 657
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/electron/runtime-request-headers.test.mjs",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/electron/runtime-request-headers.test.mjs",
+      "sha256": "096c276ffb7ca02f123a8ce9fa5692e263b770dd31e0a2160bea104bb2f2c4a0",
+      "bytes": 812
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/API.md",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/API.md",
+      "sha256": "81eb14817d2031b125ed711d65b801c127910b5b985183d9e40e23297c12d7e9",
+      "bytes": 74035
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/examples/service-echo/package.json",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/examples/service-echo/package.json",
+      "sha256": "59006d33b7373c770ce7c1ea08676e47c156c8478e61c6ae5d5716252626f189",
+      "bytes": 599
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/examples/service-echo/panel/index.html",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/examples/service-echo/panel/index.html",
+      "sha256": "fc01a684ceae994437736f0224552ead6318ab24506474fac029f234928a11fa",
+      "bytes": 280
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/examples/service-echo/panel/main.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/examples/service-echo/panel/main.js",
+      "sha256": "0b5571aace39b8b16609f08115bb3ce88a244439236207a8d9a85debbcf2d28b",
+      "bytes": 64616
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/examples/service-echo/panel/main.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/examples/service-echo/panel/main.ts",
+      "sha256": "7959f94b896477902a1b4167e94422397a72b230dd8d30753857b0806982ab4c",
+      "bytes": 5348
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/examples/service-echo/service/main.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/examples/service-echo/service/main.js",
+      "sha256": "90aa0fdcf004b2bd421df8f1912fc50b3abe5870cda9017558fd26e23e2d2ef0",
+      "bytes": 1432
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/examples/service-echo/service/main.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/examples/service-echo/service/main.ts",
+      "sha256": "6df202a548e2daf6d8355b42a640e32f5d33227a978cc112df1b5e345e4fcfd9",
+      "bytes": 1515
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/GUEST_SERVICES.md",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/GUEST_SERVICES.md",
+      "sha256": "c60fc188bf554ad72b7ba3be40d37a9ec6cc4ebe6c08d015748bbf0174b4f48b",
+      "bytes": 38656
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/LICENSE",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/LICENSE",
+      "sha256": "1f6e869a3feff6b4eb07907afc89176562b1f4324389f163d9fd94f09864b44e",
+      "bytes": 1074
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/package.json",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/package.json",
+      "sha256": "1a049358db5a44f744771ae912aba8edf5c57e5cae4f30b5e1c2de2f2b49a530",
+      "bytes": 1423
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/api-version.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/api-version.ts",
+      "sha256": "9cbb48452dcc30cba04997ab04e77d69a9917cb43a4cbbd7ff6efc56bfdce5a3",
+      "bytes": 429
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/contract.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/contract.ts",
+      "sha256": "4c5a14aec0bace371fe56edc6293c2ca2375c17a56c1c5bbe674f9993c66ccf8",
+      "bytes": 34294
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/file-editor.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/file-editor.test.ts",
+      "sha256": "a7d4282f5d0a4c5ad299d578fb986610516bec6c08af9f2c009fe9ff9a0c0ae8",
+      "bytes": 13761
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/file-editor.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/file-editor.ts",
+      "sha256": "7dedf9af06db306336870d143993fb6c1d120ed33c74072abfdf15ce1d3f58a6",
+      "bytes": 6283
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/frame-policy.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/frame-policy.test.ts",
+      "sha256": "4908fc87c8527a942d6d7c9304601db2f9375cd191d6acdbd9306862222bdb03",
+      "bytes": 1447
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/frame-policy.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/frame-policy.ts",
+      "sha256": "eb26c325601465ab817a356e9e0859a03cb74a587e04df878deef5f10b21c7f5",
+      "bytes": 1820
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/host-version.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/host-version.test.ts",
+      "sha256": "85e50f4abc882716e008edbaeba6ec50bc75a3688ee2977ebbded3bacf6635dc",
+      "bytes": 1416
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/host-version.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/host-version.ts",
+      "sha256": "b28bdcdbccd3f553791374a1ac0e4cac2ceafe893ace552add64f2f981c7a1d8",
+      "bytes": 1852
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/host.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/host.test.ts",
+      "sha256": "b9ad75ff251415320f029c63e871440f7e76cd1c318595a1b4a972199bd4e01b",
+      "bytes": 51237
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/host.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/host.ts",
+      "sha256": "9cf3616d9087b273c9aac07dddea19a7d7702eecc877d49fd650f363b858f96b",
+      "bytes": 52347
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/index.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/index.ts",
+      "sha256": "83fd48b2c3daaf02a58b98cac8a1c184d0cfe16250120b3e808078f7e9e27e47",
+      "bytes": 13901
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/manifest.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/manifest.ts",
+      "sha256": "48eea5aba100dab1371cdac85f9a84b95414098d1baa47d565ccd9de12633c13",
+      "bytes": 30270
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/parse.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/parse.test.ts",
+      "sha256": "32715cdef50c2f04f638652962add6392fd35ea287cae2bd9ec5ca5c08324c2a",
+      "bytes": 55078
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/parse.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/parse.ts",
+      "sha256": "24fd46d0152d4f9a105115b352419f23f2153cc65e17b629e1d4b0ed5cb8400a",
+      "bytes": 35565
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/popover-boundary.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/popover-boundary.test.ts",
+      "sha256": "7bf26004b0b2b2de073575435ea83886a1acdca9ccedae63bff46b592dd8df6c",
+      "bytes": 2114
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/popover-schemas.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/popover-schemas.ts",
+      "sha256": "59e91f1b6286e5436f200c9b5c31af5441bd8fa674559220c72d12b42601b826",
+      "bytes": 3530
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/popover.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/popover.ts",
+      "sha256": "8a518fa22aff32db24dc9bb0081901cab4f42879b822db1135e53d87c003d6f6",
+      "bytes": 3664
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/protocol.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/protocol.test.ts",
+      "sha256": "f6c21144e665140d02b6029b40d14ec5e17504cfd4e383d65ff3c9c537d92198",
+      "bytes": 38618
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/protocol.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/protocol.ts",
+      "sha256": "864b83e88cf6a797c6c8a2b1c7138ecba5dc315cdb90bcb1b0789229bdd7b433",
+      "bytes": 24247
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/schemas.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/schemas.ts",
+      "sha256": "46d3276a1617581584550fe56517b9b456c71a75208bc95a90e54ab3b0005859",
+      "bytes": 1350
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/scrollbar-style.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/scrollbar-style.ts",
+      "sha256": "df558cfbe0cbd34bb2bb4f98b4e8c178f81b6f760f4e7ec1b98c58915038403b",
+      "bytes": 3595
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/service-provider-schemas.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/service-provider-schemas.ts",
+      "sha256": "c83a5a64a8e13fca0b8bd04e6c0d127f00158f85dd6f7b8089559deb419e08ef",
+      "bytes": 10233
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/service-providers.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/service-providers.test.ts",
+      "sha256": "002ebd739820050dbdfe0e0f4b37fbfbccb07a000b2ed52fd381e2d6cf0479b4",
+      "bytes": 15887
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/service-providers.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/service-providers.ts",
+      "sha256": "b158a2445546efde40532f856b9a4494ea9c979213b78bac623b424b76a30703",
+      "bytes": 29543
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/service-surface-schemas.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/service-surface-schemas.ts",
+      "sha256": "c48e7dbf3bfe73fe91bdfc0ddfb8f19ced8d55577d456e08caed571e3d7fe6aa",
+      "bytes": 3264
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/service-surface.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/service-surface.test.ts",
+      "sha256": "ecf755ac1a06c2936e7af19bacadab01f245029a3e0c0fa04f9bfb7e1eb91678",
+      "bytes": 863
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/service-surface.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/service-surface.ts",
+      "sha256": "5443eb2f5bd5d8b28325278fb2053ac6d628d5f1468abe8ab48b3c61080bd58d",
+      "bytes": 10425
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/shells.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/shells.ts",
+      "sha256": "cfec8137155638289c649e7b7bc10f02d061b7dafe776f6f25f3e1b46d25e4d5",
+      "bytes": 2207
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/status-control-schemas.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/status-control-schemas.ts",
+      "sha256": "689bed415d2c9b7abf0e937ad9895610a02e5e8e831a43a1c775294067f8ddde",
+      "bytes": 1768
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/status-controls.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/status-controls.test.ts",
+      "sha256": "1d6ccd19799a7935ba654cec2c67624d4ff322ee3351a4788f1c6068075600bd",
+      "bytes": 2311
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/status-controls.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/status-controls.ts",
+      "sha256": "e7629721a92f0418cbe004e5325c929a1c40b15dad77235e4cb3887d9d2a0567",
+      "bytes": 2939
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/badge.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/badge.ts",
+      "sha256": "27f62a4c411d7b044bc80f037eca95ee4c4efd318c8b520875a4ffef0d20d737",
+      "bytes": 988
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/banner.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/banner.ts",
+      "sha256": "06f150427f817c87e284648987e7c21fa8a615d01c24f6d368232e4bcda7f329",
+      "bytes": 1751
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/button.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/button.ts",
+      "sha256": "e4d71517a5335c5b7c8b01649759a35749d275f4eccc48c79107025ed4029b39",
+      "bytes": 1953
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/checkbox.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/checkbox.ts",
+      "sha256": "ec9d84a9bd405ce75f95ab8aa2e7301f6b86b16bbf58b51573f08a6f8e4bb495",
+      "bytes": 1952
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/dom.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/dom.ts",
+      "sha256": "e2686e56753d7cbf9f1411484e7bbe1cec29b6d0eb9792fc9601c9d5c6eb21b0",
+      "bytes": 2455
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/empty.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/empty.ts",
+      "sha256": "afc0a5f03b8940e168fb76f08bbd32fadb9f24f0a75d4f38387f2784e468f3e2",
+      "bytes": 1445
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/field.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/field.ts",
+      "sha256": "1dcf197e1eee3c7464d81647454ca1b2a7068dcf110d278fea8528778427416c",
+      "bytes": 2103
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/git-graph-popover.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/git-graph-popover.test.ts",
+      "sha256": "3b575650224011e32b86c57902bcf561cf199f5f9d4ea2ee47f31fbfaed77d53",
+      "bytes": 3537
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/icons.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/icons.ts",
+      "sha256": "8aa85c7133948c1c43c57991b248370a03cd353da63638a7e389f2efdebea2dc",
+      "bytes": 1359
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/index.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/index.ts",
+      "sha256": "f2f8148cadc19ea969327cba7baa0b8fd9789dd51bb354605c027c2d4180529e",
+      "bytes": 2226
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/list.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/list.ts",
+      "sha256": "bc216823af4a2a5ef6c43bac72b2b479a85490186958bfbaca0431e6c70fbcbc",
+      "bytes": 3770
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/menu.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/menu.ts",
+      "sha256": "dba88229bed72428799edabca3f6493ef7dcb0a647bf0c3674491ea80b944b48",
+      "bytes": 4242
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/navigation.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/navigation.test.ts",
+      "sha256": "3e57707f7e202133317b69d50f9de258b078712f8dd42de87e031dc40f82a0f0",
+      "bytes": 2444
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/navigation.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/navigation.ts",
+      "sha256": "59b713f6c20dc75e2fc3ee4279c76577299791644bce783c0c95c5301c210579",
+      "bytes": 1799
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/option.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/option.ts",
+      "sha256": "2a6b7d1ea754d061c8038def783f87039b288246ae61a2777ea0c77dd3b36bfa",
+      "bytes": 2174
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/popover-anchor.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/popover-anchor.test.ts",
+      "sha256": "5a652762cd96013a182344ea7b1c0379b9c24e6df30dadda292d4ff0d6cd320d",
+      "bytes": 5820
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/popover-anchor.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/popover-anchor.ts",
+      "sha256": "af8717330b0d3b468e4b1727e033ade1049f0b112364add787ee24e6a739bc9c",
+      "bytes": 7255
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/popup.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/popup.ts",
+      "sha256": "3535001578bc6b3a8bd9be7907e8d128c56d9a9f7860907288356fe5e109002d",
+      "bytes": 1729
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/progress.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/progress.test.ts",
+      "sha256": "3f15ff4743b567e7b84f5abf899248e3e86ba33d9cbf504bb61d2937b64ffc61",
+      "bytes": 483
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/progress.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/progress.ts",
+      "sha256": "7a649761745fd28e6e25a637e09418aa478879da57f82965b0ae97a721a49707",
+      "bytes": 1734
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/search.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/search.ts",
+      "sha256": "36e81c9c4031c75b28e07001899cc767f8fe51abe092b54825a637974bc4e6b3",
+      "bytes": 2262
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/select.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/select.test.ts",
+      "sha256": "1793e9ec5cfcc837a9ef46864c8b311fe5257b75ed125b4c4417ef4b2df57cf2",
+      "bytes": 934
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/select.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/select.ts",
+      "sha256": "1b19bb04f666900d5a6c5e6e4794661f1ecf917ab6a9f4db0fc08b126f04bdd5",
+      "bytes": 6468
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/separator.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/separator.ts",
+      "sha256": "bd925e301c570ee11eab09e9b6fbd1788f15c237fdaaaaeddac39b2377336df9",
+      "bytes": 846
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/spinner.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/spinner.ts",
+      "sha256": "5558cab084b0050f239d2a7b6dfd44b26ac69135099370283d8e03d9fa2a9d46",
+      "bytes": 1068
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/style.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/style.test.ts",
+      "sha256": "976449cc247daf5d3abb6e971de4003b2d43535f8df6b42f78ed72dfb2cce494",
+      "bytes": 1886
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/style.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/style.ts",
+      "sha256": "081be47dc0eaabf03e3567dc6b9933748e1dcfc8eaa12450dc01b3cabd3bbf75",
+      "bytes": 21850
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/tabs.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/tabs.ts",
+      "sha256": "a6301f5ae37e66c6098b05dd41ed8c728696e799b7bdcf5e9121f1de47c64979",
+      "bytes": 2291
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/text.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/text.test.ts",
+      "sha256": "8a41112ef817d356e3a2a8c953257d05289f5f0f77917ded471f30c2ded630c1",
+      "bytes": 1953
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/text.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/text.ts",
+      "sha256": "9dad4dbfbbe42b6ff1054735838ad250f55ab1497a539d06adcd7353be801303",
+      "bytes": 3018
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/theme.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/theme.test.ts",
+      "sha256": "c22df888ea1a03d5850760d0ace615becc34a4e7d74d8ce4b92532dc36c94b8c",
+      "bytes": 3562
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/ui/theme.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/ui/theme.ts",
+      "sha256": "6fca27daaf15cf8f75bc3b90aa28733fecc93c78a0d4f5a396109ada9167fa23",
+      "bytes": 3926
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/workspace-schemas.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/workspace-schemas.ts",
+      "sha256": "56bdbbb2d6079ec6c2528a9832cc4e79ac274b103402ee6e2c309fc9ab8e54ff",
+      "bytes": 3097
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/workspace.test.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/workspace.test.ts",
+      "sha256": "8dd61e99604f9ae52d584ec3cc905c1fad0aa553bf0b85b8b0a6a3b560130fad",
+      "bytes": 2825
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/sdk/src/workspace.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/sdk/src/workspace.ts",
+      "sha256": "a3878eb3128b97787ebc972f2c02073f44c6f56a2048528f09f0988a3ee0f463",
+      "bytes": 2944
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/ui/src/lib/guests/host-bridge.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/ui/src/lib/guests/host-bridge.ts",
+      "sha256": "cd040caed818433ee3868875e87f1dfa3b75e26b5344af0d67de1d2e5f093f57",
+      "bytes": 16223
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/ui/src/lib/guests/open-url.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/ui/src/lib/guests/open-url.ts",
+      "sha256": "639dec0cb55ba54b822d2e673dd49cf5803b5219129509609e9a9de36215a007",
+      "bytes": 1507
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/ui/src/lib/guests/service.ts",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/ui/src/lib/guests/service.ts",
+      "sha256": "5fdfd3f3d6b0b48d4cd6fcfbf4ecf93f2a6dbc5bed73d207980912e1857474a3",
+      "bytes": 3521
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/package.json",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/package.json",
+      "sha256": "cfbdbef684abf7f5337258673a4fd2febd3516389358172974d26f04264d6009",
+      "bytes": 3723
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/auth-store.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/auth-store.js",
+      "sha256": "bcf1fbaa763964b6c8689fba7509c2c27907720a9f37513d05590432827b5a5a",
+      "bytes": 6665
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/auth-store.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/auth-store.test.js",
+      "sha256": "ca8a369381e54b7c26fbcb957b94fa8a28bde666aec51840c5006ebd7f9b372c",
+      "bytes": 4495
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/background.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/background.test.js",
+      "sha256": "11508477f53e0d141aa63a80b9015230ef64c534e7abd7dc7c7ccff27a8f986d",
+      "bytes": 5638
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/builtins.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/builtins.js",
+      "sha256": "c8a4687672d30f80e9c9410a71bf300519d4cb289186745098fc6902370cecd4",
+      "bytes": 1448
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/builtins.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/builtins.test.js",
+      "sha256": "d5a639efaa0732c6b5cddeb7f07bd80976638946bc1824c0a7ee97c1c9bd981d",
+      "bytes": 10799
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/catalog.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/catalog.js",
+      "sha256": "1ce3f010162a8e2fd4a7ea9c831f09f779fb4b9b2d86b09018d5aa1a5e1ba8f8",
+      "bytes": 22762
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/catalog.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/catalog.test.js",
+      "sha256": "930d94f8a891e34d10d0d8fa60fecb700347feddf7c40fd445143775e0055eb2",
+      "bytes": 22469
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/clone-network.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/clone-network.test.js",
+      "sha256": "bb61795b146cc1f87a58cb7bdf4887429d2f81e87c5632fb926e0b8fdd9cb939",
+      "bytes": 5420
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/clone.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/clone.js",
+      "sha256": "517270a8e2d046caed03a938bd9a014737884d2057a232ee9db7587e7bc9cd35",
+      "bytes": 13279
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/deactivation-listeners.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/deactivation-listeners.test.js",
+      "sha256": "e839d2467142be4ba1f47004cf468c7cf7d6ed1fed495bc58629ca302fd64653",
+      "bytes": 2909
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/DOCUMENTATION.md",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/DOCUMENTATION.md",
+      "sha256": "24042e2844c00b7db3e4c5d4a791ed8a81b37d114e8fe3f1b823d0f0c9107a7c",
+      "bytes": 40880
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/enterprise.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/enterprise.js",
+      "sha256": "2e6256ba2157a88fe50c4cecd53b1170197f92a399b76f02fa9c491ac372d967",
+      "bytes": 3046
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/enterprise.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/enterprise.test.js",
+      "sha256": "c885a7f14ed68bb13fac57d2daf730dd6f224271eb3fcedb5db0d68b9fc1e442",
+      "bytes": 6106
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/extract-zip.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/extract-zip.js",
+      "sha256": "00bed19927e13ca063d593704fe12581e86eb004f65da5b9a47225dca57add61",
+      "bytes": 4573
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/extract-zip.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/extract-zip.test.js",
+      "sha256": "2a94ed3c5791513b23935ff59df44019351b23b5c75d3e531180a69e315182b1",
+      "bytes": 3053
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/files.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/files.js",
+      "sha256": "f56f3ba305671672f8514909b5ef41f06d7c0927a4b4c456e5e45595eae26051",
+      "bytes": 10809
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/files.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/files.test.js",
+      "sha256": "d67eac3ca91e7ef173c68daa5a2ed794443720d5dc1ac709777ea4fc909bc7a9",
+      "bytes": 13158
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/frame-grants.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/frame-grants.js",
+      "sha256": "b599cc9ecc88ff3bb82b7339565634ef07815efdce4e7a6633b04bb7229413cc",
+      "bytes": 1968
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/frame-grants.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/frame-grants.test.js",
+      "sha256": "499fca640a48016f8422c5186078807af022dcba04d059825cb6e14fbdc86753",
+      "bytes": 4736
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/grant-scope.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/grant-scope.js",
+      "sha256": "a82b56b00cdb6514340c804abf266d1d8fb3333531ea002f674a4e29b8161052",
+      "bytes": 4627
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/grant-scope.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/grant-scope.test.js",
+      "sha256": "52f28f0c2e167fd9da38e2b44589c2708310a8f7047c454f46bbf21c5a54cdae",
+      "bytes": 5551
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/host-callback.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/host-callback.js",
+      "sha256": "01d1a434182a8c796ce779a08f4374ff39467fab8a047a526e3be44497d29711",
+      "bytes": 5692
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/host-callback.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/host-callback.test.js",
+      "sha256": "966d29700d0051c5a9bf84136f80df65ac6b4850928d84b1f9f6e60927643c03",
+      "bytes": 5787
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/host-session.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/host-session.js",
+      "sha256": "5bd955617b712e091a75870a8aca1ceee6d5540dd2320018e5c05a077c50c742",
+      "bytes": 2226
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/host-session.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/host-session.test.js",
+      "sha256": "1d44599805331e30a2f20e0d846df73859eead6f9f6e5d0e367edb09763f458f",
+      "bytes": 3931
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/html-styles.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/html-styles.js",
+      "sha256": "76ae68b9f1e6cd742525dee783643c13581d8dbaa26fe751e23ccdde6cc015f7",
+      "bytes": 1789
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/html-styles.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/html-styles.test.js",
+      "sha256": "652e1b12e5ce2d7ba6009d791beec08e34bf1032e661f1a843af247edfda6e31",
+      "bytes": 7321
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/html-tokens.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/html-tokens.js",
+      "sha256": "da66b412c48113bfc6d854a3c15db2b66176ba07393c0d29ffdee709c9d74ea2",
+      "bytes": 2261
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/html-tokens.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/html-tokens.test.js",
+      "sha256": "96b837740fec8b9d4ccf372bd9514939ec673b31fc05b85ea1cab5262e70250e",
+      "bytes": 2194
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/install.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/install.js",
+      "sha256": "5b79b3310afd489e5d2705cd6bdd08f418e430e08f1b6fd6c54364b09ebbced4",
+      "bytes": 15993
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/install.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/install.test.js",
+      "sha256": "6f76f4acdaf2c478cbbf7ebe907f66eee8507bcd292a47326ba2e5320187e748",
+      "bytes": 15210
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/oauth.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/oauth.js",
+      "sha256": "9e780a79bc2701fcf8abaae309c599d1bde281f1fd821679afb00a175cf79364",
+      "bytes": 17908
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/oauth.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/oauth.test.js",
+      "sha256": "a6ee91162a4036197ee56b35ceded38d69c15fb72a1c2284a02b42d6b0ad92c0",
+      "bytes": 20470
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/persist.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/persist.js",
+      "sha256": "1f1bae6b06813df0870ba480d3851600f77f7013e098ca4d209f1250e8c50c28",
+      "bytes": 13821
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/persist.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/persist.test.js",
+      "sha256": "f7fad7348f0cbbb5ffd7948b0547330c4b73560f453daec3a83c93943c96dfd3",
+      "bytes": 12841
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/request.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/request.js",
+      "sha256": "43d9cca03dba446d728661a46209a4829583fa7f6d13635f534669e63e780a4f",
+      "bytes": 4085
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/request.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/request.test.js",
+      "sha256": "ed96434d91dff664be5d79e837fa01ab7ecbe2c1f341e9b9b19924b0a86ebac9",
+      "bytes": 9740
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/response-body.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/response-body.js",
+      "sha256": "fdc337f4da64475f9af8cf8260abaccbafa0d63195b8109b98546bfeb6a240af",
+      "bytes": 1296
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/routes.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/routes.js",
+      "sha256": "f9d9eba0fbfa9fcd31e2f88a8101a94d603c2a97b5b5b5b2cdedb02c6cb993b1",
+      "bytes": 39926
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/service-registry.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/service-registry.js",
+      "sha256": "af923071668786ba731783070a678053f95b660ae8d4b498b2fed05cd9935162",
+      "bytes": 10819
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/service-registry.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/service-registry.test.js",
+      "sha256": "cf9ad9354eb4dba65304776872ce9f682a50dc4249f757b010ce3aeec4327cb0",
+      "bytes": 10458
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/service.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/service.js",
+      "sha256": "e8e138e648be0519be592d8345126189b67a3a0d6847dedfd9ad99aacc28cfb1",
+      "bytes": 26140
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/service.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/service.test.js",
+      "sha256": "6373dd102753031d31b153c6b9436063691200ef892d4cf78dc9b2b348f1d00b",
+      "bytes": 21482
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/sockets.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/sockets.js",
+      "sha256": "e02c6a01af9077ddf9417d1d929af43f85480e9227822436b464b68b423495f4",
+      "bytes": 3828
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/sockets.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/sockets.test.js",
+      "sha256": "a1472c91c97c94cc399e9cdf2adb2a1364ec09b80c9a8a4643a20fdd9bfc08fa",
+      "bytes": 3301
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/ssh-install.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/ssh-install.test.js",
+      "sha256": "8c5dbfb5e157e03318c287836d32d9bbe123f42255cc40d74614a1d271a83774",
+      "bytes": 10484
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/storage.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/storage.js",
+      "sha256": "d0a399b14cb6fd71c8a58478eb48cb1cc32bc3c3639081d8cdfc3a9380b481a9",
+      "bytes": 2900
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/storage.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/storage.test.js",
+      "sha256": "0d2578cc751fa5fb2fb29d39ba6fbe9aa817d3ea332741b5e77d80eff3f4cd62",
+      "bytes": 3594
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/surface.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/surface.js",
+      "sha256": "a0e5ed4596590a07c1b4588443e842149765ad33310ac39c455b3b9be9908ebc",
+      "bytes": 25041
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/surface.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/surface.test.js",
+      "sha256": "c26183e2d6dce18d13d8d0a2b5f1ba7c66e45e6126b8c201cbc683e4988a1887",
+      "bytes": 25669
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/updates.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/updates.js",
+      "sha256": "f16a4ae23938bbf74965f857ddece89bf4045dc69ffc22ba3d62f7fb7fcaede9",
+      "bytes": 12540
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/updates.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/updates.test.js",
+      "sha256": "d3501e52010dd807f70ebf81df46283af0b67584ff964b550245b8cd281b32ed",
+      "bytes": 19213
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/upload.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/upload.js",
+      "sha256": "aae2ff1617902b2d1d20619b22704af4427ac3951a0b9bbcf6eab4a438dcf315",
+      "bytes": 1932
+    },
+    {
+      "source": "openchamber",
+      "path": "packages/web/server/lib/guests/upload.test.js",
+      "url": "https://raw.githubusercontent.com/openchamber/openchamber/3e9ef4db17bd184f1f2713eb6356261304d6aee7/packages/web/server/lib/guests/upload.test.js",
+      "sha256": "3eebf85157b97fc7b4b94ab9a46cd752b2c993093a5e4de7a8ebd33e570f29b8",
+      "bytes": 5425
+    }
+  ]
+}

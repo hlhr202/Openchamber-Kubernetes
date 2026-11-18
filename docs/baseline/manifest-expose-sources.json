@@ -1,0 +1,35 @@
+{
+  "scope": "Pinned public kubectl v1.37.0 expose TEXT only, never executed; selector/port derivation and inline createService",
+  "records": [
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v1.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/cmd/expose/expose.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/cmd/expose/expose.go",
+      "local": "tests/fixtures/contracts/manifest-expose-contract/pkg__cmd__expose__expose.go.txt",
+      "bytes": 21778,
+      "sha256": "67e4e5f3ac94ac3e19004e1254210e139ec063729234c6317b35edb1dda09e7e"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v1.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/polymorphichelpers/mapbasedselectorforobject.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/polymorphichelpers/mapbasedselectorforobject.go",
+      "local": "tests/fixtures/contracts/manifest-expose-contract/pkg__polymorphichelpers__mapbasedselectorforobject.go.txt",
+      "bytes": 6806,
+      "sha256": "dacc07b3a5f323b421f60a3660d71b705837cf5f45ed0f6011ea1b1fc2511e02"
+    },
+    {
+      "repo": "kubernetes/kubectl",
+      "tag": "v1.37.0",
+      "commit": "7979cc3026f5fbf359f078d1c7152ac7c79172ee",
+      "path": "pkg/polymorphichelpers/portsforobject.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/kubectl/7979cc3026f5fbf359f078d1c7152ac7c79172ee/pkg/polymorphichelpers/portsforobject.go",
+      "local": "tests/fixtures/contracts/manifest-expose-contract/pkg__polymorphichelpers__portsforobject.go.txt",
+      "bytes": 2488,
+      "sha256": "18bc7c08ddbc1e8a5797a14e31b80e98e5198d600ae897494b73b0c4f6c68f8d"
+    }
+  ]
+}

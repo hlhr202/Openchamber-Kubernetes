@@ -1,0 +1,12 @@
+packages:
+  - '.'
+pmOnFail: error
+runtimeOnFail: error
+engineStrict: true
+ignoreScripts: true
+verifyDepsBeforeRun: error
+enablePrePostScripts: false
+storeDir: /pnpm/store
+minimumReleaseAgeStrict: true
+minimumReleaseAgeExclude:
+  - '@openchamber/sdk@2.5.1'

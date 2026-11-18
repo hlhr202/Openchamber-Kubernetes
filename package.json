@@ -1,0 +1,44 @@
+{
+  "name": "openchamber-kubernetes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kubernetes integration for the official OpenChamber 2.5.1 host.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": "24.x" },
+  "packageManager": "pnpm@12.15.0",
+  "scripts": {
+    "build": "node scripts/in-container.ts build",
+    "build:development": "node scripts/in-container.ts build:development",
+    "bench:build": "node scripts/in-container.ts bench:build",
+    "check:static": "node scripts/in-container.ts check:static",
+    "check:foundation": "node scripts/in-container.ts check:foundation",
+    "typecheck": "node scripts/in-container.ts typecheck",
+    "lint": "node scripts/in-container.ts lint",
+    "test:readonly": "node scripts/in-container.ts test:readonly",
+    "check:baseline": "node scripts/in-container.ts check:baseline",
+    "audit:packages": "node scripts/audit-public-packages.ts"
+  },
+  "dependencies": {
+    "@openchamber/sdk": "2.5.1",
+    "@xterm/xterm": "6.0.0",
+    "@xterm/addon-serialize": "0.14.0",
+    "yaml": "2.8.3",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "24.9.0",
+    "oxlint": "1.89.0",
+    "rolldown": "1.2.15",
+    "typescript": "7.0.2"
+  },
+  "openchamber": {
+    "apiVersion": 1,
+    "engines": { "openchamber": "2.5.1" },
+    "contributes": {
+      "panel": { "id": "kubernetes", "name": "Kubernetes", "icon": "panel/icon.svg", "entry": "panel/index.html" },
+      "page": true,
+      "service": { "entry": "service/main.js", "runtime": "host" }
+    }
+  }
+}

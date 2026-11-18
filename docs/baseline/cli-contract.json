@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "evidence": "M1-E014",
+  "checkedAt": "2026-10-23",
+  "candidateKubectlVersion": "v1.37.0",
+  "scope": "initial-static-auth-raw-GET-path-not-complete-CLI-or-cluster-matrix",
+  "runtime": "not-executed",
+  "releaseChecksums": [
+    {
+      "platform": "linux/amd64",
+      "url": "https://dl.k8s.io/release/v1.37.0/bin/linux/amd64/kubectl.sha256",
+      "sha256": "6129359f4e1f3848a5572ccb0b26cf28b8ca08cef38c95a765b2f64a2c961a2f"
+    },
+    {
+      "platform": "darwin/arm64",
+      "url": "https://dl.k8s.io/release/v1.37.0/bin/darwin/arm64/kubectl.sha256",
+      "sha256": "583beedaebe422e71d3f1a96acef8b1fef86ea2f09a45ad01aa6c9ce287c1380"
+    }
+  ],
+  "artifactsDownloaded": false,
+  "toolsInstalled": false
+}

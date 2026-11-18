@@ -1,0 +1,8 @@
+{
+  "scope": "Pinned public TEXT only, never executed; Node24.22.1 low-level HTTP/S and CRD-v0.37.0 merge-patch capability",
+  "records": [
+    { "name": "node-https", "url": "https://nodejs.org/download/release/v24.22.1/docs/api/https.json", "local": "tests/fixtures/contracts/manifest-apply-transport-contract/node-https.txt", "bytes": 50981, "sha256": "cef8a096fe9e2a559890bfcd6496666e4b5e21456cb27a7aaa4d2fad389b4bb0" },
+    { "name": "node-http", "url": "https://nodejs.org/download/release/v24.22.1/docs/api/http.json", "local": "tests/fixtures/contracts/manifest-apply-transport-contract/node-http.txt", "bytes": 312321, "sha256": "92938615f5f4e87742c9429e64dd4272e0b961a9b1f4c2b8e9c188c5ad7b87f7" },
+    { "name": "crd-handler", "repo": "kubernetes/apiextensions-apiserver", "tag": "v0.37.0", "commit": "78b55771e5935f10d7d8d187de1b2f3c934cdcb9", "url": "https://raw.githubusercontent.com/kubernetes/apiextensions-apiserver/78b55771e5935f10d7d8d187de1b2f3c934cdcb9/pkg/apiserver/customresource_handler.go", "local": "tests/fixtures/contracts/manifest-apply-transport-contract/crd-handler.txt", "bytes": 59110, "sha256": "664f7a3232b9f5a7038a420c3351f501b566de7c744888c52c1a276abf98e6f7" }
+  ]
+}

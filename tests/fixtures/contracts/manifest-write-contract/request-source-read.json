@@ -1,0 +1,25 @@
+{
+  "purpose": "M4-E023-preparatory-public-text-only-not-runtime-evidence",
+  "records": [
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "rest/request.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/rest/request.go",
+      "bytes": 49605,
+      "sha256": "d6c270a6b408fe9266a5e828c9d6033019742d511fb7e4c1433beaa67e37e044",
+      "local": "tests/fixtures/contracts/manifest-write-contract/client-go__rest__request.go.txt"
+    },
+    {
+      "repo": "kubernetes/client-go",
+      "tag": "v0.37.0",
+      "commit": "28076445520055420e3be4255b4cd27fd19df1f9",
+      "path": "rest/with_retry.go",
+      "url": "https://raw.githubusercontent.com/kubernetes/client-go/28076445520055420e3be4255b4cd27fd19df1f9/rest/with_retry.go",
+      "bytes": 13108,
+      "sha256": "72f140a151ca1fa553644ab503b2148d09dff0c819892a5bc9952fe54874dd16",
+      "local": "tests/fixtures/contracts/manifest-write-contract/client-go__rest__with_retry.go.txt"
+    }
+  ]
+}
