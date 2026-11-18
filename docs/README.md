@@ -1,5 +1,6 @@
 # Project Documentation
 
+- [Extension README and language selector](../README.md)
 - [Product scope](./product.md) · [Roadmap](./roadmap.md) · [Architecture](./architecture.md) · [Design](./design.md)
 - Feature specs: [Compatibility](./features/1-compatibility-baseline-and-host-boundaries/spec.md) · [Plugin and resource tree](./features/2-plugin-foundation-and-resource-tree/spec.md) · [Reads and observation](./features/3-resource-inspection-and-observation/spec.md) · [Resource and configuration operations](./features/4-resource-and-kubeconfig-management/spec.md) · [Terminal and forwarding](./features/5-terminal-exec-and-port-forwarding/spec.md) · [Helm](./features/6-helm-repositories-and-releases/spec.md) · [Debug and providers](./features/7-debugging-tunnels-and-cluster-providers/spec.md) · [Packaging and acceptance](./features/8-integration-packaging-and-human-acceptance/spec.md) · [Explorer](./features/9-resource-explorer-ux-and-request-control/spec.md).
 - [Development and verification commands](./development.md) · [Hard limits](#hard-limits) · [Delivered candidate](./status.md)
@@ -7,6 +8,8 @@
 ## Documentation Policy
 
 Write project documentation in English. Each feature uses one short `spec.md` to define behavior, boundaries, and non-goals. Shared rules belong in the architecture or design docs. Do not maintain a separate backlog or per-operation manual acceptance files in the repository docs. The archive is a short evidence index, not a specification or test input. `baseline/` contains only machine-readable JSON fixtures. Tests verify sources, protocols, and behavior, not historical wording.
+
+The root `README.md` is canonical. Its translations live in `i18n/` and share one set of English-language screenshots with synthetic data in `screenshots/`.
 
 ## Hard Limits
 

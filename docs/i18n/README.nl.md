@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | Nederlands | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | Nederlands | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
 
 Een Kubernetes-extensie voor OpenChamber. Verken clusters, onderzoek problemen met workloads en voer gangbare Kubernetes-bewerkingen uit zonder de werkruimte van je project te verlaten.
+
+## Schermafbeeldingen
+
+Voorbeelden van de desktopinterface met fictieve gegevens. Er is geen verbinding met een cluster gemaakt en er zijn geen bewerkingen uitgevoerd. Klik op een afbeelding om deze op ware grootte te bekijken.
+
+| Resourceverkenner | Resourcedetails |
+| --- | --- |
+| [![Uitgeklapte resourceboom met workloadstatussen en aangepaste resources](../screenshots/explorer.png)](../screenshots/explorer.png) | [![Geselecteerde Deployment naast het bijbehorende YAML-manifest](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **Containerterminal** | **Poortdoorsturing** |
+| [![Geselecteerde Pod en container met voorbeelduitvoer van de terminal](../screenshots/terminal.png)](../screenshots/terminal.png) | [![Geselecteerde Service met de ingevulde poortkoppeling 8080:80 vóór het starten van de doorsturing](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## Installatie
 
@@ -19,7 +29,7 @@ Zodra de voorgebouwde extensiebestanden in de standaardbranch van de repository 
 
 Lokaal bouwen of JavaScript-afhankelijkheden installeren is niet nodig. Zolang de repository privé is, moet OpenChamber Server al beschikken over Git-inloggegevens waarmee de repository via HTTPS kan worden gelezen. Aanmelden bij GitHub in je browser geeft de server die inloggegevens niet.
 
-De [in Docker geverifieerde kandidaatversie](status.md) biedt ook een voorgebouwd ZIP-bestand voor handmatige installatie. Installatie via een Git-URL is nog niet geverifieerd.
+De [in Docker geverifieerde kandidaatversie](../status.md) biedt ook een voorgebouwd ZIP-bestand voor handmatige installatie. Installatie via een Git-URL is nog niet geverifieerd.
 
 ## Vereisten
 
@@ -49,6 +59,6 @@ Deze verklaring geldt voor de extensie, niet voor OpenChamber, Kubernetes of de 
 
 ## Licentie
 
-[MIT](../LICENSE). Meegeleverde afhankelijkheden behouden hun eigen licenties. Zie `THIRD_PARTY_NOTICES.txt` in het voorgebouwde pakket.
+[MIT](../../LICENSE). Meegeleverde afhankelijkheden behouden hun eigen licenties. Zie `THIRD_PARTY_NOTICES.txt` in het voorgebouwde pakket.
 
-[Projectdocumentatie](README.md) · [Reikwijdte](product.md) · [Ontwikkeling](development.md)
+[Projectdocumentatie](../README.md) · [Reikwijdte](../product.md) · [Ontwikkeling](../development.md)

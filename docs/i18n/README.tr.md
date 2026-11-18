@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | Türkçe | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | Türkçe | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
 
 OpenChamber için bir Kubernetes eklentisi. Proje çalışma alanınızdan ayrılmadan kümeleri inceleyebilir, iş yüklerindeki sorunları araştırabilir ve yaygın Kubernetes işlemlerini yapabilirsiniz.
+
+## Ekran görüntüleri
+
+Örnek verilerle hazırlanmış masaüstü önizlemeleri. Kümeye bağlanılmadı ve hiçbir işlem çalıştırılmadı. Tam boyutta görmek için bir görüntüye tıklayın.
+
+| Kaynak gezgini | Kaynak ayrıntıları |
+| --- | --- |
+| [![İş yükü durumlarını ve özel kaynakları gösteren genişletilmiş kaynak ağacı](../screenshots/explorer.png)](../screenshots/explorer.png) | [![Seçili Deployment ve yanındaki YAML bildirimi](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **Kapsayıcı terminali** | **Bağlantı noktası yönlendirme** |
+| [![Seçili Pod ve kapsayıcı ile örnek terminal çıktısı](../screenshots/terminal.png)](../screenshots/terminal.png) | [![Yönlendirme başlamadan önce 8080:80 eşlemesi doldurulmuş seçili Service](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## Kurulum
 
@@ -19,7 +29,7 @@ OpenChamber için bir Kubernetes eklentisi. Proje çalışma alanınızdan ayrı
 
 Yerel derleme veya JavaScript bağımlılıklarını kurma gerekmez. Depo özel olduğu sürece OpenChamber Server’ın depoyu HTTPS üzerinden okuyabilen Git kimlik bilgilerine önceden sahip olması gerekir. Tarayıcıda GitHub hesabınıza giriş yapmanız bu bilgileri sunucuya sağlamaz.
 
-[Docker’da doğrulanan aday sürüm](status.md) elle kurulum için önceden derlenmiş bir ZIP de sunar. Git URL’siyle kurulum henüz doğrulanmadı.
+[Docker’da doğrulanan aday sürüm](../status.md) elle kurulum için önceden derlenmiş bir ZIP de sunar. Git URL’siyle kurulum henüz doğrulanmadı.
 
 ## Ön koşullar
 
@@ -49,6 +59,6 @@ Bu açıklama yalnızca eklenti için geçerlidir; OpenChamber, Kubernetes veya 
 
 ## Lisans
 
-[MIT](../LICENSE). Paketle gelen bağımlılıklar kendi lisanslarını korur. Önceden derlenmiş paketteki `THIRD_PARTY_NOTICES.txt` dosyasına bakın.
+[MIT](../../LICENSE). Paketle gelen bağımlılıklar kendi lisanslarını korur. Önceden derlenmiş paketteki `THIRD_PARTY_NOTICES.txt` dosyasına bakın.
 
-[Proje belgeleri](README.md) · [Ürün kapsamı](product.md) · [Geliştirme](development.md)
+[Proje belgeleri](../README.md) · [Ürün kapsamı](../product.md) · [Geliştirme](../development.md)

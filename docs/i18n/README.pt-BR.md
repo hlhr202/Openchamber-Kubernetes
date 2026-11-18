@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | Português (Brasil) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | Português (Brasil) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
 
 Uma extensão do Kubernetes para o OpenChamber. Explore clusters, investigue problemas nas cargas de trabalho e execute operações comuns do Kubernetes sem sair do espaço de trabalho do seu projeto.
+
+## Capturas de tela
+
+Prévias da interface para desktop com dados fictícios. Nenhum cluster foi acessado e nenhuma operação foi executada. Clique em uma captura para vê-la em tamanho real.
+
+| Explorador de recursos | Detalhes do recurso |
+| --- | --- |
+| [![Árvore de recursos expandida com status das cargas de trabalho e recursos personalizados](../screenshots/explorer.png)](../screenshots/explorer.png) | [![Deployment selecionado ao lado de seu manifesto YAML](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **Terminal do contêiner** | **Encaminhamento de portas** |
+| [![Pod e contêiner selecionados com um exemplo de saída do terminal](../screenshots/terminal.png)](../screenshots/terminal.png) | [![Service selecionado com o mapeamento 8080:80 preenchido antes de iniciar o encaminhamento](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## Instalação
 
@@ -19,7 +29,7 @@ Depois que os arquivos pré-compilados da extensão forem publicados no branch p
 
 Não é preciso compilar localmente nem instalar dependências de JavaScript. Enquanto o repositório for privado, o OpenChamber Server precisa já ter credenciais do Git com acesso de leitura via HTTPS. Entrar no GitHub pelo navegador não fornece essas credenciais ao servidor.
 
-A [versão candidata verificada no Docker](status.md) também oferece um ZIP pré-compilado para instalação manual. A instalação pela URL do Git ainda não foi verificada.
+A [versão candidata verificada no Docker](../status.md) também oferece um ZIP pré-compilado para instalação manual. A instalação pela URL do Git ainda não foi verificada.
 
 ## Pré-requisitos
 
@@ -49,6 +59,6 @@ Esta declaração se aplica à extensão, não ao OpenChamber, ao Kubernetes ou 
 
 ## Licença
 
-[MIT](../LICENSE). As dependências incluídas mantêm suas respectivas licenças. Consulte `THIRD_PARTY_NOTICES.txt` no pacote pré-compilado.
+[MIT](../../LICENSE). As dependências incluídas mantêm suas respectivas licenças. Consulte `THIRD_PARTY_NOTICES.txt` no pacote pré-compilado.
 
-[Documentação do projeto](README.md) · [Escopo do produto](product.md) · [Desenvolvimento](development.md)
+[Documentação do projeto](../README.md) · [Escopo do produto](../product.md) · [Desenvolvimento](../development.md)

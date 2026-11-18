@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | 繁體中文
+[English](../../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | 繁體中文
 
 適用於 OpenChamber 的 Kubernetes 擴充功能。你可以在專案工作區內瀏覽叢集、排查工作負載問題，以及執行常用的 Kubernetes 操作。
+
+## 螢幕截圖
+
+桌面預覽使用模擬資料，未連線至叢集或執行操作。點選截圖可檢視原始大小。
+
+| 資源瀏覽器 | 資源詳細資料 |
+| --- | --- |
+| [![展開的資源樹，顯示工作負載狀態和自訂資源](../screenshots/explorer.png)](../screenshots/explorer.png) | [![選取的 Deployment 及其 YAML 資訊清單](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **容器終端機** | **連接埠轉送** |
+| [![選取的 Pod 和容器，以及範例終端機輸出](../screenshots/terminal.png)](../screenshots/terminal.png) | [![為選取的 Service 預填 8080:80，尚未開始轉送](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## 安裝
 
@@ -19,7 +29,7 @@
 
 不需要在本機建置或安裝 JavaScript 相依套件。如果存放庫為私人存放庫，OpenChamber Server 必須已具備透過 HTTPS 讀取它的 Git 憑證。在瀏覽器登入 GitHub 不會把憑證提供給伺服器。
 
-[通過 Docker 驗證的候選版本](status.md)也提供可手動安裝的預先建置 ZIP。透過 Git URL 安裝尚未驗證。
+[通過 Docker 驗證的候選版本](../status.md)也提供可手動安裝的預先建置 ZIP。透過 Git URL 安裝尚未驗證。
 
 ## 先決條件
 
@@ -49,6 +59,6 @@
 
 ## 授權
 
-[MIT](../LICENSE)。隨附的相依套件保有各自的授權，請見預先建置套件中的 `THIRD_PARTY_NOTICES.txt`。
+[MIT](../../LICENSE)。隨附的相依套件保有各自的授權，請見預先建置套件中的 `THIRD_PARTY_NOTICES.txt`。
 
-[專案文件](README.md) · [產品範圍](product.md) · [開發文件](development.md)
+[專案文件](../README.md) · [產品範圍](../product.md) · [開發文件](../development.md)

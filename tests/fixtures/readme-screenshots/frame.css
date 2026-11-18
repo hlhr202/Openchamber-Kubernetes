@@ -1,0 +1,40 @@
+:root {
+  font-size: 17px;
+  color-scheme: dark;
+  --oc-font: "DejaVu Sans", sans-serif;
+  --oc-mono: "DejaVu Sans Mono", monospace;
+  --oc-bg: #10151e;
+  --oc-fg: #e8edf6;
+  --oc-muted: #a5b3c7;
+  --oc-muted-surface: #182230;
+  --oc-border: #304057;
+  --oc-hover: #202f42;
+  --oc-focus: #8eb7fa;
+  --oc-primary: #85b1fa;
+  --oc-primary-fg: #111b2b;
+  --oc-selection: #223957;
+  --oc-selection-fg: #f0f6ff;
+  --oc-success-text: #63d0a0;
+  --oc-warning-text: #f0b86d;
+  --oc-error-text: #f48697;
+  --oc-info-text: #98bdf8;
+  --oc-radius: 5px;
+  --oc-k8s-tree-row-height: 20px;
+}
+
+body { display: grid; grid-template-rows: auto minmax(0, 1fr); background: var(--oc-bg); color: var(--oc-fg); font-family: var(--oc-font); }
+#app { height: auto; min-height: 0; padding: .6rem .75rem .75rem; }
+.preview-frame {
+  display: flex; align-items: center; gap: .55rem; padding: .55rem .85rem;
+  border-bottom: 1px solid var(--oc-border); background: var(--oc-muted-surface); font-size: .875rem;
+}
+.preview-frame img { width: 1.4rem; height: 1.4rem; filter: invert(82%) sepia(31%) saturate(1185%) hue-rotate(182deg); }
+.preview-frame span { margin-inline-start: auto; font-size: .7rem; color: var(--oc-muted); }
+
+/* Fit the whole sample on screen without hiding controls or changing panel assets. */
+.oc-k8s-subview-shell .oc-sdk-btn { font-size: .75rem; }
+.oc-k8s-document-panel .oc-sdk-field:has(textarea) { flex: 1; }
+#app .oc-k8s-document-panel textarea {
+  box-sizing: border-box; width: 100%; min-height: 0; height: 17rem;
+  font: .8rem/1.2 var(--oc-mono);
+}

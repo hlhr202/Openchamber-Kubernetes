@@ -18,6 +18,25 @@ docker compose run --rm --no-deps --pull never dev node scripts/in-container.ts 
 - `.build/candidates/`, `.build/packages/`, and `.build/reports/` contain candidates, ZIPs, and verification reports, respectively. A candidate pointer is not proof of installation. See [build and verification](./architecture.md#build-and-verification) for artifact identity and verification boundaries.
 - `bench:build` holds inputs fixed, runs separately, and reports time, size, and peak memory. A separate process does not imply a cold system cache; repeated builds are not incremental rebuilds. Linux container results do not prove macOS compatibility or real host responsiveness.
 
+## README Screenshots
+
+The four English desktop screenshots in `docs/screenshots/` are documentation assets, not part of the install package. All README translations use these files. The screenshot fixture renders production views and styles with fixed synthetic state and a preview frame. It cannot access a host bridge and does not run a cluster read, terminal, or forwarding operation.
+
+```sh
+mkdir -p .build/readme-gallery
+docker compose --env-file /dev/null run --rm --no-deps --pull never dev \
+  node scripts/in-container.ts prepare:readme-screenshots
+docker run --rm --pull never --platform linux/amd64 --network none --read-only \
+  --user 1000:1000 --cap-drop ALL --security-opt no-new-privileges \
+  --tmpfs /tmp:rw,nosuid,size=256m -e HOME=/tmp \
+  -v "$PWD/.build/reports/readme-screenshots:/preview:ro" \
+  -v "$PWD/.build/readme-gallery:/output" \
+  -v "$PWD/scripts/capture-readme-screenshots.py:/capture.py:ro" \
+  mcr.microsoft.com/playwright@sha256:42f02d323c310069b4d54c94bd91a608966a486c3492c48ae0b1cea747ec5ca2 python3 /capture.py
+```
+
+Review the four 1680 × 945 PNGs in `.build/readme-gallery/` before copying them to `docs/screenshots/`. Do not use real cluster images or add the browser output directory to Git.
+
 ## Git URL Installation
 
 OpenChamber `2.5.1` clones the repository's default branch when the URL has no branch or tag fragment. It inspects the root manifest and its prebuilt files; it does not install npm dependencies, compile the extension, or look up a GitHub Release asset. Keep `package.json` at the repository root and publish the files it references at their manifest-relative paths. For an update, increase the root manifest's `version` and publish it with the matching build. A ZIP remains a separate installation option.

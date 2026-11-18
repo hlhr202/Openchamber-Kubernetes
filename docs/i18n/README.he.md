@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | עברית | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | עברית | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
 
 הרחבת Kubernetes ל־OpenChamber. אפשר לעיין באשכולות, לאבחן תקלות בעומסי עבודה ולבצע פעולות Kubernetes נפוצות בלי לצאת מסביבת העבודה של הפרויקט.
+
+## צילומי מסך
+
+תצוגות מקדימות של הממשק השולחני עם נתונים מדומים. לא נוצר חיבור לאשכול ולא בוצעו פעולות. בחרו צילום כדי לראות אותו בגודל מלא.
+
+| סייר משאבים | פרטי משאב |
+| --- | --- |
+| [![עץ משאבים פתוח עם מצבי עומסי עבודה ומשאבים מותאמים אישית](../screenshots/explorer.png)](../screenshots/explorer.png) | [![משאב Deployment שנבחר לצד המניפסט שלו ב־YAML](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **מסוף קונטיינר** | **העברת פורטים** |
+| [![Pod וקונטיינר שנבחרו עם פלט מסוף לדוגמה](../screenshots/terminal.png)](../screenshots/terminal.png) | [![Service שנבחר עם המיפוי 8080:80 לפני תחילת ההעברה](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## התקנה
 
@@ -19,7 +29,7 @@
 
 אין צורך בבנייה מקומית או בהתקנת תלויות JavaScript. כל עוד המאגר פרטי, ל־OpenChamber Server צריכים כבר להיות פרטי אימות של Git שמאפשרים גישת קריאה דרך HTTPS. כניסה ל־GitHub בדפדפן אינה מעניקה לשרת את פרטי האימות האלה.
 
-ל[גרסה המועמדת שנבדקה ב־Docker](status.md) יש גם קובץ ZIP שנבנה מראש להתקנה ידנית. התקנה מכתובת Git טרם אומתה.
+ל[גרסה המועמדת שנבדקה ב־Docker](../status.md) יש גם קובץ ZIP שנבנה מראש להתקנה ידנית. התקנה מכתובת Git טרם אומתה.
 
 ## דרישות מקדימות
 
@@ -49,6 +59,6 @@
 
 ## רישיון
 
-[MIT](../LICENSE). התלויות הכלולות שומרות על הרישיונות שלהן. ראו `THIRD_PARTY_NOTICES.txt` בחבילה שנבנתה מראש.
+[MIT](../../LICENSE). התלויות הכלולות שומרות על הרישיונות שלהן. ראו `THIRD_PARTY_NOTICES.txt` בחבילה שנבנתה מראש.
 
-[תיעוד הפרויקט](README.md) · [היקף המוצר](product.md) · [פיתוח](development.md)
+[תיעוד הפרויקט](../README.md) · [היקף המוצר](../product.md) · [פיתוח](../development.md)

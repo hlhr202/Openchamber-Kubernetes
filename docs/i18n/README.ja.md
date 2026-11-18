@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | 日本語 | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | 日本語 | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
 
 OpenChamber 向けの Kubernetes 拡張機能です。プロジェクトのワークスペースを離れずに、クラスターの参照、ワークロードの問題調査、一般的な Kubernetes 操作ができます。
+
+## スクリーンショット
+
+サンプルデータを使ったデスクトップ画面です。クラスターへの接続や操作は行っていません。画像をクリックすると原寸で表示できます。
+
+| リソースエクスプローラー | リソースの詳細 |
+| --- | --- |
+| [![ワークロードの状態とカスタムリソースが表示された展開済みのリソースツリー](../screenshots/explorer.png)](../screenshots/explorer.png) | [![選択した Deployment とその YAML マニフェスト](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **コンテナのターミナル** | **ポート転送** |
+| [![選択した Pod とコンテナ、およびターミナル出力の例](../screenshots/terminal.png)](../screenshots/terminal.png) | [![選択した Service にポートの組 8080:80 が入力された転送開始前の画面](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## インストール
 
@@ -19,7 +29,7 @@ OpenChamber 向けの Kubernetes 拡張機能です。プロジェクトのワ�
 
 ローカルでのビルドや JavaScript 依存パッケージのインストールは不要です。リポジトリが非公開の場合、OpenChamber Server に HTTPS 経由で読み取れる Git の認証情報が設定済みである必要があります。ブラウザーから GitHub にログインしても、認証情報はサーバーに渡りません。
 
-[Docker で検証済みの候補ビルド](status.md)には、手動インストール用のビルド済み ZIP もあります。Git URL からのインストールはまだ検証されていません。
+[Docker で検証済みの候補ビルド](../status.md)には、手動インストール用のビルド済み ZIP もあります。Git URL からのインストールはまだ検証されていません。
 
 ## 前提条件
 
@@ -49,6 +59,6 @@ OpenChamber 向けの Kubernetes 拡張機能です。プロジェクトのワ�
 
 ## ライセンス
 
-[MIT](../LICENSE)。同梱する依存パッケージにはそれぞれのライセンスが適用されます。ビルド済みパッケージ内の `THIRD_PARTY_NOTICES.txt` を参照してください。
+[MIT](../../LICENSE)。同梱する依存パッケージにはそれぞれのライセンスが適用されます。ビルド済みパッケージ内の `THIRD_PARTY_NOTICES.txt` を参照してください。
 
-[プロジェクト文書](README.md) · [製品の対象範囲](product.md) · [開発](development.md)
+[プロジェクト文書](../README.md) · [製品の対象範囲](../product.md) · [開発](../development.md)

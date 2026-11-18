@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | 简体中文 | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | 简体中文 | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
 
 为 OpenChamber 提供 Kubernetes 集成。在项目工作区内浏览集群、排查工作负载问题，并执行常用的 Kubernetes 操作。
+
+## 截图
+
+桌面预览使用模拟数据，未连接集群或执行操作。点击截图可查看原图。
+
+| 资源浏览器 | 资源详情 |
+| --- | --- |
+| [![展开的资源树，显示工作负载状态和自定义资源](../screenshots/explorer.png)](../screenshots/explorer.png) | [![选中的 Deployment 及其 YAML 清单](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **容器终端** | **端口转发** |
+| [![选中的 Pod 和容器，以及示例终端输出](../screenshots/terminal.png)](../screenshots/terminal.png) | [![为选中的 Service 预填 8080:80，尚未开始转发](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## 安装
 
@@ -19,7 +29,7 @@
 
 无需在本地构建或安装 JavaScript 依赖。仓库为私有时，运行 OpenChamber Server 的环境必须已经具备通过 HTTPS 读取仓库的 Git 凭据。在浏览器里登录 GitHub 不会把凭据提供给服务器。
 
-[通过 Docker 验证的候选版本](status.md)也提供可手动安装的预构建 ZIP。通过 Git URL 安装尚未验证。
+[通过 Docker 验证的候选版本](../status.md)也提供可手动安装的预构建 ZIP。通过 Git URL 安装尚未验证。
 
 ## 前置条件
 
@@ -49,6 +59,6 @@
 
 ## 许可证
 
-[MIT](../LICENSE)。随包分发的依赖保留各自的许可证，详见预构建包中的 `THIRD_PARTY_NOTICES.txt`。
+[MIT](../../LICENSE)。随包分发的依赖保留各自的许可证，详见预构建包中的 `THIRD_PARTY_NOTICES.txt`。
 
-[项目文档](README.md) · [产品范围](product.md) · [开发文档](development.md)
+[项目文档](../README.md) · [产品范围](../product.md) · [开发文档](../development.md)

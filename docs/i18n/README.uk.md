@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | Українська | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | Українська | [繁體中文](README.zh-TW.md)
 
 Розширення Kubernetes для OpenChamber. Переглядайте кластери, діагностуйте проблеми з робочими навантаженнями й виконуйте типові операції Kubernetes, не залишаючи робочої області проєкту.
+
+## Знімки екрана
+
+Приклади інтерфейсу на комп’ютері з вигаданими даними. Підключення до кластера не встановлювалося й жодні операції не виконувалися. Натисніть на знімок, щоб переглянути його в повному розмірі.
+
+| Оглядач ресурсів | Відомості про ресурс |
+| --- | --- |
+| [![Розгорнуте дерево ресурсів зі станами робочих навантажень і користувацькими ресурсами](../screenshots/explorer.png)](../screenshots/explorer.png) | [![Вибраний Deployment поруч із його маніфестом YAML](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **Термінал контейнера** | **Перенаправлення портів** |
+| [![Вибрані Pod і контейнер із прикладом виводу термінала](../screenshots/terminal.png)](../screenshots/terminal.png) | [![Вибраний Service із заповненим зіставленням 8080:80 до початку перенаправлення](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## Встановлення
 
@@ -19,7 +29,7 @@
 
 Локальне збирання й установлення залежностей JavaScript не потрібні. Поки репозиторій приватний, OpenChamber Server повинен уже мати облікові дані Git для читання репозиторію через HTTPS. Вхід до GitHub у браузері не надає цих даних серверу.
 
-Для [версії-кандидата, перевіреної в Docker](status.md), також є готовий ZIP-архів для ручного встановлення. Встановлення за URL Git ще не перевірено.
+Для [версії-кандидата, перевіреної в Docker](../status.md), також є готовий ZIP-архів для ручного встановлення. Встановлення за URL Git ще не перевірено.
 
 ## Передумови
 
@@ -49,6 +59,6 @@
 
 ## Ліцензія
 
-[MIT](../LICENSE). Залежності, що постачаються в пакеті, зберігають свої ліцензії; див. `THIRD_PARTY_NOTICES.txt` у готовому пакеті.
+[MIT](../../LICENSE). Залежності, що постачаються в пакеті, зберігають свої ліцензії; див. `THIRD_PARTY_NOTICES.txt` у готовому пакеті.
 
-[Документація проєкту](README.md) · [Межі продукту](product.md) · [Розробка](development.md)
+[Документація проєкту](../README.md) · [Межі продукту](../product.md) · [Розробка](../development.md)

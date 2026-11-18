@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-English | [简体中文](docs/README.zh-CN.md) | [العربية](docs/README.ar.md) | [Deutsch](docs/README.de.md) | [Español](docs/README.es.md) | [Français](docs/README.fr.md) | [עברית](docs/README.he.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [Nederlands](docs/README.nl.md) | [Polski](docs/README.pl.md) | [Português (Brasil)](docs/README.pt-BR.md) | [Türkçe](docs/README.tr.md) | [Українська](docs/README.uk.md) | [繁體中文](docs/README.zh-TW.md)
+English | [简体中文](docs/i18n/README.zh-CN.md) | [العربية](docs/i18n/README.ar.md) | [Deutsch](docs/i18n/README.de.md) | [Español](docs/i18n/README.es.md) | [Français](docs/i18n/README.fr.md) | [עברית](docs/i18n/README.he.md) | [日本語](docs/i18n/README.ja.md) | [한국어](docs/i18n/README.ko.md) | [Nederlands](docs/i18n/README.nl.md) | [Polski](docs/i18n/README.pl.md) | [Português (Brasil)](docs/i18n/README.pt-BR.md) | [Türkçe](docs/i18n/README.tr.md) | [Українська](docs/i18n/README.uk.md) | [繁體中文](docs/i18n/README.zh-TW.md)
 
 A Kubernetes extension for OpenChamber. Browse clusters, troubleshoot workloads, and perform common Kubernetes operations without leaving your project workspace.
+
+## Screenshots
+
+Desktop previews with synthetic data; no cluster connection or operations were run. Select a screenshot to view it full size.
+
+| Resource explorer | Resource details |
+| --- | --- |
+| [![Expanded resource tree with workload statuses and custom resources](docs/screenshots/explorer.png)](docs/screenshots/explorer.png) | [![Deployment selected beside its YAML manifest](docs/screenshots/resource-details.png)](docs/screenshots/resource-details.png) |
+| **Container terminal** | **Port forwarding** |
+| [![Selected Pod and container with illustrative terminal output](docs/screenshots/terminal.png)](docs/screenshots/terminal.png) | [![Service selected with the 8080:80 mapping filled in before forwarding starts](docs/screenshots/port-forward.png)](docs/screenshots/port-forward.png) |
 
 ## Installation
 

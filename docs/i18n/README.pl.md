@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | Polski | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | [简体中文](README.zh-CN.md) | [العربية](README.ar.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | Polski | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
 
 Rozszerzenie Kubernetes dla OpenChamber. Przeglądaj klastry, diagnozuj problemy z obciążeniami i wykonuj typowe operacje Kubernetes bez opuszczania obszaru roboczego projektu.
+
+## Zrzuty ekranu
+
+Podgląd interfejsu na komputerze z przykładowymi danymi. Nie nawiązano połączenia z klastrem ani nie wykonano żadnych operacji. Kliknij zrzut, aby zobaczyć go w pełnym rozmiarze.
+
+| Eksplorator zasobów | Szczegóły zasobu |
+| --- | --- |
+| [![Rozwinięte drzewo zasobów ze stanami obciążeń i zasobami niestandardowymi](../screenshots/explorer.png)](../screenshots/explorer.png) | [![Wybrany Deployment obok jego manifestu YAML](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **Terminal kontenera** | **Przekierowanie portów** |
+| [![Wybrany Pod i kontener oraz przykładowe dane wyjściowe terminala](../screenshots/terminal.png)](../screenshots/terminal.png) | [![Wybrany Service z uzupełnionym mapowaniem 8080:80 przed rozpoczęciem przekierowania](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## Instalacja
 
@@ -19,7 +29,7 @@ Po opublikowaniu gotowych plików rozszerzenia w domyślnej gałęzi repozytoriu
 
 Nie trzeba niczego kompilować lokalnie ani instalować zależności JavaScript. Dopóki repozytorium jest prywatne, OpenChamber Server musi już dysponować danymi uwierzytelniającymi Git pozwalającymi na jego odczyt przez HTTPS. Zalogowanie się do GitHuba w przeglądarce nie udostępnia tych danych serwerowi.
 
-Dla [wersji kandydującej zweryfikowanej w Dockerze](status.md) dostępne jest także gotowe archiwum ZIP do ręcznej instalacji. Instalacja z adresu Git nie została jeszcze zweryfikowana.
+Dla [wersji kandydującej zweryfikowanej w Dockerze](../status.md) dostępne jest także gotowe archiwum ZIP do ręcznej instalacji. Instalacja z adresu Git nie została jeszcze zweryfikowana.
 
 ## Wymagania
 
@@ -49,6 +59,6 @@ To oświadczenie dotyczy rozszerzenia, a nie OpenChamber, Kubernetes ani używan
 
 ## Licencja
 
-[MIT](../LICENSE). Dołączone zależności zachowują swoje licencje. Zobacz `THIRD_PARTY_NOTICES.txt` w gotowym pakiecie.
+[MIT](../../LICENSE). Dołączone zależności zachowują swoje licencje. Zobacz `THIRD_PARTY_NOTICES.txt` w gotowym pakiecie.
 
-[Dokumentacja projektu](README.md) · [Zakres produktu](product.md) · [Informacje dla programistów](development.md)
+[Dokumentacja projektu](../README.md) · [Zakres produktu](../product.md) · [Informacje dla programistów](../development.md)

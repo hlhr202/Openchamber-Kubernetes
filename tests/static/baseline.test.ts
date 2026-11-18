@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import test from 'node:test';
 import { z } from 'zod';
 
@@ -101,8 +101,11 @@ test('local Markdown links in documentation resolve without leaving this project
       if (!href || /^https?:/.test(href)) continue;
       const target = new URL(href, url);
       assert.ok(target.href.startsWith(root.href), `Link outside project: ${href}`);
+      if (!target.hash || !target.pathname.endsWith('.md')) {
+        assert.ok((await stat(target)).isFile(), `Not a file: ${url.pathname} → ${href}`);
+        continue;
+      }
       const linked = await readFile(target, 'utf8');
-      if (!target.hash || !target.pathname.endsWith('.md')) continue;
       const anchor = decodeURIComponent(target.hash.slice(1));
       const slug = (heading: string) => heading.toLowerCase().replace(/<[^>]+>/g, '').replace(/[^\p{L}\p{N}\p{M}_ -]/gu, '').replaceAll(' ', '-');
       const ids = [...linked.matchAll(/^#{1,6} +(.+)$/gm)].map(value => slug(value[1] ?? ''));
@@ -118,6 +121,34 @@ test('local Markdown links in documentation resolve without leaving this project
   }
   await check(new URL('README.md', root));
   await walk(new URL('docs/', root));
+});
+
+test('README language navigation is bidirectional and shares one clickable four-image gallery', async () => {
+  const locales = ['ar', 'de', 'es', 'fr', 'he', 'ja', 'ko', 'nl', 'pl', 'pt-BR', 'tr', 'uk', 'zh-CN', 'zh-TW'];
+  const docs = new URL('docs/', root);
+  const i18n = new URL('i18n/', docs);
+  const files = locales.map(locale => `README.${locale}.md`);
+  const readmes = [new URL('README.md', root), ...files.map(file => new URL(file, i18n))];
+  const screenshotDir = new URL('screenshots/', docs);
+  const images = ['explorer.png', 'resource-details.png', 'terminal.png', 'port-forward.png'];
+  assert.deepEqual((await readdir(i18n)).sort(), files);
+  assert.ok(!(await readdir(docs)).some(file => /^README\..+\.md$/.test(file)), 'Translate the root README only under docs/i18n/');
+  assert.deepEqual((await readdir(screenshotDir)).sort(), [...images].sort());
+
+  for (const readme of readmes) {
+    const markdown = await readFile(readme, 'utf8');
+    const navigation = markdown.split('\n')[2] ?? '';
+    const links = [...navigation.matchAll(/\]\(([^)]+)\)/g)].map(match => new URL(match[1]!, readme).href).sort();
+    assert.deepEqual(links, readmes.filter(other => other !== readme).map(other => other.href).sort(), readme.pathname);
+    const rows = markdown.split('\n').filter(line => line.startsWith('|') && line.includes('[!['));
+    assert.equal(rows.length, 2, readme.pathname);
+    for (const [index, row] of rows.entries()) {
+      const cells = [...row.matchAll(/\[!\[[^\]]+\]\(([^)]+)\)\]\(([^)]+)\)/g)];
+      assert.deepEqual(cells.map(cell => new URL(cell[1]!, readme).href),
+        images.slice(index * 2, index * 2 + 2).map(image => new URL(image, screenshotDir).href), readme.pathname);
+      assert.ok(cells.every(cell => cell[1] === cell[2]), `Thumbnail does not open the original: ${readme.pathname}`);
+    }
+  }
 });
 
 test('reviewed command coverage resolves exact sources, unique owners/cases and pending runtime state', async () => {

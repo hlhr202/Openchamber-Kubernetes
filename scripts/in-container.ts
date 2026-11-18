@@ -18,6 +18,7 @@ const tasks: Readonly<Record<string, readonly string[]>> = {
   'check:foundation': ['node', 'scripts/check-foundation.ts'],
   'package:zip': ['node', 'scripts/package-zip.ts'],
   'prepare:ui-refresh': ['node', 'scripts/prepare-ui-refresh-preview.ts'],
+  'prepare:readme-screenshots': ['node', 'scripts/prepare-readme-screenshots.ts'],
 };
 const task = process.argv[2] ?? '';
 const command = tasks[task];

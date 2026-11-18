@@ -1,8 +1,18 @@
 # OpenChamber Kubernetes Explorer
 
-[English](../README.md) | [简体中文](README.zh-CN.md) | العربية | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
+[English](../../README.md) | [简体中文](README.zh-CN.md) | العربية | [Deutsch](README.de.md) | [Español](README.es.md) | [Français](README.fr.md) | [עברית](README.he.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Nederlands](README.nl.md) | [Polski](README.pl.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Українська](README.uk.md) | [繁體中文](README.zh-TW.md)
 
 إضافة Kubernetes لـ OpenChamber. يمكنك تصفّح العناقيد وتشخيص مشكلات أحمال العمل وتنفيذ عمليات Kubernetes الشائعة دون مغادرة مساحة عمل مشروعك.
+
+## لقطات الشاشة
+
+معاينات لواجهة سطح المكتب ببيانات اصطناعية؛ لم يُجرَ أي اتصال بعنقود ولم تُنفَّذ أي عمليات. اختر أي لقطة لعرضها بالحجم الكامل.
+
+| مستكشف الموارد | تفاصيل المورد |
+| --- | --- |
+| [![شجرة موارد موسّعة تعرض حالات أحمال العمل والموارد المخصصة](../screenshots/explorer.png)](../screenshots/explorer.png) | [![مورد Deployment محدد وبجانبه ملف تعريف YAML](../screenshots/resource-details.png)](../screenshots/resource-details.png) |
+| **طرفية الحاوية** | **إعادة توجيه المنافذ** |
+| [![اختيار Pod وحاوية مع مثال لمخرجات الطرفية](../screenshots/terminal.png)](../screenshots/terminal.png) | [![خدمة محددة مع تعيين 8080:80 قبل بدء إعادة التوجيه](../screenshots/port-forward.png)](../screenshots/port-forward.png) |
 
 ## التثبيت
 
@@ -19,7 +29,7 @@
 
 لا حاجة إلى بناء الإضافة محليًا أو تثبيت تبعيات JavaScript. ما دام المستودع خاصًا، يجب أن تكون لدى OpenChamber Server بيانات اعتماد Git تتيح قراءة المستودع عبر HTTPS. تسجيل الدخول إلى GitHub من المتصفح لا يوفّر هذه البيانات للخادم.
 
-يتوفر أيضًا ملف ZIP مبني مسبقًا للتثبيت اليدوي من [النسخة المرشحة التي جرى التحقق منها في Docker](status.md). لم يُتحقق بعد من التثبيت عبر عنوان Git.
+يتوفر أيضًا ملف ZIP مبني مسبقًا للتثبيت اليدوي من [النسخة المرشحة التي جرى التحقق منها في Docker](../status.md). لم يُتحقق بعد من التثبيت عبر عنوان Git.
 
 ## المتطلبات المسبقة
 
@@ -49,6 +59,6 @@
 
 ## الترخيص
 
-[MIT](../LICENSE). تحتفظ التبعيات المضمّنة بتراخيصها الخاصة. راجع `THIRD_PARTY_NOTICES.txt` في الحزمة المبنية مسبقًا.
+[MIT](../../LICENSE). تحتفظ التبعيات المضمّنة بتراخيصها الخاصة. راجع `THIRD_PARTY_NOTICES.txt` في الحزمة المبنية مسبقًا.
 
-[وثائق المشروع](README.md) · [نطاق المنتج](product.md) · [التطوير](development.md)
+[وثائق المشروع](../README.md) · [نطاق المنتج](../product.md) · [التطوير](../development.md)
